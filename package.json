@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PrimalOrB/deep-thoughts.git"
+    "url": "git+git@github.com:PrimalOrB/dbt_quotes.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/PrimalOrB/deep-thoughts/issues"
+    "url": "https://github.com/PrimalOrB/dbt_quotes/issues"
   },
-  "homepage": "https://github.com/PrimalOrB/deep-thoughts#readme",
+  "homepage": "https://github.com/PrimalOrB/dbt_quotes#readme",
   "devDependencies": {
     "concurrently": "^6.2.0"
   }
