@@ -11,15 +11,12 @@ const quoteSchema = new Schema(
     },
     customerName: {
         type: String,
-        required: 'Customer name required',
     },
     jNum: {
         type: Number,
-        required: false
     },
     description: {
         type: String,
-        required: 'Description required',
     },
     priority: {
         type: Number,

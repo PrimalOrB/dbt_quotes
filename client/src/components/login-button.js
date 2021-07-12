@@ -5,7 +5,7 @@ const LoginButton = () => {
   const { loginWithRedirect } = useAuth0({organization: process.env.ORGID});
   return (
     <button
-      className="btn btn-primary btn-block"
+    className="login"
       onClick={() => loginWithRedirect()}
     >
       Log In

@@ -5,7 +5,7 @@ const AddNew = () => {
 
   return (
     <div>
-     <hi>Add new</hi>
+     <h1>Add New Quote</h1>
      <AddForm />
     </div>
   );

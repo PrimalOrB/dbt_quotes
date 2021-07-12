@@ -6,15 +6,13 @@ import AuthNav from "./auth-nav";
 
 const NavBar = () => {
   return (
-    <div className="nav-container mb-3">
-      <nav className="navbar navbar-expand-md navbar-light bg-light">
+      <nav>
         <div className="container">
-          <img src="https://deboertool.com/img/logo.png" alt="logo"/><br />
           <MainNav />
+          <img src="https://deboertool.com/img/logo-white.png" alt="logo"/><br />
           <AuthNav />
         </div>
       </nav>
-    </div>
   );
 };
 

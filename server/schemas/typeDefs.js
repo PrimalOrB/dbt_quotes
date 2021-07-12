@@ -62,7 +62,7 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        addQuote(customerName: String!, jNum: Int, description: String!, priority: Int, additionalNotes: String, pcsURL: String, crmURL: String, status: String, PODate: String, POQty: String): Quote
+        addQuote(customerName: String, jNum: Int, description: String, priority: Int, additionalNotes: String, pcsURL: String, crmURL: String, status: String, PODate: String, POQty: String): Quote
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
         addThought(thoughtText: String!): Thought

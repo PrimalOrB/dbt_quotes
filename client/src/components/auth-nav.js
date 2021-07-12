@@ -9,12 +9,11 @@ const AuthNav = () => {
         const { given_name, picture } = user;
         return (
         
-            <div className="navbar-nav ml-auto">
-                <div className="col-md-2 mb-3">
+            <div className="access-block">
+                <div className="profile-img">
                     <img
                         src={picture}
                         alt="Profile"
-                        className="rounded-circle img-fluid profile-picture mb-3 mb-md-0"
                     />
                 </div>
                 <h2>{given_name}</h2>
@@ -24,7 +23,7 @@ const AuthNav = () => {
     }
 
     return (
-            <div className="navbar-nav ml-auto">
+            <div className="access-block">
                 <AuthenticationButton />
             </div>
     )
