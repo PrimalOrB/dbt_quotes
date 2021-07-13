@@ -216,13 +216,40 @@ main h1 {
   width: 100%;
   text-align: center;
   border-bottom: 1px solid #4d4d4d;
+  margin-bottom: 1.5rem;
 }
 
 .quoteCard {
-  width: 45%;
+  width: 95%;
   border: 1px solid black;
-  border-radius: 1rem;
   margin: 0.5rem;
-  padding: 0.5rem
+  display: flex;
 }
 
+.rotate {
+  display: block;
+  transform-origin: top left;
+  transform: rotate(-90deg) translate(-100%);
+  margin-top: -50%;
+  white-space: nowrap;
+}
+
+.rotation-wrapper-inner {
+  padding: 50% 0;
+  height: 0;
+}
+
+.rotation-wrapper-outer {
+  background-color: rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 0 0.15rem;
+  height: 100%;
+  width: 2em;
+  border-right: 1px solid  #4d4d4d;
+}
+
+.details {
+  padding-left: 0.5em;
+}
