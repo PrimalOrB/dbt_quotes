@@ -8,6 +8,13 @@ export const QUERY_QUOTES = gql`
             customerName
             jNum
             description
+            priority
+            additionalNotes
+            pcsURL
+            crmURL
+            status
+            PODate
+            POQty
         }
     }
 `;

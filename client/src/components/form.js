@@ -3,7 +3,6 @@ import { useMutation } from '@apollo/client';
 import { ADD_QUOTE } from '../utils/mutations';
 import { QUERY_QUOTES } from '../utils/queries';
 
-
 const AddForm = () => {
 
     const [formState, setFormState] = useState({
@@ -36,29 +35,41 @@ const AddForm = () => {
     const [ addQuote, { error }] = useMutation(ADD_QUOTE, {
         update(cache, { data: { addQuote } }) {
             try {
-            console.log( addQuote )
-            const { quotes } = cache.readQuery({ query: QUERY_QUOTES });
-            cache.writeQuery({
-              query: QUERY_QUOTES,
-              data: { quotes: [addQuote, ...quotes] }
-            });
-          } catch (e) {
-            console.error(e);
-          }
-        }
+                console.log( cache )
+                // const { quotes } = cache.readQuery({ query: QUERY_QUOTES });
+                cache.writeQuery({
+                    query: QUERY_QUOTES,
+                    // data: { quotes: [addQuote, ...quotes] }
+                    data: { quotes: [addQuote] }
+                });
+                window.location.replace("/");
+            } catch (e) {
+                console.error(e);
+            }
+            }
       });
 
 
     const handleSubmit = async event =>{
         event.preventDefault()
-        console.log( formState )
         try {
+            console.log( formState )
             await addQuote({
-                variables: { formState }
+                variables: { 
+                    customerName: formState.customerName,
+                    jNum: formState.jNum,
+                    description: formState.description,
+                    priority: formState.priority,
+                    additionalNotes: formState.additionalNotes,
+                    pcsURL: formState.pcsURL,
+                    crmURL: formState.crmURL,
+                    status: formState.status,
+                    PODate: formState.PODate,
+                    POQty: formState.POQty,
+                 }
             });
         
             } catch (event) {
-            console.error(event);
         }
     }
 
@@ -68,7 +79,7 @@ const AddForm = () => {
             <form id="add-form" onSubmit={ handleSubmit }>
                 <div>
                     <label htmlFor="customerName">Customer:</label>
-                    <input type="text" name="customerName"  placeholder='Customer name *' className="form-required" onBlur={handleChange}/>
+                    <input type="text" name="customerName"  placeholder='Customer name *' className="form-required" required onBlur={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="jNum">J#:</label>
@@ -76,7 +87,7 @@ const AddForm = () => {
                 </div>
                 <div>
                     <label htmlFor="description">Description:</label>
-                    <input type="text" name="description" placeholder='Short description *' className="form-required" onBlur={handleChange}/>
+                    <input type="text" name="description" placeholder='Short description *' className="form-required" required onBlur={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="priority">Priority:</label>
@@ -102,8 +113,8 @@ const AddForm = () => {
                     </select>
                 </div>
                 <div>
-                    <label htmlFor="PODate">PO Received:</label>
-                    <input type="text" name="PODate" placeholder='Date Purchase Order Received' onBlur={handleChange}/>
+                    <label htmlFor="PODate">PO Received Date:</label>
+                    <input type="date" name="PODate" placeholder='Date Purchase Order Received' onBlur={handleChange} onChange={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="POQty">PO Quantity:</label>

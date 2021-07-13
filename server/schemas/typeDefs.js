@@ -4,16 +4,16 @@ const typeDefs = gql`
     type Quote {
         _id: ID
         createdAt: String
-        customerName: String
-        jNum: Int
-        description: String
-        priority: Int
+        customerName: String!
+        jNum: String
+        description: String!
+        priority: String
         additionalNotes: String
         pcsURL: String
         crmURL: String
         status: String
         PODate: String
-        POQty: Int
+        POQty: String
         notes: [Note]
     }
 
@@ -29,7 +29,7 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        addQuote(customerName: String, jNum: Int, description: String, priority: Int, additionalNotes: String, pcsURL: String, crmURL: String, status: String, PODate: String, POQty: String): Quote
+        addQuote(customerName: String!, jNum: String, description: String!, priority: String, additionalNotes: String, pcsURL: String, crmURL: String, status: String, PODate: String, POQty: String): Quote
     }
 `;
 

@@ -3,12 +3,11 @@ const dateFormat = require('../utils/dateFormat');
 
 const noteSchema = new Schema(
   {
-    reactionBody: {
+    noteText: {
       type: String,
       required: true,
-      maxlength: 280
     },
-    username: {
+    noteBy: {
       type: String,
       required: true
     },
