@@ -16,6 +16,25 @@ export const QUERY_QUOTES = gql`
             status
             PODate
             POQty
+            }
         }
-    }
+`;
+
+export const QUERY_QUOTE = gql`
+      query quote($id:ID!) {
+        quote(_id:$id) {
+            _id
+            createdAt
+            customerName
+            jNum
+            description
+            priority
+            additionalNotes
+            pcsURL
+            crmURL
+            status
+            PODate
+            POQty
+            }
+        }
 `;

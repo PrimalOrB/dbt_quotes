@@ -8,7 +8,6 @@ const resolvers = {
           const filterSet = {
           }
           const sortSet = {
-            'createdAt': -1
           }
 
           if( filterPO ) {
@@ -28,14 +27,17 @@ const resolvers = {
           }
 
           if( filterDate ) {
-            sortSet.createdAt = 1
-          } else {
             sortSet.createdAt = -1
+          } else {
+            delete sortSet.createdAt
           }
 
-          console.log( filterSet )
+          console.log( filterSet, sortSet )
 
         return Quote.find( filterSet ).sort(sortSet)
+      },
+      quote: async (parent, { _id }) => {
+        return Quote.findOne({ _id })
       },
     },
 

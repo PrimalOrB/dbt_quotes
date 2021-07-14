@@ -1,20 +1,20 @@
 import React from "react";
 
-const Filter = ( { filterState, setFilterState, handleChange } ) => (
-  <div className="filter-container">
-      <div className="filter-el">
-        <label htmlFor="filterPO">Oldest PO</label>
-        <input name="filterPO" type="checkbox" onChange={ handleChange } />
-      </div>
-      <div className="filter-el">
-        <label htmlFor="filterPriority">Top Priority</label>
-        <input name="filterPriority" type="checkbox" onChange={ handleChange } />
-      </div>
-      <div className="filter-el">
-        <label htmlFor="filterDate">Oldest Task</label>
-        <input name="filterDate" type="checkbox" onChange={ handleChange } />
-      </div>
-  </div>
-);
+const Filter = ( { filterState, setFilterState, handleChange } ) => {
+
+    return (
+        <div className="filter-container">
+            <div className="filter-el">
+              <p id="filterPO" onClick={ handleChange } className={ filterState.filterPO ? 'clicked' : '' }>Oldest PO</p>
+            </div>
+            <div className="filter-el">
+              <p id="filterPriority" onClick={ handleChange } className={ filterState.filterPriority ? 'clicked' : '' }>Top Priority</p>
+            </div>
+            <div className="filter-el">
+              <p id="filterDate" onClick={ handleChange } className={ filterState.filterDate ? 'clicked' : '' }>Newest Task</p>
+            </div>
+        </div>
+    )
+};
 
 export default Filter;

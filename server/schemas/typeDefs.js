@@ -26,6 +26,7 @@ const typeDefs = gql`
 
     type Query {
         quotes(filterPO: Boolean, filterPriority: Boolean, filterDate: Boolean): [Quote]
+        quote(_id: ID!): Quote
     }
 
     type Mutation {

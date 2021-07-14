@@ -37,6 +37,7 @@ const App = () => {
           <ProtectedRoute path="/profile" component={Profile} />
           <ProtectedRoute path="/external-api" component={ExternalApi} />
           <ProtectedRoute path="/add-new" component={AddNew} />
+          <ProtectedRoute path="/edit/:id" component={AddNew} />
         </Switch>
       </main>
     </div>

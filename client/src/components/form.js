@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useMutation } from '@apollo/client';
 import { ADD_QUOTE } from '../utils/mutations';
-import { QUERY_QUOTES } from '../utils/queries';
+import { QUERY_QUOTES, QUERY_QUOTE } from '../utils/queries';
+import { useQuery } from '@apollo/client';
+import { useParams } from 'react-router-dom';
 
 const AddForm = () => {
 
-    const [formState, setFormState] = useState({
+    const initialState = {
         'customerName':'',
         'jNum':'',
         'description':'',
@@ -16,7 +18,10 @@ const AddForm = () => {
         'status':'',
         'PODate':'',
         'POQty':'',
-    });
+    }
+
+    const [formState, setFormState] = useState(initialState);
+   
     const [ errorMessage, setErrorMessage ] = useState( '' )
 
     function handleChange( e ) {
@@ -39,7 +44,7 @@ const AddForm = () => {
                 // const { quotes } = cache.readQuery({ query: QUERY_QUOTES });
                 cache.writeQuery({
                     query: QUERY_QUOTES,
-                    // data: { quotes: [addQuote, ...quotes] }
+
                     data: { quotes: [addQuote] }
                 });
                 window.location.replace("/");
@@ -73,7 +78,21 @@ const AddForm = () => {
         }
     }
 
+    const { id: _id } = useParams();
 
+    const { loading, data } = useQuery(QUERY_QUOTE,{
+        variables: { id: _id }
+    });
+
+    const quote = data?.quote || []
+
+    
+    console.log( quote )
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+    
     return (
         <section id="add-form-cont">
             <form id="add-form" onSubmit={ handleSubmit }>

@@ -6,20 +6,18 @@ import { QUERY_QUOTES } from '../utils/queries';
 
 const Home = () => {
 
-  const [filterState, setFilterState] = useState({
+  const initialState = {
     'filterPO': false,
     'filterPriority': false,
     'filterDate':false
-  })
-  console.log( filterState )
+  }
+
+  const [filterState, setFilterState] = useState( initialState )
 
   const handleChange = (event) => {
-    const { name, value, checked, type } = event.target;
-    const val = type === 'checkbox' ? checked: value
-
     setFilterState({
-      ...filterState,
-      [name]: val,
+      ...initialState,
+      [event.target.id]: !filterState[event.target.id],
     });
   };
 

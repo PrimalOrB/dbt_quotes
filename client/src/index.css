@@ -20,6 +20,10 @@ nav {
   background-color: #4d4d4d;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 .container {
   display: flex;
   justify-content: space-between;
@@ -225,6 +229,18 @@ main h1 {
   background-color: rgba( 0,0,0,0.1);
   margin: 0.5rem;
   display: flex;
+  flex-direction: column;
+}
+
+.quoteCardTop {
+  display: flex;
+}
+
+.quoteCardBottom {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.25rem;
+  border-top:1px solid #4d4d4d;
 }
 
 .rotate {
@@ -262,6 +278,11 @@ main h1 {
   padding: 0 0.5rem
 }
 
+.quoteCard  svg{
+  width: 1.5rem;
+  height: 1.5rem
+}
+
 .jnum {
   font-size: 1.5rem;
   font-weight: bold;
@@ -296,7 +317,45 @@ main h1 {
   align-items: center;
 }
 
-.filter-el label {
-  padding-right: 0.5rem;
+.filter-el p {
   margin: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: 0.25s ease all;
+  border: 1px solid #4d4d4d;
+  border-bottom: 3px solid #4d4d4d;
+  color: white;
+  background-color: #707070;
+  font-weight: bold;
+}
+
+.filter-el p:hover{
+  background-color: rgba(122, 122, 122, 0.5);
+  border-color: rgba(122, 122, 122, 0.5);
+  color: #4d4d4d;
+}
+
+.filter-el .clicked {
+  background-color: rgba(185, 185, 185, 0.5);
+  color: #4d4d4d;
+  border-color: rgba(245,124,0,1);
+}
+
+.cardLink {
+  margin-left: 0.5rem
+}
+
+.cardLink p {
+  margin: 0;
+  border: 1px solid #4d4d4d;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  background-color: rgba(0,0,0,0.1);
+  transition: 0.25s ease all;
+}
+
+.cardLink p:hover {
+  background-color: rgba(0,0,0,0.2);
 }
