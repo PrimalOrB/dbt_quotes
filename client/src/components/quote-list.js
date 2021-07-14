@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import RotatedEl from './rotated-element'
 import { BsCalendar } from 'react-icons/bs'
 import { FaDollarSign } from 'react-icons/fa'
@@ -7,9 +7,7 @@ import { HiOutlineExclamation } from 'react-icons/hi'
 
 const QuoteList = ( { quotes } ) => {
 
-    console.log( quotes )
-
-    function dateDiff( a, range ){
+    function dateDiff( a ){
         const b = new Date()
         a = new Date(Number(a))
         const day = 1000 * 60 * 60 * 24;
@@ -25,7 +23,7 @@ const QuoteList = ( { quotes } ) => {
 
   return (
     <div className="quoteList">
-        <div className="search-filters">Filters</div>
+        {/* <div className="search-filters">Filters</div> */}
         {quotes &&
         quotes.map(quote => (
             <article className="quoteCard" key={ quote._id }>

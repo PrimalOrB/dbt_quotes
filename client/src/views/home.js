@@ -1,12 +1,35 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 
-import { HomeContent, QuoteList } from "../components";
+import { HomeContent, QuoteList, Filter } from "../components";
 import { useQuery } from '@apollo/client';
 import { QUERY_QUOTES } from '../utils/queries';
 
 const Home = () => {
 
-  const { loading, data } = useQuery(QUERY_QUOTES);
+  const [filterState, setFilterState] = useState({
+    'filterPO': false,
+    'filterPriority': false,
+    'filterDate':false
+  })
+  console.log( filterState )
+
+  const handleChange = (event) => {
+    const { name, value, checked, type } = event.target;
+    const val = type === 'checkbox' ? checked: value
+
+    setFilterState({
+      ...filterState,
+      [name]: val,
+    });
+  };
+
+  const { loading, data } = useQuery(QUERY_QUOTES,{
+    variables: { 
+      filterPO: filterState.filterPO,
+      filterPriority: filterState.filterPriority,
+      filterDate: filterState.filterDate
+     }
+  });
 
   const quotes = data?.quotes || []
 
@@ -17,6 +40,7 @@ const Home = () => {
         <div>Loading...</div>
       ) : (
         <>
+        <Filter filterState={ filterState } setFilterState={ setFilterState } handleChange={ handleChange }/>
         <QuoteList quotes={ quotes }/>
         </>
       )}

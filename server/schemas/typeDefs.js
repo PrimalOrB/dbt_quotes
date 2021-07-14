@@ -25,12 +25,13 @@ const typeDefs = gql`
     }
 
     type Query {
-        quotes: [Quote]
+        quotes(filterPO: Boolean, filterPriority: Boolean, filterDate: Boolean): [Quote]
     }
 
     type Mutation {
         addQuote(customerName: String!, jNum: String, description: String!, priority: String, additionalNotes: String, pcsURL: String, crmURL: String, status: String, PODate: String, POQty: String): Quote
     }
+    
 `;
 
 module.exports = typeDefs;
