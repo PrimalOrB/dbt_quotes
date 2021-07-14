@@ -7,7 +7,7 @@ const quoteSchema = new Schema(
     createdAt: {
         type: Date,
         default: Date.now,
-        get: timestamp => dateFormat(timestamp)
+        // get: timestamp => dateFormat(timestamp)
     },
     customerName: {
         type: String,
@@ -39,7 +39,7 @@ const quoteSchema = new Schema(
     },
     PODate: {
         type: Date,
-        get: timestamp => dateFormat(timestamp)
+        // get: timestamp => dateFormat(timestamp)
     },
     POQty: {
         type: Number,

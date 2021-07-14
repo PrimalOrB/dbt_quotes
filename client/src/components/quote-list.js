@@ -1,7 +1,7 @@
 import React from "react";
 import RotatedEl from './rotated-element'
 import { BsCalendar } from 'react-icons/bs'
-import { AiOutlineDollar } from 'react-icons/ai'
+import { FaDollarSign } from 'react-icons/fa'
 import { HiOutlineExclamation } from 'react-icons/hi'
 
 
@@ -35,13 +35,14 @@ const QuoteList = ( { quotes } ) => {
                 } 
                 <RotatedEl text={ dateDiff( quote.createdAt ).diff } hover="Task Date:" data={ quote.createdAt } colorRange='30'  icon={ BsCalendar() }/>
                 {quote.PODate > 0 && (
-                    <RotatedEl text={ dateDiff( quote.PODate, 30 ).diff } hover="PO Date:" data={ quote.createdAt } colorRange='30' icon={ AiOutlineDollar() }/>
+                    <RotatedEl text={ dateDiff( quote.PODate, 30 ).diff } hover="PO Date:" data={ quote.createdAt } colorRange='30' icon={ FaDollarSign() }/>
                     )
                 } 
                 <div className="details">
-                    <h3>{ quote.customerName }</h3>
-                    <h3>{ `J${ quote.jNum }` }</h3>
-                    <h3> { quote.status }</h3>
+                    <div className='jnum'>{ `J${ quote.jNum }` }</div>
+                    <div className='customer'>- { quote.customerName }</div>
+                    <div className='desc'>- { quote.description }</div>
+                    <div className="additional"></div>
                 </div>
 
             </article>
