@@ -174,7 +174,7 @@ const AddForm = () => {
         variables: { id: _id }
     });
 
-    const quote = data?.quote || []
+    const quote = data?.quote || {initialState}
 
     useEffect(() => {
         // if( quote.length ){
