@@ -38,7 +38,7 @@ const QuoteList = ( { quotes } ) => {
                     } 
                     <RotatedEl text={ dateDiff( quote.createdAt ).diff } hover="Task Date:" data={ quote.createdAt } colorRange='30'  icon={ BsCalendar() }/>
                     {quote.PODate > 0 && (
-                        <RotatedEl text={ dateDiff( quote.PODate, 30 ).diff } hover="PO Date:" data={ quote.createdAt } colorRange='30' icon={ FaDollarSign() }/>
+                        <RotatedEl text={ dateDiff( quote.PODate, 30 ).diff } hover="PO Qty:" data={ quote.POQty  } colorRange='30' icon={ FaDollarSign() }/>
                         )
                     } 
                     <div className="details">

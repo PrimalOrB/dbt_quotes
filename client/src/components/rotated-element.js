@@ -10,7 +10,7 @@ const RotatedEl = ( { text, icon, colorRange, hover, data } ) => {
         return hslPos
     };
 
-    const hoverLabel =  data > 5 ? new Date( Number(data) ).toLocaleDateString() : data
+    const hoverLabel =  data > 100000 ? new Date( Number(data) ).toLocaleDateString() : data
 
     return (
         <span className='rotation-wrapper-outer' style={{ backgroundColor: `hsl(${bgColor(text, colorRange)},  100%, 50%)`}}>

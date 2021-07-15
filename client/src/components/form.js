@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useMutation } from '@apollo/client';
 import { ADD_QUOTE, EDIT_QUOTE } from '../utils/mutations';
 import { QUERY_QUOTES, QUERY_QUOTE } from '../utils/queries';
@@ -51,7 +51,7 @@ const AddForm = () => {
             } catch (e) {
                 console.error(e);
             }
-            }
+        }
       });
 
       const [ editQuote, { error2 }] = useMutation(EDIT_QUOTE, {
@@ -68,7 +68,7 @@ const AddForm = () => {
             } catch (e) {
                 console.error(e);
             }
-            }
+        }
       });
 
 
@@ -97,7 +97,6 @@ const AddForm = () => {
     }
 
     const handleEdit = async event =>{
-        console.log( quote._id )
         event.preventDefault()
         try {
             console.log( formState )
@@ -131,6 +130,13 @@ const AddForm = () => {
 
     console.log( quote )
 
+    useEffect(() => {
+        setFormState( {
+            ...quote
+        } )
+        console.log( new Date(), new Date(Number(quote.PODate))   )
+    },[data?.quote])
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -144,31 +150,31 @@ const AddForm = () => {
             <form id="add-form" onSubmit={ handleEdit }>
                 <div>
                     <label htmlFor="customerName">Customer:</label>
-                    <input type="text" name="customerName"  placeholder='Customer name *' className="form-required" required onBlur={handleChange}/>
+                    <input type="text" name="customerName"  placeholder='Customer name *' defaultValue={ formState.customerName } className="form-required" required onBlur={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="jNum">J#:</label>
-                    <input type="number" min="10000" name="jNum" placeholder='##### ( numbers only )' onBlur={handleChange}/>
+                    <input type="number" min="10000" name="jNum" placeholder='##### ( numbers only )' defaultValue={ formState.jNum } onBlur={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="description">Description:</label>
-                    <input type="text" name="description" placeholder='Short description *' className="form-required" required onBlur={handleChange}/>
+                    <input type="text" name="description" placeholder='Short description *' defaultValue={ formState.description } className="form-required" required onBlur={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="priority">Priority:</label>
-                    <input type="number" min="1" max="5" placeholder='Task priority' name="priority" onBlur={handleChange}/>
+                    <input type="number" min="1" max="5" placeholder='Task priority' defaultValue={ formState.priority } name="priority" onBlur={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="additionalNotes">Additional Notes:</label>
-                    <textarea name="additionalNotes" rows="5"  placeholder='Enter additional notes' onBlur={handleChange}/>
+                    <textarea name="additionalNotes" rows="5"  placeholder='Enter additional notes' defaultValue={ formState.additionalNotes } onBlur={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="pcsURL">PCS URL:</label>
-                    <input type="text" name="pcsURL"  placeholder='http://pcs.deboertool.com/...' onBlur={handleChange}/>
+                    <input type="text" name="pcsURL"  placeholder='http://pcs.deboertool.com/...' defaultValue={ formState.pcsURL } onBlur={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="crmURL">CRM Opportunity:</label>
-                    <input type="text" name="crmURL"  placeholder='https://deboertool.com/crm/app/opportunities/...'onBlur={handleChange}/>
+                    <input type="text" name="crmURL"  placeholder='https://deboertool.com/crm/app/opportunities/...' defaultValue={ formState.crmURL }  onBlur={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="status">Assign a status:</label>
@@ -179,11 +185,11 @@ const AddForm = () => {
                 </div>
                 <div>
                     <label htmlFor="PODate">PO Received Date:</label>
-                    <input type="date" name="PODate" placeholder='Date Purchase Order Received' onBlur={handleChange} onChange={handleChange}/>
+                    <input type="date" name="PODate" placeholder='Date Purchase Order Received' defaultValue={ new Date(Number(quote.PODate)).toISOString().substr(0,10) } onBlur={handleChange} onChange={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="POQty">PO Quantity:</label>
-                    <input type="text" name="POQty" placeholder='Quantity of item on Purchase Order' onBlur={handleChange}/>
+                    <input type="text" name="POQty" placeholder='Quantity of item on Purchase Order' defaultValue={ formState.POQty } onBlur={handleChange}/>
                 </div>
                 <button type="submit">Edit</button>
             </form>
