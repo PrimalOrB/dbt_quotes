@@ -293,6 +293,7 @@ main h1 {
 .customer {
   font-size: 1.5rem;
   font-weight: normal;
+  text-transform: uppercase;
 }
 
 .desc {
