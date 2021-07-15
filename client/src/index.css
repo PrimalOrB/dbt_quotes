@@ -158,6 +158,8 @@ main h1 {
 #add-form-cont {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 #add-form {

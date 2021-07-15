@@ -31,6 +31,7 @@ const typeDefs = gql`
 
     type Mutation {
         addQuote(customerName: String!, jNum: String, description: String!, priority: String, additionalNotes: String, pcsURL: String, crmURL: String, status: String, PODate: String, POQty: String): Quote
+        editQuote(_id: ID!, customerName: String!, jNum: String, description: String!, priority: String, additionalNotes: String, pcsURL: String, crmURL: String, status: String, PODate: String, POQty: String): Quote
     }
     
 `;
