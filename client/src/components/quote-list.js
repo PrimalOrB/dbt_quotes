@@ -45,7 +45,7 @@ const QuoteList = ( { quotes } ) => {
                         <div className='jnum'>{ `J${ quote.jNum }` }</div>
                         <div className='customer'>- { quote.customerName }</div>
                         <div className='desc'>- { quote.description }</div>
-                        <div className="additional"></div>
+                        <div className="additional">{ quote.additionalNotes }</div>
                     </div>
                 </div>
                 <div className="quoteCardBottom">

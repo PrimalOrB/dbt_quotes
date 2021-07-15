@@ -20,21 +20,69 @@ const AddForm = () => {
         'POQty':'',
     }
 
+    const initialErrorMessage = {
+        'customerName':'',
+        'description':'',
+        'pcsURL':'',
+        'crmURL':'',
+    }
+
     const [formState, setFormState] = useState(initialState);
    
     const [ errorMessage, setErrorMessage ] = useState( '' )
 
     function handleChange( e ) {
-        if ( !e.target.value.length ) {
-            setErrorMessage( `${ e.target.name } is required.` );
+        if( ( e.target.name === 'customerName' || e.target.name === 'description' ) && !e.target.value.length ){
+            setErrorMessage( {
+                ...errorMessage, [e.target.name]: `input-error`
+            } )
+        } else if( ( e.target.name === 'pcsURL' || e.target.name === 'crmURL' ) && e.target.value.length ){
+            const value = e.target.value
+            const regex = /https?:\/\/(www\.)?(pcs\.)?(deboertool.com)/
+            if( !value.match(regex) ){
+                setErrorMessage( {
+                    ...errorMessage, [e.target.name]: `input-error`
+                } )
+            } else {
+                setErrorMessage( {
+                    ...errorMessage, [e.target.name]: ``
+                } );
+                setFormState( {
+                    ...formState, [e.target.name]: e.target.value
+                } )
+            }
         } else {
-            setErrorMessage( '' );
-        }
-        if( !errorMessage ){
+            setErrorMessage( {
+                ...errorMessage, [e.target.name]: ``
+            } );
             setFormState( {
                 ...formState, [e.target.name]: e.target.value
             } )
-        }  
+        }
+
+        console.log( 'set' )
+    }
+
+    // function handleChange( e ) {
+    //     // if ( !e.target.value.length ) {
+    //     //     setErrorMessage( `${ e.target.name } is required.` );
+    //     // } else {
+    //         setErrorMessage( '' );
+    //     // }
+    //     if( !errorMessage ){
+    //         setFormState( {
+    //             ...formState, [e.target.name]: e.target.value
+    //         } )
+    //     }  
+    // }
+
+
+    let errors = 0
+    for(var key in errorMessage) {
+        var value = errorMessage[key];
+        if( value ){
+            errors += 1
+        }
     }
 
     const [ addQuote, { error }] = useMutation(ADD_QUOTE, {
@@ -128,13 +176,12 @@ const AddForm = () => {
 
     const quote = data?.quote || []
 
-    console.log( quote )
-
     useEffect(() => {
-        setFormState( {
-            ...quote
-        } )
-        console.log( new Date(), new Date(Number(quote.PODate))   )
+        // if( quote.length ){
+            setFormState( {
+                ...quote
+            } )
+        // }
     },[data?.quote])
 
     if (loading) {
@@ -150,31 +197,31 @@ const AddForm = () => {
             <form id="add-form" onSubmit={ handleEdit }>
                 <div>
                     <label htmlFor="customerName">Customer:</label>
-                    <input type="text" name="customerName"  placeholder='Customer name *' defaultValue={ formState.customerName } className="form-required" required onBlur={handleChange}/>
+                    <input type="text" name="customerName"  placeholder='Customer name *' defaultValue={ formState.customerName === null ? '' : formState.customerName } className={ `form-required ${errorMessage.customerName}` } required onBlur={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="jNum">J#:</label>
-                    <input type="number" min="10000" name="jNum" placeholder='##### ( numbers only )' defaultValue={ formState.jNum } onBlur={handleChange}/>
+                    <input type="number" min="10000" name="jNum" placeholder='##### ( numbers only )' defaultValue={ formState.jNum === null ? '' : formState.jNum } onBlur={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="description">Description:</label>
-                    <input type="text" name="description" placeholder='Short description *' defaultValue={ formState.description } className="form-required" required onBlur={handleChange}/>
+                    <input type="text" name="description" placeholder='Short description *' defaultValue={ formState.description === null ? '' : formState.description } className={ `form-required ${errorMessage.description}` } required onBlur={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="priority">Priority:</label>
-                    <input type="number" min="1" max="5" placeholder='Task priority' defaultValue={ formState.priority } name="priority" onBlur={handleChange}/>
+                    <input type="number" min="1" max="5" placeholder='Task priority' defaultValue={ formState.priority === null ? '' : formState.priority } name="priority" onBlur={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="additionalNotes">Additional Notes:</label>
-                    <textarea name="additionalNotes" rows="5"  placeholder='Enter additional notes' defaultValue={ formState.additionalNotes } onBlur={handleChange}/>
+                    <textarea name="additionalNotes" rows="5"  placeholder='Enter additional notes' defaultValue={ formState.additionalNotes === null ? '' : formState.additionalNotes } onBlur={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="pcsURL">PCS URL:</label>
-                    <input type="text" name="pcsURL"  placeholder='http://pcs.deboertool.com/...' defaultValue={ formState.pcsURL } onBlur={handleChange}/>
+                    <input type="text" name="pcsURL"  placeholder='http://pcs.deboertool.com/...' defaultValue={ formState.pcsURL === null ? '' : formState.pcsURL } onBlur={handleChange} className={ errorMessage.pcsURL }/>
                 </div>
                 <div>
                     <label htmlFor="crmURL">CRM Opportunity:</label>
-                    <input type="text" name="crmURL"  placeholder='https://deboertool.com/crm/app/opportunities/...' defaultValue={ formState.crmURL }  onBlur={handleChange}/>
+                    <input type="text" name="crmURL"  placeholder='https://deboertool.com/crm/app/opportunities/...' defaultValue={ formState.crmURL === null ? '' : formState.crmURL }  onBlur={handleChange} className={ errorMessage.crmURL }/>
                 </div>
                 <div>
                     <label htmlFor="status">Assign a status:</label>
@@ -185,13 +232,13 @@ const AddForm = () => {
                 </div>
                 <div>
                     <label htmlFor="PODate">PO Received Date:</label>
-                    <input type="date" name="PODate" placeholder='Date Purchase Order Received' defaultValue={ new Date(Number(quote.PODate)).toISOString().substr(0,10) } onBlur={handleChange} onChange={handleChange}/>
+                    <input type="date" name="PODate" placeholder='Date Purchase Order Received' defaultValue={ quote.PODate === null ? '' : new Date(Number(quote.PODate)).toISOString().substr(0,10) } onBlur={handleChange} onChange={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="POQty">PO Quantity:</label>
-                    <input type="text" name="POQty" placeholder='Quantity of item on Purchase Order' defaultValue={ formState.POQty } onBlur={handleChange}/>
+                    <input type="text" name="POQty" placeholder='Quantity of item on Purchase Order' defaultValue={ formState.POQty === null ? '' : formState.POQty } onBlur={handleChange}/>
                 </div>
-                <button type="submit">Edit</button>
+                { !errors ? <button type="submit">Edit</button> : <p className="form-error">{errors} Input Error{errors > 1 && 's'}</p>}
             </form>
         </section> 
         </>
@@ -202,7 +249,7 @@ const AddForm = () => {
             <form id="add-form" onSubmit={ handleSubmit }>
                 <div>
                     <label htmlFor="customerName">Customer:</label>
-                    <input type="text" name="customerName"  placeholder='Customer name *' className="form-required" required onBlur={handleChange}/>
+                    <input type="text" name="customerName"  placeholder='Customer name *' className={ `form-required ${errorMessage.customerName}` } r required onBlur={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="jNum">J#:</label>
@@ -210,7 +257,7 @@ const AddForm = () => {
                 </div>
                 <div>
                     <label htmlFor="description">Description:</label>
-                    <input type="text" name="description" placeholder='Short description *' className="form-required" required onBlur={handleChange}/>
+                    <input type="text" name="description" placeholder='Short description *' className={ `form-required ${errorMessage.description}` } required onBlur={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="priority">Priority:</label>
@@ -222,11 +269,11 @@ const AddForm = () => {
                 </div>
                 <div>
                     <label htmlFor="pcsURL">PCS URL:</label>
-                    <input type="text" name="pcsURL"  placeholder='http://pcs.deboertool.com/...' onBlur={handleChange}/>
+                    <input type="text" name="pcsURL"  placeholder='http://pcs.deboertool.com/...' onBlur={handleChange} className={ errorMessage.pcsURL }/>
                 </div>
                 <div>
                     <label htmlFor="crmURL">CRM Opportunity:</label>
-                    <input type="text" name="crmURL"  placeholder='https://deboertool.com/crm/app/opportunities/...'onBlur={handleChange}/>
+                    <input type="text" name="crmURL"  placeholder='https://deboertool.com/crm/app/opportunities/...'onBlur={handleChange} className={ errorMessage.crmURL }/>
                 </div>
                 <div>
                     <label htmlFor="status">Assign a status:</label>
@@ -243,7 +290,7 @@ const AddForm = () => {
                     <label htmlFor="POQty">PO Quantity:</label>
                     <input type="text" name="POQty" placeholder='Quantity of item on Purchase Order' onBlur={handleChange}/>
                 </div>
-                <button type="submit">Add New</button>
+                { !errors ? <button type="submit">Add New</button> : <p className="form-error">{errors} Input Error{errors > 1 && 's'}</p>}
             </form>
         </section>
         </>
