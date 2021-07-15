@@ -127,7 +127,8 @@ main {
   border-top: 0;
 }
 
-main h1 {
+main h1,
+.add-form-cont h1 {
   text-align: center;
   padding: 0.5rem;
   border-bottom: 3px solid #4d4d4d;
@@ -158,6 +159,8 @@ main h1 {
 #add-form-cont {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 #add-form {
@@ -341,11 +344,13 @@ main h1 {
   border-color: rgba(245,124,0,1);
 }
 
-.cardLink {
+.cardLink,
+.quoteCardBottom a {
   margin-left: 0.5rem
 }
 
-.cardLink p {
+.cardLink p,
+.quoteCardBottom a p {
   margin: 0;
   border: 1px solid #4d4d4d;
   padding: 0.25rem 0.75rem;

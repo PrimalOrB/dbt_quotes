@@ -51,8 +51,7 @@ const QuoteList = ( { quotes } ) => {
                 <div className="quoteCardBottom">
                     { ( quote.crmURL !== '' && quote.crmURL !== null)  && <CardLink icon={ FiExternalLink() } text={ "crm" } url={ quote.crmURL } target={ "_blank "} />}
                     { ( quote.pcsURL !== '' && quote.pcsURL !== null)  && <CardLink icon={ FiExternalLink() } text={ "pcs" } url={ quote.pcsURL } target={ "_blank "}/>}
-                    <CardLink icon={ FiEdit() } text={ "edit" } url={ `/edit/${quote._id}` } target={ `/edit/${quote._id}`  }/>
-                    <Link to={`/edit/${quote._id}`} >Test</Link>
+                    <Link to={`/edit/${quote._id}`} ><p><FiEdit/>Edit</p></Link>
                 </div>
 
             </article>

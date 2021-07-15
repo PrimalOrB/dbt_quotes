@@ -5,7 +5,6 @@ const AddNew = () => {
 
   return (
     <div>
-     <h1>Add New Quote</h1>
      <AddForm />
     </div>
   );

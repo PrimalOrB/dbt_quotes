@@ -42,11 +42,21 @@ const resolvers = {
     },
 
     Mutation: {
-      addQuote: async (parent, args) => {
+      addQuote: async ( parent, args) => {
         console.log( args )
-        const quote = await Quote.create(args);
+        const quote = await Quote.create( args );
         return quote;
       },
+      editQuote: async( parent,args ) => {
+        console.log('test')
+        let quote = await Quote.findOneAndUpdate( 
+          {_id: args._id},
+          {"$set":{...args}},
+          {"new": true}
+          );
+        console.log( quote)
+        return quote;
+      }
     }
 }
 
