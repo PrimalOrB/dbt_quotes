@@ -260,6 +260,11 @@ main h2{
   margin: 0.5rem;
   display: flex;
   flex-direction: column;
+  transition: 0.25s ease all;
+}
+
+.quoteCard:hover {
+  background-color: rgba( 0,0,0,0.2);
 }
 
 .quoteCardTop {
