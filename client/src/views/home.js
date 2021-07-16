@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 
-import { HomeContent, QuoteList, Filter } from "../components";
+import { HomeContent, QuoteList, Filter, Loading } from "../components";
 import { useQuery } from '@apollo/client';
 import { QUERY_QUOTES } from '../utils/queries';
 
@@ -35,7 +35,7 @@ const Home = () => {
     <Fragment>
       <HomeContent />
       {loading ? (
-        <div>Loading...</div>
+        <Loading />
       ) : (
         <>
         <Filter filterState={ filterState } setFilterState={ setFilterState } handleChange={ handleChange }/>

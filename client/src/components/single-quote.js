@@ -1,9 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useMutation } from '@apollo/client';
-import { ADD_QUOTE, EDIT_QUOTE } from '../utils/mutations';
-import { QUERY_QUOTES, QUERY_QUOTE } from '../utils/queries';
-import { useQuery } from '@apollo/client';
-import { useParams } from 'react-router-dom';
+import React from "react";
 import { Link } from "react-router-dom";
 import RotatedEl from './rotated-element'
 import { BsCalendar } from 'react-icons/bs'
@@ -14,8 +9,6 @@ import { MdForum } from 'react-icons/md'
 import { CardLink } from './'
 
 const SingleQuote = ( { quoteData } ) => {
-
-    console.log( quoteData )
 
     function dateDiff( a ){
         const b = new Date()

@@ -4,6 +4,7 @@ import { ADD_QUOTE, EDIT_QUOTE } from '../utils/mutations';
 import { QUERY_QUOTES, QUERY_QUOTE } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
+import { Loading } from './'
 
 const AddForm = () => {
 
@@ -193,7 +194,7 @@ const AddForm = () => {
     },[data?.quote])
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loading/>;
     }
     
     return (

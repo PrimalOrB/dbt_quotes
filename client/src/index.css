@@ -206,8 +206,9 @@ main h2{
 }
 
 #add-form button,
+.note-form button,
 .form-error{
-  padding: 0.5rem 0;
+  padding: 0.5rem 2rem;
   border-radius: 2rem;
   margin-top: 0.5rem;
   border: none;
@@ -234,7 +235,8 @@ main h2{
   background-color: rgb(238, 204, 204) !important;
 }
 
-#add-form button:hover {
+#add-form button:hover,
+.note-form button:hover {
   background-color: rgba(245,124,0,1);
 }
 
@@ -445,4 +447,26 @@ main h2{
 .archived {
   background-color: #4d4d4d;
   color: white
+}
+
+.note-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.note-form textarea {
+  width: 80%;
+  resize: vertical;
+  outline: none;
+  border-radius: 0.25rem;
+}
+
+.note-form label {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #4d4d4d;
 }

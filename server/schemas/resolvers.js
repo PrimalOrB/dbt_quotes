@@ -53,7 +53,7 @@ const resolvers = {
           {"new": true}
           );
         return quote;
-      }
+      },
     }
 }
 

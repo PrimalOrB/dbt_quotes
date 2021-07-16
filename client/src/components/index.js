@@ -5,5 +5,6 @@ import QuoteList from "./quote-list";
 import Filter from "./filters";
 import CardLink from './card-link'
 import SingleQuote from './single-quote'
+import NoteForm  from './note-form'
 
-export { HomeContent, Loading, NavBar, QuoteList, Filter, SingleQuote, CardLink };
+export { HomeContent, Loading, NavBar, QuoteList, Filter, SingleQuote, CardLink, NoteForm };

@@ -1,8 +1,10 @@
 import React from "react";
 import SingleQuote from '../components/single-quote'
+import { Loading, NoteForm } from "../components";
 import { QUERY_QUOTE } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
+
 
 const SingleView = () => {
 
@@ -17,9 +19,12 @@ const SingleView = () => {
   return (
     <>
       { data?.quote ?
+        <>
         <SingleQuote quoteData={ quote }/>
+        <NoteForm />
+        </>
         :
-        <h1>loading</h1>
+        <Loading />
       }
     </>
   );
