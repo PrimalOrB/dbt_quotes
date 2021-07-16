@@ -21,37 +21,51 @@ const AddForm = () => {
     }
 
     const initialErrorMessage = {
-        'customerName':'',
-        'description':'',
+        'customerName':'input-error',
+        'description':'input-error',
         'pcsURL':'',
         'crmURL':'',
     }
 
     const [formState, setFormState] = useState(initialState);
    
-    const [ errorMessage, setErrorMessage ] = useState( '' )
+    const [ errorMessage, setErrorMessage ] = useState( initialErrorMessage )
 
     function handleChange( e ) {
-        if( ( e.target.name === 'customerName' || e.target.name === 'description' ) && !e.target.value.length ){
-            setErrorMessage( {
-                ...errorMessage, [e.target.name]: `input-error`
-            } )
-        } else if( ( e.target.name === 'pcsURL' || e.target.name === 'crmURL' ) && e.target.value.length ){
-            const value = e.target.value
-            const regex = /https?:\/\/(www\.)?(pcs\.)?(deboertool.com)/
-            if( !value.match(regex) ){
-                setErrorMessage( {
-                    ...errorMessage, [e.target.name]: `input-error`
-                } )
-            } else {
-                setErrorMessage( {
-                    ...errorMessage, [e.target.name]: ``
-                } );
-                setFormState( {
-                    ...formState, [e.target.name]: e.target.value
-                } )
-            }
-        } else {
+        switch ( e.target.name ){
+            case 'customerName': case 'description':
+                if( e.target.value.length === 0 ){
+                    setErrorMessage( {
+                        ...errorMessage, [e.target.name]: `input-error`
+                    } )
+                } else {
+                    addState()
+                }
+                break
+            case 'pcsURL': case 'crmURL':
+                if( e.target.value.length > 0 ){
+                    const value = e.target.value
+                    const regex = /https?:\/\/(www\.)?(pcs\.)?(deboertool.com)/
+                    if( !value.match(regex) ){
+                        setErrorMessage( {
+                            ...errorMessage, [e.target.name]: `input-error`
+                        } )
+                    } else {
+                        addState()
+                    }
+                } else {
+                    addState()
+                }
+                break
+            case 'jNum':
+                console.log( 'jnum action?' )
+                break
+            default: 
+                addState()
+                break
+        }
+
+        function addState(){
             setErrorMessage( {
                 ...errorMessage, [e.target.name]: ``
             } );
@@ -59,23 +73,7 @@ const AddForm = () => {
                 ...formState, [e.target.name]: e.target.value
             } )
         }
-
-        console.log( 'set' )
     }
-
-    // function handleChange( e ) {
-    //     // if ( !e.target.value.length ) {
-    //     //     setErrorMessage( `${ e.target.name } is required.` );
-    //     // } else {
-    //         setErrorMessage( '' );
-    //     // }
-    //     if( !errorMessage ){
-    //         setFormState( {
-    //             ...formState, [e.target.name]: e.target.value
-    //         } )
-    //     }  
-    // }
-
 
     let errors = 0
     for(var key in errorMessage) {
@@ -102,22 +100,22 @@ const AddForm = () => {
         }
       });
 
-      const [ editQuote, { error2 }] = useMutation(EDIT_QUOTE, {
-        update(cache, { data: { editQuote } }) {
-            try {
-                console.log( editQuote )
-                // const { quotes } = cache.readQuery({ query: QUERY_QUOTES });
-                cache.writeQuery({
-                    query: QUERY_QUOTES,
+    const [ editQuote, { error2 }] = useMutation(EDIT_QUOTE, {
+    update(cache, { data: { editQuote } }) {
+        try {
+            console.log( editQuote )
+            // const { quotes } = cache.readQuery({ query: QUERY_QUOTES });
+            cache.writeQuery({
+                query: QUERY_QUOTES,
 
-                    data: { quotes: [editQuote] }
-                });
-                window.location.replace("/");
-            } catch (e) {
-                console.error(e);
-            }
+                data: { quotes: [editQuote] }
+            });
+            window.location.replace("/");
+        } catch (e) {
+            console.error(e);
         }
-      });
+    }
+    });
 
 
     const handleSubmit = async event =>{
@@ -177,11 +175,10 @@ const AddForm = () => {
     const quote = data?.quote || {initialState}
 
     useEffect(() => {
-        // if( quote.length ){
-            setFormState( {
-                ...quote
-            } )
-        // }
+        setFormState( {
+            ...quote
+        } )
+        data?.quote && setErrorMessage('')
     },[data?.quote])
 
     if (loading) {
@@ -190,6 +187,7 @@ const AddForm = () => {
     
     return (
         <>
+        { ( error || error2 ) && <span className="api-error">API Error</span> }
         { quote?._id ? 
         <>
         <h1>Edit Quote</h1>
@@ -249,7 +247,7 @@ const AddForm = () => {
             <form id="add-form" onSubmit={ handleSubmit }>
                 <div>
                     <label htmlFor="customerName">Customer:</label>
-                    <input type="text" name="customerName"  placeholder='Customer name *' className={ `form-required ${errorMessage.customerName}` } r required onBlur={handleChange}/>
+                    <input type="text" name="customerName"  placeholder='Customer name *' className={ `form-required ${errorMessage.customerName}` } required onBlur={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="jNum">J#:</label>

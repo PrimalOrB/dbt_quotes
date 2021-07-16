@@ -383,3 +383,9 @@ main h2{
 .cardLink p:hover {
   background-color: rgba(0,0,0,0.2);
 }
+
+.api-error {
+  display: block;
+  text-align: center;
+  color: red
+}
