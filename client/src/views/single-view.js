@@ -15,9 +15,13 @@ const SingleView = () => {
   const quote = data?.quote || []
 
   return (
-    <div>
-      <SingleQuote quoteData={ quote }/>
-    </div>
+    <>
+      { data?.quote ?
+        <SingleQuote quoteData={ quote }/>
+        :
+        <h1>loading</h1>
+      }
+    </>
   );
 };
 
