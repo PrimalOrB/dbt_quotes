@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   color: #4d4d4d;
-  /* border: 1px solid black */
+  border: 1px solid black
 }
 
 #app {
@@ -291,7 +291,6 @@ main h2{
   flex-wrap: nowrap;
   align-items: center;
   padding: 0 0.15rem;
-  height: 100%;
   width: 2em;
   border-right: 1px solid  #4d4d4d;
 }

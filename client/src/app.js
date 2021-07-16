@@ -5,7 +5,7 @@ import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@ap
 
 
 import { NavBar, Loading } from "./components";
-import { Home, Profile, ExternalApi, AddNew, NoAuth } from "./views";
+import { Home, Profile, ExternalApi, AddNew, SingleView, NoAuth } from "./views";
 import ProtectedRoute from "./auth/protected-route";
 
 import "./app.css";
@@ -38,6 +38,7 @@ const App = () => {
           <ProtectedRoute path="/external-api" component={ExternalApi} />
           <ProtectedRoute path="/add-new" component={AddNew} />
           <ProtectedRoute path="/edit/:id" component={AddNew} />
+          <ProtectedRoute path="/quote/:id" component={SingleView} />
           {/* <Route path="/" exact component={NoAuth} /> */}
         </Switch>
       </main>
