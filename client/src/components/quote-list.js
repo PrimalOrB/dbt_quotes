@@ -5,6 +5,7 @@ import { BsCalendar } from 'react-icons/bs'
 import { FaDollarSign } from 'react-icons/fa'
 import { FiEdit, FiExternalLink } from 'react-icons/fi'
 import { HiOutlineExclamation } from 'react-icons/hi'
+import { MdForum } from 'react-icons/md'
 import { CardLink } from './'
 
 
@@ -60,9 +61,12 @@ const QuoteList = ( { quotes } ) => {
                         </div>
                     </div>
                     <div className="quoteCardBottom">
-                        { ( quote.crmURL !== '' && quote.crmURL !== null)  && <CardLink icon={ FiExternalLink() } text={ "crm" } url={ quote.crmURL } target={ "_blank "} />}
-                        { ( quote.pcsURL !== '' && quote.pcsURL !== null)  && <CardLink icon={ FiExternalLink() } text={ "pcs" } url={ quote.pcsURL } target={ "_blank "}/>}
-                        <Link className="cardLink" to={`/edit/${quote._id}`} ><p><FiEdit/>edit</p></Link>
+                        <Link className="cardLink" to={`/quote/${quote._id}`} ><p><MdForum/>Conversation</p></Link>
+                        <div className="quoteLinks">
+                            { ( quote.crmURL !== '' && quote.crmURL !== null)  && <CardLink icon={ FiExternalLink() } text={ "crm" } url={ quote.crmURL } target={ "_blank "} />}
+                            { ( quote.pcsURL !== '' && quote.pcsURL !== null)  && <CardLink icon={ FiExternalLink() } text={ "pcs" } url={ quote.pcsURL } target={ "_blank "}/>}
+                            <Link className="cardLink" to={`/edit/${quote._id}`} ><p><FiEdit/>edit</p></Link>
+                        </div>
                     </div>
 
                 </article>
