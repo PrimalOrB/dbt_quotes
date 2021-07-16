@@ -295,10 +295,25 @@ main h2{
   display: flex;
   width: 100%;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.details div {
+.sub-details{
+  display: flex;
+}
+
+.sub-details div {
   padding: 0 0.5rem
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255,255,255,.5);
+  padding: 0 1rem;
+  border-left: 1px solid #4d4d4d;
+  border-bottom: 1px solid #4d4d4d;
+  border-radius: 0 0 0 0.75rem;
 }
 
 .quoteCard  svg{

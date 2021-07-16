@@ -4,6 +4,7 @@ import { ADD_QUOTE, EDIT_QUOTE } from '../utils/mutations';
 import { QUERY_QUOTES, QUERY_QUOTE } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
+import Select from 'react-select';
 
 const AddForm = () => {
 
@@ -26,6 +27,17 @@ const AddForm = () => {
         'pcsURL':'',
         'crmURL':'',
     }
+
+    const dropDown = [
+        {value: 'tbd', label: 'Assign Status'},
+        {value: 'rfq', label: 'RFQ'},
+        {value: 'quote-review', label: 'Quote Review'},
+        {value: 'production', label: 'Production'},
+        {value: 'production-review', label: 'Production Review'},
+        {value: 'produciton-ready', label: 'Production Ready'},
+        {value: 'hold', label: 'On Hold'},
+        {value: 'archived', label: 'Archived'}
+    ]
 
     const [formState, setFormState] = useState(initialState);
    
@@ -223,10 +235,12 @@ const AddForm = () => {
                 </div>
                 <div>
                     <label htmlFor="status">Assign a status:</label>
-                    <select name="status" id="status" onBlur={handleChange}>
-                            {/* <option disabled="disabled">Assign status</option>
-                            <option value="finished">Finished</option> */}
+                    <select name="status" id="status" value={ formState.status } onChange={handleChange}>
+                        { dropDown.map((x) => {
+                                return <option key={ x.value } value={ x.value } >{ x.label }</option>
+                            })}
                     </select>
+                    {/* <Select id='status' value={ dropDown.value } defaultValue={ formState.status === null ? '' : formState.status }/> */}
                 </div>
                 <div>
                     <label htmlFor="PODate">PO Received Date:</label>
@@ -276,8 +290,9 @@ const AddForm = () => {
                 <div>
                     <label htmlFor="status">Assign a status:</label>
                     <select name="status" id="status" onBlur={handleChange}>
-                            {/* <option disabled="disabled">Assign status</option>
-                            <option value="finished">Finished</option> */}
+                        { dropDown.map((x) => {
+                            return <option value={ x.value } >{ x.label }</option>
+                        })}
                     </select>
                 </div>
                 <div>
