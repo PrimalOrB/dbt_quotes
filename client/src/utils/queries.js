@@ -16,6 +16,7 @@ export const QUERY_QUOTES = gql`
             status
             PODate
             POQty
+            noteCount
             }
         }
 `;
@@ -35,6 +36,12 @@ export const QUERY_QUOTE = gql`
             status
             PODate
             POQty
+            notes{
+                _id
+                noteText
+                noteBy
+                createdAt
+              }
             }
         }
 `;

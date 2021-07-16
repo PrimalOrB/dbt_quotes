@@ -29,7 +29,6 @@ const SingleQuote = ( { quoteData } ) => {
             return label.split('-').map( capitalize ).join(' ');
             }
     }
-
         
     return (
         <>
@@ -55,7 +54,7 @@ const SingleQuote = ( { quoteData } ) => {
                         </div>
                     </div>
                     <div className="quoteCardBottom">
-                        <Link className="cardLink" to={`/quote/${quoteData._id}`} ><p><MdForum/>Conversation</p></Link>
+                        <Link className="cardLink" to={`/quote/${quoteData._id}`} ><p><MdForum/>Conversation { quoteData.noteCount > 0 && <span className='note-count' >( { quoteData.noteCount } note{ quoteData.noteCount > 1 && 's' } )</span>}</p></Link>
                         <div className="quoteLinks">
                             { ( quoteData.crmURL !== '' && quoteData.crmURL !== null)  && <CardLink icon={ FiExternalLink() } text={ "crm" } url={ quoteData.crmURL } target={ "_blank "} />}
                             { ( quoteData.pcsURL !== '' && quoteData.pcsURL !== null)  && <CardLink icon={ FiExternalLink() } text={ "pcs" } url={ quoteData.pcsURL } target={ "_blank "}/>}

@@ -34,7 +34,9 @@ const resolvers = {
 
           console.log( filterSet, sortSet )
 
-        return Quote.find( filterSet ).sort(sortSet)
+        return Quote.find( filterSet )
+          .sort( sortSet )
+          .populate( 'notes' )
       },
       quote: async (parent, { _id }) => {
         return Quote.findOne({ _id })
@@ -54,6 +56,14 @@ const resolvers = {
           );
         return quote;
       },
+      addNote: async( parent, { quoteId, noteText, noteBy } ) => {
+        let updatedQuote = await Quote.findOneAndUpdate(
+          { _id: quoteId },
+          { $push: { notes: { noteText, noteBy } } },
+          { new: true, runValidators: true }
+        );
+        return updatedQuote;
+      }
     }
 }
 

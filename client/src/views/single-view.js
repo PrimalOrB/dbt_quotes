@@ -1,6 +1,6 @@
 import React from "react";
 import SingleQuote from '../components/single-quote'
-import { Loading, NoteForm } from "../components";
+import { Loading, NoteForm, Note } from "../components";
 import { QUERY_QUOTE } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
@@ -16,16 +16,23 @@ const SingleView = () => {
 
   const quote = data?.quote || []
 
+  console.log( quote.notes)
+
   return (
     <>
-      { data?.quote ?
+    {loading ? (
+        <Loading />
+      ) : (
         <>
         <SingleQuote quoteData={ quote }/>
+        { quote.notes.map( ( note ) => {
+          return <Note noteData={ note }/>
+          // console.log( note )
+        // return <Note />
+        } )}
         <NoteForm />
         </>
-        :
-        <Loading />
-      }
+      )}  
     </>
   );
 };

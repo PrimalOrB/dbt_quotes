@@ -470,3 +470,38 @@ main h2{
   font-weight: bold;
   color: #4d4d4d;
 }
+
+.note-count {
+  padding-left: 0.5rem;
+  font-style: oblique;
+}
+
+.note-cont {
+  width: 90%;
+  outline: 1px dashed #4d4d4d;
+  padding: 0.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255,255,255,0.4);
+  transition: 0.25s ease all;
+}
+
+.note-cont:hover {
+  background-color: rgba(0,0,0,0.2);
+}
+
+.note-details {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.note-by {
+  font-weight: bold;
+}
+
+.note-date {
+  font-style: italic;
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+}

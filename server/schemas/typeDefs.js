@@ -14,6 +14,7 @@ const typeDefs = gql`
         status: String
         PODate: String
         POQty: String
+        noteCount: Int
         notes: [Note]
     }
 
