@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import { ADD_QUOTE, EDIT_QUOTE } from '../utils/mutations';
 import { QUERY_QUOTES, QUERY_QUOTE } from '../utils/queries';
 import { useQuery } from '@apollo/client';
-import { Redirect, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Loading } from './'
 import { useStoreContext } from "../utils/GlobalState";
 

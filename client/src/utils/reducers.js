@@ -1,7 +1,8 @@
 import { useReducer } from 'react';
 import {
     UPDATE_USER,
-    UPDATE_DATASTORE
+    UPDATE_DATASTORE,
+    UPDATE_FILTER
 } from "./actions";
   
 export const reducer = ( state, action ) => {
@@ -16,7 +17,11 @@ export const reducer = ( state, action ) => {
                 ...state,
                 dataStore: [...action.dataStore],
             };
-
+        case UPDATE_FILTER:
+            return {
+                ...state,
+                currentFilter: [...action.currentFilter],
+            };
         default:
         return state;
     }

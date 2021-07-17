@@ -1,2 +1,3 @@
 export const UPDATE_USER = "UPDATE_USER";
 export const UPDATE_DATASTORE = "UPDATE_DATASTORE";
+export const UPDATE_FILTER = "UPDATE_FILTER";

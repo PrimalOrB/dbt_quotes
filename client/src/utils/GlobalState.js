@@ -8,7 +8,7 @@ const StoreProvider = ({ value = [], ...props }) => {
     const [state, dispatch] = useStateReducer({
       currentUser: {},
       dataStore: [],
-      currentQuote: '',
+      currentFilter: 'quote-asc',
     });
     console.log(state);
     return <Provider value={[state, dispatch]} {...props} />;
