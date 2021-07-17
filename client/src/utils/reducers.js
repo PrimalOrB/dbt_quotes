@@ -20,7 +20,7 @@ export const reducer = ( state, action ) => {
         case UPDATE_FILTER:
             return {
                 ...state,
-                currentFilter: [...action.currentFilter],
+                currentFilter: action.currentFilter,
             };
         default:
         return state;

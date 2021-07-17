@@ -1,8 +1,7 @@
 import React, { Fragment, useState } from "react";
 
-import { HomeContent, QuoteList, Filter, Loading } from "../components";
-import { useQuery } from '@apollo/client';
-import { QUERY_QUOTES } from '../utils/queries';
+import { HomeContent, QuoteList, Filter } from "../components";
+import { useStoreContext } from "../utils/GlobalState";
 
 const Home = () => {
 
@@ -21,28 +20,15 @@ const Home = () => {
     });
   };
 
-  const { loading, data } = useQuery(QUERY_QUOTES,{
-    variables: { 
-      filterPO: filterState.filterPO,
-      filterPriority: filterState.filterPriority,
-      filterDate: filterState.filterDate
-     }
-  });
-
-  const quotes = data?.quotes || []
+  const [state] = useStoreContext();
+  const { dataStore, currentFilter } = state
 
   return (
-    <Fragment>
+    <>
       <HomeContent />
-      {loading ? (
-        <Loading />
-      ) : (
-        <>
-        <Filter filterState={ filterState } setFilterState={ setFilterState } handleChange={ handleChange }/>
-        <QuoteList quotes={ quotes }/>
-        </>
-      )}
-    </Fragment>
+      <Filter filterState={ filterState } setFilterState={ setFilterState } handleChange={ handleChange }/>
+      <QuoteList quotes={ currentFilter.filter(dataStore) }/>
+    </>
   )
 
 };
