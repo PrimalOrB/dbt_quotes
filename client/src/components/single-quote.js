@@ -45,8 +45,8 @@ const SingleQuote = ( { quoteData } ) => {
                         } 
                         <div className="details">
                             <div className="sub-details">
-                                <div className='jnum'>{ `J${ quoteData.jNum }` }</div>
-                                <div className='customer'>- { quoteData.customerName }</div>
+                                { quoteData.jNum && <div className='jnum'>{ `J${ quoteData.jNum } :` }</div> }
+                                <div className='customer'>{ quoteData.customerName }</div>
                                 <div className='desc'>- { quoteData.description }</div>
                             </div>
                             <div className={ `status ${ quoteData.status }` }>{ transformLabel( quoteData.status ) }</div>
