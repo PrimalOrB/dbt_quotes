@@ -53,12 +53,27 @@ a:hover {
   background-color: rgba(255, 255, 255, 0.1);
   transition: 0.25s ease all;
   border-bottom: 3px solid white;
+  display: flex;
+  align-items: center;
+}
+
+.nav-button svg {
+  stroke: white;
+  color: white;
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: 0.25s ease all;
+  margin-right: 0.4rem;
 }
 
 .nav-button:hover {
   background-color: rgba(255, 255, 255, 0.5);
   color: #4d4d4d;
   text-decoration: none;
+}
+
+.nav-button:hover svg {
+  stroke: #4d4d4d;
 }
 
 .nav-button-active {

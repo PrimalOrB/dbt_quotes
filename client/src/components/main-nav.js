@@ -1,6 +1,8 @@
 import {NavLink} from "react-router-dom";
 import React from "react";
 import { useStoreContext } from "../utils/GlobalState";
+import { FiPlusSquare, FiHome, FiCheck } from 'react-icons/fi'
+import { HiOutlineArchive } from 'react-icons/hi'
 
 const MainNav = () => {
 
@@ -17,7 +19,7 @@ const MainNav = () => {
       className="nav-button"
       activeClassName="nav-button-active"
     >
-      Dashboard
+      <FiHome />Dashboard
     </NavLink>
     <NavLink
       to="/production"
@@ -25,7 +27,7 @@ const MainNav = () => {
       className={`nav-button ${ productionReady > 0 && 'pulse'}`}
       activeClassName="nav-button-active"
     >
-      Production
+      <FiCheck />Production
     </NavLink>
     <NavLink
       to="/archive"
@@ -33,7 +35,7 @@ const MainNav = () => {
       className="nav-button"
       activeClassName="nav-button-active"
     >
-      Archive
+      <HiOutlineArchive />Archive
     </NavLink>
     <NavLink
       to="/add-new"
@@ -41,7 +43,7 @@ const MainNav = () => {
       className="nav-button"
       activeClassName="nav-button-active"
     >
-      Add New
+    <FiPlusSquare /> Add New
     </NavLink>
     
     {/* <NavLink
