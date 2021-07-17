@@ -9,7 +9,7 @@ import { useStoreContext } from "../utils/GlobalState";
 
 const AddForm = () => {
 
-    const [state, dispatch] = useStoreContext();
+    const [state] = useStoreContext();
 
     const initialState = {
         customerName:'',
@@ -37,7 +37,7 @@ const AddForm = () => {
         {value: 'quote-review', label: 'Quote Review'},
         {value: 'production', label: 'Production'},
         {value: 'production-review', label: 'Production Review'},
-        {value: 'produciton-ready', label: 'Production Ready'},
+        {value: 'production-ready', label: 'Production Ready'},
         {value: 'hold', label: 'On Hold'},
         {value: 'archived', label: 'Archived'}
     ]

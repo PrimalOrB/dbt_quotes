@@ -6,6 +6,7 @@ import { useStoreContext } from "../utils/GlobalState";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useQuery } from '@apollo/client';
 import { QUERY_QUOTES } from '../utils/queries';
+import Loading from "./loading";
 
 const NavBar = () => {
 
@@ -34,6 +35,10 @@ const NavBar = () => {
   }, [data, dispatch]);
 
   return (
+    <>
+    {loading ? (
+      <Loading />
+    ) : (
       <nav>
         <div className="container">
           <MainNav />
@@ -41,6 +46,8 @@ const NavBar = () => {
           <AuthNav />
         </div>
       </nav>
+    )}
+    </>
   );
 };
 

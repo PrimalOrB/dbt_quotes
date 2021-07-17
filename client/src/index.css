@@ -443,7 +443,7 @@ main h2 {
   color: white;
 }
 
-.produciton-ready {
+.production-ready {
   background-color: rgb(182, 218, 182);
 }
 
@@ -507,4 +507,23 @@ main h2 {
   font-style: italic;
   font-size: 0.8rem;
   margin-left: 0.5rem;
+}
+
+.pulse {
+  background-color: #222;
+  animation-name: color;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes color {
+  0% {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    background-color: rgba(245, 124, 0, 1);
+  }
+  100% {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 }

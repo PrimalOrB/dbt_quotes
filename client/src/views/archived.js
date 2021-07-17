@@ -8,15 +8,13 @@ const Archived = () => {
   const [state] = useStoreContext();
   const { dataStore, currentFilter } = state
 
-  const active = dataStore.filter( (x) => {
-    return x.status !== 'archived' && x.status !== 'production-ready'
-  })
+  const archived = dataStore.filter( x => x.status === 'archived')
 
   return (
     <>
       <HomeContent />
       <Filter/>
-      <QuoteList quotes={ currentFilter.filter(active) }/>
+      <QuoteList quotes={ currentFilter.filter(archived) }/>
     </>
   )
 

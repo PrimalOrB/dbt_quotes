@@ -3,23 +3,21 @@ import React from "react";
 import { HomeContent, QuoteList, Filter } from "../components";
 import { useStoreContext } from "../utils/GlobalState";
 
-const Archived = () => {
+const Production = () => {
 
   const [state] = useStoreContext();
   const { dataStore, currentFilter } = state
 
-  const active = dataStore.filter( (x) => {
-    return x.status !== 'archived' && x.status !== 'production-ready'
-  })
+  const ready = dataStore.filter( x => x.status === 'production-ready')
 
   return (
     <>
       <HomeContent />
       <Filter/>
-      <QuoteList quotes={ currentFilter.filter(active) }/>
+      <QuoteList quotes={ currentFilter.filter(ready) }/>
     </>
   )
 
 };
 
-export default Archived;
+export default Production;

@@ -2,7 +2,7 @@ import React from "react";
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_FILTER } from '../utils/actions';
 
-const Filter = ( { filterState, setFilterState, handleChange } ) => {
+const Filter = () => {
 
   const [state, dispatch] = useStoreContext();
 
@@ -32,17 +32,6 @@ const Filter = ( { filterState, setFilterState, handleChange } ) => {
                     return <option key={ x.value } value={ x.value } >{ x.label }</option>
                 })}
               </select>
-          </div>
-
-
-          <div className="filter-el">
-            <p id="filterPO" onClick={ handleChange } className={ filterState.filterPO ? 'clicked' : '' }>Oldest PO</p>
-          </div>
-          <div className="filter-el">
-            <p id="filterPriority" onClick={ handleChange } className={ filterState.filterPriority ? 'clicked' : '' }>Top Priority</p>
-          </div>
-          <div className="filter-el">
-            <p id="filterDate" onClick={ handleChange } className={ filterState.filterDate ? 'clicked' : '' }>Newest Task</p>
           </div>
       </div>
     )

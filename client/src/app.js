@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { StoreProvider } from "./utils/GlobalState";
 import { NavBar, Loading } from "./components";
-import { Home, Profile, ExternalApi, AddNew, SingleView } from "./views";
+import { Home, Profile, ExternalApi, AddNew, SingleView, Archive, Production } from "./views";
 import ProtectedRoute from "./auth/protected-route";
 
 import "./app.css";
@@ -33,6 +33,8 @@ const App = () => {
           <main>
             <Switch>
               <ProtectedRoute exact path="/" component={ Home } />
+              <ProtectedRoute exact path="/archive" component={ Archive } />
+              <ProtectedRoute exact path="/production" component={ Production } />
               <ProtectedRoute path="/profile" component={ Profile } />
               <ProtectedRoute path="/external-api" component={ ExternalApi } />
               <ProtectedRoute path="/add-new" component={ AddNew } />

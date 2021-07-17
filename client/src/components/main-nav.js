@@ -1,7 +1,15 @@
 import {NavLink} from "react-router-dom";
 import React from "react";
+import { useStoreContext } from "../utils/GlobalState";
 
-const MainNav = () => (
+const MainNav = () => {
+
+  const [state] = useStoreContext();
+  const { dataStore } = state
+
+  const productionReady = dataStore.filter( x => x.status === 'production-ready').length
+
+  return (
   <div className="nav-menu">
     <NavLink
       to="/"
@@ -12,6 +20,22 @@ const MainNav = () => (
       Dashboard
     </NavLink>
     <NavLink
+      to="/production"
+      exact
+      className={`nav-button ${ productionReady > 0 && 'pulse'}`}
+      activeClassName="nav-button-active"
+    >
+      Production
+    </NavLink>
+    <NavLink
+      to="/archive"
+      exact
+      className="nav-button"
+      activeClassName="nav-button-active"
+    >
+      Archive
+    </NavLink>
+    <NavLink
       to="/add-new"
       exact
       className="nav-button"
@@ -19,6 +43,7 @@ const MainNav = () => (
     >
       Add New
     </NavLink>
+    
     {/* <NavLink
       to="/profile"
       exact
@@ -37,6 +62,7 @@ const MainNav = () => (
       External API
     </NavLink> */}
   </div>
-);
+  )
+};
 
 export default MainNav;
