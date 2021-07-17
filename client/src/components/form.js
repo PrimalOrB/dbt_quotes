@@ -3,22 +3,25 @@ import { useMutation } from '@apollo/client';
 import { ADD_QUOTE, EDIT_QUOTE } from '../utils/mutations';
 import { QUERY_QUOTES, QUERY_QUOTE } from '../utils/queries';
 import { useQuery } from '@apollo/client';
-import { useParams } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import { Loading } from './'
+import { useStoreContext } from "../utils/GlobalState";
 
 const AddForm = () => {
 
+    const [state, dispatch] = useStoreContext();
+
     const initialState = {
-        'customerName':'',
-        'jNum':'',
-        'description':'',
-        'priority':'',
-        'additionalNotes':'',
-        'pcsURL':'',
-        'crmURL':'',
-        'status':'',
-        'PODate':'',
-        'POQty':'',
+        customerName:'',
+        jNum:'',
+        description:'',
+        priority:'',
+        additionalNotes:'',
+        pcsURL:'',
+        crmURL:'',
+        status:'tbd',
+        PODate:'',
+        POQty:'',
     }
 
     const initialErrorMessage = {
@@ -39,11 +42,12 @@ const AddForm = () => {
         {value: 'archived', label: 'Archived'}
     ]
 
-    const [formState, setFormState] = useState(initialState);
+    const [ formState, setFormState ] = useState( initialState );
    
     const [ errorMessage, setErrorMessage ] = useState( initialErrorMessage )
 
     function handleChange( e ) {
+        console.log( formState )
         switch ( e.target.name ){
             case 'customerName': case 'description':
                 if( e.target.value.length === 0 ){
@@ -70,7 +74,13 @@ const AddForm = () => {
                 }
                 break
             case 'jNum':
-                console.log( 'jnum action?' )
+                const match = state.dataStore.filter( quote => quote.jNum === e.target.value )
+                if( match ){
+                    console.log( match[0]._id)
+                    alert( `${e.target.value} already exists, loading content...` )
+                    window.location.replace(`/edit/${match[0]._id}`);
+                }
+                addState()
                 break
             default: 
                 addState()
@@ -102,7 +112,6 @@ const AddForm = () => {
                 // const { quotes } = cache.readQuery({ query: QUERY_QUOTES });
                 cache.writeQuery({
                     query: QUERY_QUOTES,
-
                     data: { quotes: [addQuote] }
                 });
                 window.location.replace("/");
@@ -128,7 +137,6 @@ const AddForm = () => {
         }
     }
     });
-
 
     const handleSubmit = async event =>{
         console.log( 'submit' )
@@ -184,7 +192,7 @@ const AddForm = () => {
         variables: { id: _id }
     });
 
-    const quote = data?.quote || {initialState}
+    const quote = data?.quote || {...initialState}
 
     useEffect(() => {
         setFormState( {
@@ -291,7 +299,7 @@ const AddForm = () => {
                     <label htmlFor="status">Assign a status:</label>
                     <select name="status" id="status" onBlur={handleChange}>
                         { dropDown.map((x) => {
-                            return <option value={ x.value } >{ x.label }</option>
+                            return <option key={ x.value } value={ x.value } >{ x.label }</option>
                         })}
                     </select>
                 </div>

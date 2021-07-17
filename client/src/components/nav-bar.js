@@ -1,20 +1,18 @@
 import React, { useEffect } from "react";
-import { UPDATE_USER } from '../utils/actions';
+import { UPDATE_USER, UPDATE_DATASTORE } from '../utils/actions';
 import MainNav from "./main-nav";
 import AuthNav from "./auth-nav";
 import { useStoreContext } from "../utils/GlobalState";
 import { useAuth0 } from "@auth0/auth0-react";
-
-
+import { useQuery } from '@apollo/client';
+import { QUERY_QUOTES } from '../utils/queries';
 
 const NavBar = () => {
 
-  const [state, dispatch] = useStoreContext();
+  const [, dispatch] = useStoreContext();
 
-  const { currentUser } = state;
-
+  // add user to global state
   const { user } = useAuth0()
-
   useEffect(() => {
     if (user) {
       dispatch({
@@ -24,6 +22,16 @@ const NavBar = () => {
     }
   }, [user, dispatch]);
 
+  // add quotes to global state
+  const { loading, data } = useQuery(QUERY_QUOTES);
+  useEffect(() => {
+    if (data) {
+      dispatch({
+        type: UPDATE_DATASTORE,
+        dataStore: data.quotes
+      });
+    }
+  }, [data, dispatch]);
 
   return (
       <nav>
