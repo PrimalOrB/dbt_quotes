@@ -1,12 +1,14 @@
 import React from "react";
 import AuthenticationButton from "./authentication-button";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useStoreContext } from "../utils/GlobalState";
 
 const AuthNav = () => {
-    const { user } = useAuth0();
 
-    if( user ){
-        const { given_name, picture } = user;
+    const [state] = useStoreContext();
+    const { currentUser } = state;
+
+    if( currentUser ){
+        const { given_name, picture } = currentUser;
         return (
         
             <div className="access-block">

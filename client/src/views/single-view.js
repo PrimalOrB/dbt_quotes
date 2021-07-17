@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 
 
-const SingleView = () => {
+const SingleView = (  ) => {
 
   const { id: _id } = useParams();
 
@@ -15,8 +15,6 @@ const SingleView = () => {
   });
 
   const quote = data?.quote || []
-
-  console.log( quote.notes)
 
   return (
     <>
