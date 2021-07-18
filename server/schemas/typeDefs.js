@@ -1,6 +1,20 @@
 const { gql } = require( 'apollo-server-express' );
 
 const typeDefs = gql`
+    input QuoteInput {
+        _id: ID
+        customerName: String!
+        jNum: String
+        description: String!
+        priority: String
+        additionalNotes: String
+        pcsURL: String
+        crmURL: String
+        status: String
+        PODate: String
+        POQty: String
+    }
+
     type Quote {
         _id: ID
         createdAt: String
@@ -31,8 +45,8 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        addQuote(customerName: String!, jNum: String, description: String!, priority: String, additionalNotes: String, pcsURL: String, crmURL: String, status: String, PODate: String, POQty: String): Quote
-        editQuote(_id: ID!, customerName: String!, jNum: String, description: String!, priority: String, additionalNotes: String, pcsURL: String, crmURL: String, status: String, PODate: String, POQty: String): Quote
+        addQuote(input: QuoteInput!): Quote
+        editQuote(input: QuoteInput!): Quote
         addNote(quoteId: ID!, noteText: String!, noteBy: String!): Quote
     }
     

@@ -1,7 +1,7 @@
 const { Quote } = require( '../models' )
 const { AuthenticationError } = require( 'apollo-server-express' )
 const { signToken } = require( '../utils/auth' )
-
+const { sendEmail } = require( '../utils/email' )
 const resolvers = {
     Query: {
         quotes: async (parent, { filterPO, filterPriority, filterDate } ) => {
@@ -44,14 +44,17 @@ const resolvers = {
     },
 
     Mutation: {
-      addQuote: async (parent, args) => {
-        const quote = await Quote.create(args);
+      addQuote: async (parent, {input}) => {
+        const data = {...input}
+        const quote = await Quote.create(data);
+        sendEmail(input,'New',quote)
         return quote;
       },
-      editQuote: async( parent,args ) => {
+      editQuote: async( parent,{input} ) => {
+        const data = {...input}
         let quote = await Quote.findOneAndUpdate( 
-          {_id: args._id},
-          {"$set":{...args}},
+          {_id: input._id},
+          {"$set": data},
           {"new": true}
           );
         return quote;
