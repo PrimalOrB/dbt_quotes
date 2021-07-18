@@ -52,11 +52,15 @@ const resolvers = {
       },
       editQuote: async( parent,{input} ) => {
         const data = {...input}
+        let origQuote = await Quote.findOne({_id: input._id})
         let quote = await Quote.findOneAndUpdate( 
           {_id: input._id},
           {"$set": data},
           {"new": true}
           );
+        if( origQuote.status !== 'production-ready' && quote.status === 'production-ready'){
+          sendEmail(input,'Finished',quote)
+        }  
         return quote;
       },
       addNote: async( parent, { quoteId, noteText, noteBy } ) => {
