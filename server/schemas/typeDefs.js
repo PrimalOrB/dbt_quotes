@@ -15,6 +15,13 @@ const typeDefs = gql`
         POQty: String
     }
 
+    input NoteInput {
+        quoteId: ID!
+        noteText: String!
+        noteBy: String!
+    }
+    
+
     type Quote {
         _id: ID
         createdAt: String
@@ -34,8 +41,8 @@ const typeDefs = gql`
 
     type Note {
         _id: ID
-        noteText: String
-        noteBy: String
+        noteText: String!
+        noteBy: String!
         createdAt: String
     }
 
@@ -47,7 +54,7 @@ const typeDefs = gql`
     type Mutation {
         addQuote(input: QuoteInput!): Quote
         editQuote(input: QuoteInput!): Quote
-        addNote(quoteId: ID!, noteText: String!, noteBy: String!): Quote
+        addNote(input: NoteInput!): Note
     }
     
 `;

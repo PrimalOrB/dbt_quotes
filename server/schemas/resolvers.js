@@ -63,9 +63,10 @@ const resolvers = {
         }  
         return quote;
       },
-      addNote: async( parent, { quoteId, noteText, noteBy } ) => {
+      addNote: async( parent, { input } ) => {
+        const { noteText, noteBy } = input
         let updatedQuote = await Quote.findOneAndUpdate(
-          { _id: quoteId },
+          { _id: input.quoteId },
           { $push: { notes: { noteText, noteBy } } },
           { new: true, runValidators: true }
         );
