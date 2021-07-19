@@ -23,5 +23,8 @@
   "homepage": "https://github.com/PrimalOrB/dbt_quotes#readme",
   "devDependencies": {
     "concurrently": "^6.2.0"
+  },
+  "dependencies": {
+    "nodemailer": "^6.6.3"
   }
 }

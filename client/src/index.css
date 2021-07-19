@@ -373,7 +373,7 @@ main h2 {
   height: 4rem;
   background-color: rgba(255, 255, 255, 0.5);
   white-space: pre;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .filter-container {
@@ -528,6 +528,10 @@ main h2 {
   margin-left: 0.5rem;
 }
 
+.note-text {
+  white-space: pre;
+}
+
 .pulse {
   background-color: #222;
   animation-name: color;
@@ -545,4 +549,25 @@ main h2 {
   100% {
     background-color: rgba(255, 255, 255, 0.1);
   }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #999;
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #4d4d4d;
 }

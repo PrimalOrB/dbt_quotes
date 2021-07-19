@@ -2,29 +2,8 @@
 import { gql } from '@apollo/client';
 
 export const ADD_QUOTE = gql`
-    mutation addQuote(
-        $customerName: String!,
-        $jNum: String,
-        $description: String!,
-        $priority:String,
-        $additionalNotes:String,
-        $pcsURL:String,
-        $crmURL:String,
-        $status:String,
-        $PODate:String,
-        $POQty:String) {
-            addQuote(
-            customerName: $customerName
-            jNum: $jNum
-            description: $description
-            priority: $priority,
-            additionalNotes: $additionalNotes,
-            pcsURL: $pcsURL,
-            crmURL: $crmURL,
-            status: $status,
-            PODate: $PODate,
-            POQty: $POQty
-            ) {
+    mutation addQuote($input: QuoteInput!) {
+            addQuote(input: $input) {
                 _id
                 customerName
                 jNum
@@ -41,31 +20,8 @@ export const ADD_QUOTE = gql`
 `;
 
 export const EDIT_QUOTE = gql`
-    mutation editQuote(
-        $id: ID!,
-        $customerName: String!,
-        $jNum: String,
-        $description: String!,
-        $priority:String,
-        $additionalNotes:String,
-        $pcsURL:String,
-        $crmURL:String,
-        $status:String,
-        $PODate:String,
-        $POQty:String) {
-            editQuote(
-            _id: $id    
-            customerName: $customerName
-            jNum: $jNum
-            description: $description
-            priority: $priority,
-            additionalNotes: $additionalNotes,
-            pcsURL: $pcsURL,
-            crmURL: $crmURL,
-            status: $status,
-            PODate: $PODate,
-            POQty: $POQty
-            ) {
+    mutation editQuote($input: QuoteInput!) {
+            editQuote(input: $input) {
                 _id
                 customerName
                 jNum
@@ -79,4 +35,15 @@ export const EDIT_QUOTE = gql`
                 POQty
             }
         }
+`;
+
+export const ADD_NOTE = gql`
+    mutation addNote($input: NoteInput!) {
+        addNote(input: $input) {
+                    _id
+                noteText
+                noteBy
+                createdAt
+        }
+    }
 `;

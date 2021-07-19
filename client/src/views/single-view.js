@@ -24,11 +24,11 @@ const SingleView = (  ) => {
         <>
         <SingleQuote quoteData={ quote }/>
         { quote.notes.map( ( note ) => {
-          return <Note noteData={ note }/>
+          return <Note key={ note._id} noteData={ note }/>
           // console.log( note )
         // return <Note />
         } )}
-        <NoteForm />
+        <NoteForm quoteId={ { id: _id }.id }/>
         </>
       )}  
     </>

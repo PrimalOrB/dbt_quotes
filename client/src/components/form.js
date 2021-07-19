@@ -75,7 +75,7 @@ const AddForm = () => {
                 break
             case 'jNum':
                 const match = state.dataStore.filter( quote => quote.jNum === e.target.value )
-                if( match ){
+                if( match.length ){
                     console.log( match[0]._id)
                     alert( `${e.target.value} already exists, loading content...` )
                     window.location.replace(`/edit/${match[0]._id}`);
@@ -108,7 +108,7 @@ const AddForm = () => {
     const [ addQuote, { error }] = useMutation(ADD_QUOTE, {
         update(cache, { data: { addQuote } }) {
             try {
-                console.log( cache )
+                // console.log( cache )
                 // const { quotes } = cache.readQuery({ query: QUERY_QUOTES });
                 cache.writeQuery({
                     query: QUERY_QUOTES,
@@ -145,22 +145,24 @@ const AddForm = () => {
             console.log( formState )
             await addQuote({
                 variables: { 
-                    customerName: formState.customerName,
-                    jNum: formState.jNum,
-                    description: formState.description,
-                    priority: formState.priority,
-                    additionalNotes: formState.additionalNotes,
-                    pcsURL: formState.pcsURL,
-                    crmURL: formState.crmURL,
-                    status: formState.status,
-                    PODate: formState.PODate,
-                    POQty: formState.POQty,
+                    input:{
+                        customerName: formState.customerName,
+                        jNum: formState.jNum,
+                        description: formState.description,
+                        priority: formState.priority,
+                        additionalNotes: formState.additionalNotes,
+                        pcsURL: formState.pcsURL,
+                        crmURL: formState.crmURL,
+                        status: formState.status,
+                        PODate: formState.PODate,
+                        POQty: formState.POQty,
+                    }
                  }
-            });
-        
+            });      
             } catch (event) {
         }
     }
+
 
     const handleEdit = async event =>{
         event.preventDefault()
@@ -168,18 +170,20 @@ const AddForm = () => {
             console.log( formState )
             await editQuote({
                 variables: { 
-                    id: quote._id,
-                    customerName: formState.customerName,
-                    jNum: formState.jNum,
-                    description: formState.description,
-                    priority: formState.priority,
-                    additionalNotes: formState.additionalNotes,
-                    pcsURL: formState.pcsURL,
-                    crmURL: formState.crmURL,
-                    status: formState.status,
-                    PODate: formState.PODate,
-                    POQty: formState.POQty,
-                 }
+                    input:{
+                        _id: quote._id,
+                        customerName: formState.customerName,
+                        jNum: formState.jNum,
+                        description: formState.description,
+                        priority: formState.priority,
+                        additionalNotes: formState.additionalNotes,
+                        pcsURL: formState.pcsURL,
+                        crmURL: formState.crmURL,
+                        status: formState.status,
+                        PODate: formState.PODate,
+                        POQty: formState.POQty,
+                     }
+                }
             });
         
             } catch (event) {
@@ -212,7 +216,7 @@ const AddForm = () => {
         <>
         <h1>Edit Quote</h1>
         <section id="add-form-cont">
-            <form id="add-form" onSubmit={ handleEdit }>
+            <form id="add-form" onSubmit={ handleEdit } autoComplete="off">
                 <div>
                     <label htmlFor="customerName">Customer:</label>
                     <input type="text" name="customerName"  placeholder='Customer name *' defaultValue={ formState.customerName === null ? '' : formState.customerName } className={ `form-required ${errorMessage.customerName}` } required onBlur={handleChange}/>
@@ -266,7 +270,7 @@ const AddForm = () => {
         <>
         <h1>Add New Quote</h1>
         <section id="add-form-cont">
-            <form id="add-form" onSubmit={ handleSubmit }>
+            <form id="add-form" onSubmit={ handleSubmit } autoComplete="off">
                 <div>
                     <label htmlFor="customerName">Customer:</label>
                     <input type="text" name="customerName"  placeholder='Customer name *' className={ `form-required ${errorMessage.customerName}` } required onBlur={handleChange}/>
