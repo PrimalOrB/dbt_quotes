@@ -4,13 +4,19 @@ import MainNav from "./main-nav";
 import AuthNav from "./auth-nav";
 import { useStoreContext } from "../utils/GlobalState";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_QUOTES } from '../utils/queries';
+import { LOGIN_USER } from '../utils/mutations'
 import Loading from "./loading";
+import Auth from '../utils/auth';
 
 const NavBar = () => {
 
+
+
   const [, dispatch] = useStoreContext();
+
+  const [login, { error }] = useMutation(LOGIN_USER);
 
   // add user to global state
   const { user } = useAuth0()
@@ -20,8 +26,24 @@ const NavBar = () => {
         type: UPDATE_USER,
         currentUser: user
       });
+      tryLogin()
     }
   }, [user, dispatch]);
+
+
+  const tryLogin = async ()  => {
+    try {
+      const { data } = await login({
+        variables: {input: user.email }
+      });
+    
+      console.log( data.login.token )
+      Auth.login(data.login.token);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
 
   // add quotes to global state
   const { loading, data } = useQuery(QUERY_QUOTES);

@@ -2,9 +2,11 @@ const { Quote } = require( '../models' )
 const { AuthenticationError } = require( 'apollo-server-express' )
 const { signToken } = require( '../utils/auth' )
 const { sendEmail } = require( '../utils/email' )
+
 const resolvers = {
     Query: {
-        quotes: async (parent, { filterPO, filterPriority, filterDate } ) => {
+        quotes: async (parent, { filterPO, filterPriority, filterDate }, context ) => {
+          console.log( context )
           const filterSet = {
           }
           const sortSet = {
@@ -36,7 +38,8 @@ const resolvers = {
           .sort( sortSet )
           .populate( 'notes' )
       },
-      quote: async (parent, { _id }) => {
+      quote: async (parent, { _id }, context) => {
+        console.log( context )
         return Quote.findOne({ _id })
       },
     },
@@ -69,6 +72,11 @@ const resolvers = {
           { new: true, runValidators: true }
         );
         return updatedQuote;
+      },
+      login: async( parent, { input } ) => {
+        const token = signToken( input )
+        // console.log( token )
+        return { token }
       }
     }
 }

@@ -51,7 +51,13 @@ const typeDefs = gql`
         quote(_id: ID!): Quote
     }
 
+    type Auth {
+        token: ID!
+    }
+
+
     type Mutation {
+        login(input: String! ): Auth
         addQuote(input: QuoteInput!): Quote
         editQuote(input: QuoteInput!): Quote
         addNote(input: NoteInput!): Note
