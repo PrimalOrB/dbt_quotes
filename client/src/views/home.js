@@ -13,7 +13,6 @@ const Archived = () => {
   })
 
   let statusFiltered = active
-  console.log( currentStatusFilter )
   if( active.length > 0  && currentStatusFilter.name !== 'all' ){
     statusFiltered = currentStatusFilter.filter(active)
     console.log( statusFiltered )
