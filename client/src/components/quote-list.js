@@ -8,7 +8,7 @@ const QuoteList = ( { quotes } ) => {
         <div className="quoteList">
             {quotes &&
             quotes.map(quote => (
-                <SingleQuote key={ quote._id }quoteData={ quote } />
+                <SingleQuote key={ quote._id } quoteData={ quote } />
             ))}
         </div>
     );

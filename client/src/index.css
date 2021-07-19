@@ -381,6 +381,14 @@ main h2 {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid #4d4d4d;
+}
+
+.filter-container label {
+  margin: 0;
+  padding-right: 0.5rem;
+  font-weight: bold;
 }
 
 .filter-el {

@@ -2,7 +2,8 @@ import { useReducer } from 'react';
 import {
     UPDATE_USER,
     UPDATE_DATASTORE,
-    UPDATE_FILTER
+    UPDATE_FILTER,
+    UPDATE_STATUS_FILTER
 } from "./actions";
   
 export const reducer = ( state, action ) => {
@@ -22,6 +23,11 @@ export const reducer = ( state, action ) => {
                 ...state,
                 currentFilter: action.currentFilter,
             };
+        case UPDATE_STATUS_FILTER:
+            return {
+                ...state,
+                currentStatusFilter: action.currentStatusFilter,
+            }    
         default:
         return state;
     }

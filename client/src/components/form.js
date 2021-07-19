@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useMutation } from '@apollo/client';
 import { ADD_QUOTE, EDIT_QUOTE } from '../utils/mutations';
 import { QUERY_QUOTES, QUERY_QUOTE } from '../utils/queries';
+import { dropDownStatus } from '../utils/dropdowns';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { Loading } from './'
@@ -31,16 +32,16 @@ const AddForm = () => {
         'crmURL':'',
     }
 
-    const dropDown = [
-        {value: 'tbd', label: 'Assign Status'},
-        {value: 'rfq', label: 'RFQ'},
-        {value: 'quote-review', label: 'Quote Review'},
-        {value: 'production', label: 'Production'},
-        {value: 'production-review', label: 'Production Review'},
-        {value: 'production-ready', label: 'Production Ready'},
-        {value: 'hold', label: 'On Hold'},
-        {value: 'archived', label: 'Archived'}
-    ]
+    // const dropDown = [
+    //     {value: 'tbd', label: 'Assign Status'},
+    //     {value: 'rfq', label: 'RFQ'},
+    //     {value: 'quote-review', label: 'Quote Review'},
+    //     {value: 'production', label: 'Production'},
+    //     {value: 'production-review', label: 'Production Review'},
+    //     {value: 'production-ready', label: 'Production Ready'},
+    //     {value: 'hold', label: 'On Hold'},
+    //     {value: 'archived', label: 'Archived'}
+    // ]
 
     const [ formState, setFormState ] = useState( initialState );
    
@@ -248,7 +249,7 @@ const AddForm = () => {
                 <div>
                     <label htmlFor="status">Assign a status:</label>
                     <select name="status" id="status" value={ formState.status } onChange={handleChange}>
-                        { dropDown.map((x) => {
+                        { dropDownStatus.map((x) => {
                                 return <option key={ x.value } value={ x.value } >{ x.label }</option>
                             })}
                     </select>
@@ -302,7 +303,7 @@ const AddForm = () => {
                 <div>
                     <label htmlFor="status">Assign a status:</label>
                     <select name="status" id="status" onBlur={handleChange}>
-                        { dropDown.map((x) => {
+                        { dropDownStatus.map((x) => {
                             return <option key={ x.value } value={ x.value } >{ x.label }</option>
                         })}
                     </select>

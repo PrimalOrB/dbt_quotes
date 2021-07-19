@@ -32,8 +32,6 @@ const resolvers = {
             delete sortSet.createdAt
           }
 
-          console.log( filterSet, sortSet )
-
         return Quote.find( filterSet )
           .sort( sortSet )
           .populate( 'notes' )

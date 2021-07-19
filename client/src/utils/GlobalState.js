@@ -9,6 +9,7 @@ const StoreProvider = ({ value = [], ...props }) => {
       currentUser: {},
       dataStore: [],
       currentFilter: { name: 'quote-asc', filter: (arr)=>{ return arr.sort( ( a, b ) => a.createdAt - b.createdAt ) } },
+      currentStatusFilter: { name: 'all', filter: (arr)=>{ return arr } }
     });
     return <Provider value={[state, dispatch]} {...props} />;
 };
