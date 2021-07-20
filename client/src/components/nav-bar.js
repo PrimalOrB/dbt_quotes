@@ -4,15 +4,13 @@ import MainNav from "./main-nav";
 import AuthNav from "./auth-nav";
 import { useStoreContext } from "../utils/GlobalState";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery, useLazyQuery, useMutation } from '@apollo/client';
 import { QUERY_QUOTES } from '../utils/queries';
 import { LOGIN_USER } from '../utils/mutations'
 import Loading from "./loading";
 import Auth from '../utils/auth';
 
 const NavBar = () => {
-
-
 
   const [, dispatch] = useStoreContext();
 
@@ -43,8 +41,8 @@ const NavBar = () => {
   };
 
 
-  // add quotes to global state
-  const { loading, data } = useQuery(QUERY_QUOTES);
+  // refresh query every minute
+  const { loading, data } = useQuery(QUERY_QUOTES,{pollInterval: 60000});
   useEffect(() => {
     if (data) {
       dispatch({

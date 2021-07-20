@@ -305,6 +305,10 @@ main h2 {
   white-space: nowrap;
 }
 
+.rotate span {
+  color: black
+}
+
 .rotation-wrapper-inner {
   padding: 50% 0;
   height: 0;
