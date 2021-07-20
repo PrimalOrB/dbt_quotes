@@ -23,14 +23,14 @@ module.exports = {
     let emailRecipient
     switch ( type ){
       case 'New':
-        // emailRecipient = 'engineering@deboertool.com'
-        emailRecipient = 'aogilvie@deboertool.com'
+        emailRecipient = 'engineering@deboertool.com'
+        // emailRecipient = 'aogilvie@deboertool.com'
       case 'Finished':
-        // emailRecipient = 'specials@deboertool.com'
-        emailRecipient = 'aogilvie@deboertool.com'
+        emailRecipient = 'specials@deboertool.com'
+        // emailRecipient = 'aogilvie@deboertool.com'
       default:
-        // emailRecipient = 'specials@deboertool.com'
-        emailRecipient = 'aogilvie@deboertool.com'
+        emailRecipient = 'specials@deboertool.com'
+        // emailRecipient = 'aogilvie@deboertool.com'
 
     }
 
