@@ -50,7 +50,7 @@ module.exports = {
       ${ data.PODate > 0 ? `<p><b>PO Received Date:</b> ${ new Date(data.PODate).toLocaleDateString() } ${ data.POQty && `for ${ data.POQty }pc` }</p>` : ''}    
       ${ data.pcsURL !== '' ? `<br/><a href="${ data.pcsURL }"><b>PCS Quote Link</b></a>` : '' }
       ${ data.crmURL !== '' ? `<br/><a href="${ data.crmURL }"><b>CRM Opportunity Link</b></a>` : '' }
-      ${ `<br/><a href="http://localhost:3000/quote/${quote._id}"><b>Quote Tracker Link</b></a>` }
+      ${ `<br/><a href="https://dbt-quotes.herokuapp.com/quote/${quote._id}"><b>Quote Tracker Link</b></a>` }
       `
     };
     
