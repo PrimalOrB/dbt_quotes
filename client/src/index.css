@@ -373,7 +373,8 @@ main h2 {
   height: 4rem;
   background-color: rgba(255, 255, 255, 0.5);
   white-space: pre;
-  overflow-y: auto;
+  overflow-y: auto;;
+  white-space: pre-wrap;
 }
 
 .filter-container {
@@ -537,7 +538,7 @@ main h2 {
 }
 
 .note-text {
-  white-space: pre;
+  white-space: pre-wrap;
 }
 
 .pulse {
