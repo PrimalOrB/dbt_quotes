@@ -24,16 +24,17 @@ module.exports = {
     switch ( type ){
       case 'New':
         emailRecipient = 'engineering@deboertool.com'
+        break
         // emailRecipient = 'aogilvie@deboertool.com'
       case 'Finished':
         emailRecipient = 'specials@deboertool.com'
+        break
         // emailRecipient = 'aogilvie@deboertool.com'
       default:
         emailRecipient = 'specials@deboertool.com'
+        break
         // emailRecipient = 'aogilvie@deboertool.com'
     }
-
-    console.log( emailRecipient )
 
     var mailOptions = {
       from: process.env.EMAIL_ACCOUNT,
