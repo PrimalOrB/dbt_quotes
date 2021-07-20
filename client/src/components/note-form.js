@@ -11,8 +11,6 @@ const NoteForm = ( { quoteId } ) => {
    
     const [ errorMessage, setErrorMessage ] = useState('')
 
-    console.log( state.currentUser)
-
     function handleChange( e ) {
         addState()
 

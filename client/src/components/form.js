@@ -32,17 +32,6 @@ const AddForm = () => {
         'crmURL':'',
     }
 
-    // const dropDown = [
-    //     {value: 'tbd', label: 'Assign Status'},
-    //     {value: 'rfq', label: 'RFQ'},
-    //     {value: 'quote-review', label: 'Quote Review'},
-    //     {value: 'production', label: 'Production'},
-    //     {value: 'production-review', label: 'Production Review'},
-    //     {value: 'production-ready', label: 'Production Ready'},
-    //     {value: 'hold', label: 'On Hold'},
-    //     {value: 'archived', label: 'Archived'}
-    // ]
-
     const [ formState, setFormState ] = useState( initialState );
    
     const [ errorMessage, setErrorMessage ] = useState( initialErrorMessage )

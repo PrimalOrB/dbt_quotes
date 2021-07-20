@@ -42,6 +42,9 @@ const quoteSchema = new Schema(
     POQty: {
         type: Number,
     },
+    completedDate: {
+        type: Number,
+    },
     notes: [noteSchema]
   },
   {

@@ -34,10 +34,8 @@ const NavBar = () => {
   const tryLogin = async ()  => {
     try {
       const { data } = await login({
-        variables: {input: user.email }
+        variables: {email: user.email }
       });
-    
-      console.log( data.login.token )
       Auth.login(data.login.token);
     } catch (e) {
       console.error(e);

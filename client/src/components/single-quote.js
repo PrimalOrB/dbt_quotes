@@ -29,6 +29,13 @@ const SingleQuote = ( { quoteData } ) => {
             return label.split('-').map( capitalize ).join(' ');
             }
     }
+
+    function daysBetween( a, b){
+        var delta = Math.abs(a - b) / 1000;
+        var days = Math.floor(delta / 86400);
+        const str =  Number(days) === 1 ? ' day' : ' days'
+        return days + str
+    }
         
     return (
         <>
@@ -55,6 +62,7 @@ const SingleQuote = ( { quoteData } ) => {
                     </div>
                     <div className="quoteCardBottom">
                         <Link className="cardLink" to={`/quote/${quoteData._id}`} ><p><MdForum/>Conversation { quoteData.noteCount > 0 && <span className='note-count' >( { quoteData.noteCount } note{ quoteData.noteCount > 1 && 's' } )</span>}</p></Link>
+                        { quoteData.completedDate > 0 && ( <span>Task Duration: { daysBetween( quoteData.completedDate, quoteData.createdAt )  }</span>) }
                         <div className="quoteLinks">
                             { ( quoteData.crmURL !== '' && quoteData.crmURL !== null)  && <CardLink icon={ FiExternalLink() } text={ "crm" } url={ quoteData.crmURL } target={ "_blank "} />}
                             { ( quoteData.pcsURL !== '' && quoteData.pcsURL !== null)  && <CardLink icon={ FiExternalLink() } text={ "pcs" } url={ quoteData.pcsURL } target={ "_blank "}/>}

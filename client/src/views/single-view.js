@@ -16,6 +16,8 @@ const SingleView = (  ) => {
 
   const quote = data?.quote || []
 
+  console.log( data )
+
   return (
     <>
     {loading ? (
@@ -25,8 +27,6 @@ const SingleView = (  ) => {
         <SingleQuote quoteData={ quote }/>
         { quote.notes.map( ( note ) => {
           return <Note key={ note._id} noteData={ note }/>
-          // console.log( note )
-        // return <Note />
         } )}
         <NoteForm quoteId={ { id: _id }.id }/>
         </>

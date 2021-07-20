@@ -35,6 +35,7 @@ const typeDefs = gql`
         status: String
         PODate: String
         POQty: String
+        completedDate: String
         noteCount: Int
         notes: [Note]
     }
@@ -51,13 +52,18 @@ const typeDefs = gql`
         quote(_id: ID!): Quote
     }
 
+    type User {
+        email: String
+    }
+
     type Auth {
         token: ID!
+        user: User
     }
 
 
     type Mutation {
-        login(input: String! ): Auth
+        login(email: String! ): Auth
         addQuote(input: QuoteInput!): Quote
         editQuote(input: QuoteInput!): Quote
         addNote(input: NoteInput!): Note

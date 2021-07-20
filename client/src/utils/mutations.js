@@ -49,9 +49,12 @@ export const ADD_NOTE = gql`
 `;
 
 export const LOGIN_USER = gql`
-  mutation login($input: String! ) {
-    login(input: $input) {
+  mutation login($email: String! ) {
+    login(email: $email) {
       token
+      user {
+          email
+      }
     }
   }
 `;

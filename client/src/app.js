@@ -29,8 +29,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-console.log( client.link )
-
 const App = () => {
   const { isLoading } = useAuth0();
 
