@@ -31,8 +31,9 @@ module.exports = {
       default:
         emailRecipient = 'specials@deboertool.com'
         // emailRecipient = 'aogilvie@deboertool.com'
-
     }
+
+    console.log( emailRecipient )
 
     var mailOptions = {
       from: process.env.EMAIL_ACCOUNT,
