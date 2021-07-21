@@ -8,7 +8,7 @@ import { NavBar, Loading } from "./components";
 import { Home, Profile, AddNew, SingleView, Archive, Production } from "./views";
 import ProtectedRoute from "./auth/protected-route";
 
-import "./app.css";
+// import "./app.css";
 
 const httpLink = createHttpLink({
   uri: '/graphql',

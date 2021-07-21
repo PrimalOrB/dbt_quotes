@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 nav {
@@ -26,9 +27,10 @@ a:hover {
 
 .container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column-reverse;
+  justify-content: center;
   align-items: center;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   color: white;
 }
 
@@ -38,13 +40,18 @@ a:hover {
   margin-right: 1rem;
 }
 
+#logo {
+  display: none
+}
+
 .nav-menu {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .nav-button {
-  padding: 0.5rem 1rem;
+  padding: 0.25rem .75rem;
   text-transform: uppercase;
   color: white;
   font-weight: bold;
@@ -58,12 +65,7 @@ a:hover {
 }
 
 .nav-button svg {
-  stroke: white;
-  color: white;
-  width: 1.25rem;
-  height: 1.25rem;
-  transition: 0.25s ease all;
-  margin-right: 0.4rem;
+  display: none;
 }
 
 .nav-button:hover {
@@ -134,10 +136,7 @@ a:hover {
 main {
   width: 100%;
   max-width: 1200px;
-  background-color: rgba(0, 0, 0, 0.05);
-  padding: 1rem 1rem 2rem 1rem;
-  border-radius: 0 0 1rem 1rem;
-  border: 3px solid #4d4d4d;
+  padding: 0;
   border-top: 0;
   display: flex;
   justify-content: center;
@@ -286,6 +285,7 @@ main h2 {
 
 .quoteCardBottom {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   border-top: 1px solid #4d4d4d;
@@ -329,11 +329,14 @@ main h2 {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content:flex-end;
 }
 
 .sub-details {
   display: flex;
+  flex-direction: column;
+  width: 100%;
+  order: 2;
 }
 
 .sub-details div {
@@ -348,6 +351,9 @@ main h2 {
   border-left: 1px solid #4d4d4d;
   border-bottom: 1px solid #4d4d4d;
   border-radius: 0 0 0 0.75rem;
+  flex-shrink: 0;
+  flex-grow: 0;
+  order: 1
 }
 
 .quoteCard svg {
@@ -364,12 +370,15 @@ main h2 {
   font-size: 1.5rem;
   font-weight: normal;
   text-transform: uppercase;
+  white-space: pre-wrap;
 }
 
 .desc {
   font-size: 1.5rem;
   font-style: italic;
+  white-space: pre-wrap;
 }
+
 .additional {
   width: 100%;
   padding: 0.5rem;
@@ -379,11 +388,13 @@ main h2 {
   white-space: pre;
   overflow-y: auto;;
   white-space: pre-wrap;
+  order: 3;
 }
 
 .filter-container {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
   padding-bottom: 0.5rem;
@@ -493,7 +504,7 @@ main h2 {
 }
 
 .note-form textarea {
-  width: 80%;
+  width: 100%;
   resize: vertical;
   outline: none;
   border-radius: 0.25rem;
@@ -583,4 +594,72 @@ main h2 {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #4d4d4d;
+}
+
+@media screen and (min-width: 768px) {
+  main {
+    padding: 1rem 1rem 2rem 1rem;
+    border-radius: 0 0 1rem 1rem;
+    border: 3px solid #4d4d4d;
+    border-top: 0;
+  }
+
+  .container {
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+  }
+
+  .nav-button svg {
+    display: block;
+    stroke: white;
+    color: white;
+    width: 1.25rem;
+    height: 1.25rem;
+    transition: 0.25s ease all;
+    margin-right: 0.4rem;
+  }
+  .nav-menu {
+    width: auto
+  }
+
+  .nav-button {
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+    color: white;
+    font-weight: bold;
+    margin: 0rem 0.25rem;
+    border-radius: 0.25rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: 0.25s ease all;
+    border-bottom: 3px solid white;
+    display: flex;
+    align-items: center;
+  }
+
+  .details {
+    justify-content: space-between;
+  }
+
+  .sub-details {
+    flex-direction: row;
+    width: auto;
+    order: 1;
+  }
+
+  .status {
+    order: 2
+  }
+
+  .note-form textarea {
+    width: 80%;
+  }
+  
+}
+
+@media screen and (min-width: 900px) {
+  #logo {
+    display: block
+  }  
 }

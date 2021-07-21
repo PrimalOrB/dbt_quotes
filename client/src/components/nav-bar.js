@@ -60,7 +60,7 @@ const NavBar = () => {
       <nav>
         <div className="container">
           <MainNav />
-          <img src="https://deboertool.com/img/logo-white.png" alt="logo"/><br />
+          <img id="logo" src="https://deboertool.com/img/logo-white.png" alt="logo"/><br />
           <AuthNav />
         </div>
       </nav>

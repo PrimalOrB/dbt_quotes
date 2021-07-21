@@ -63,7 +63,7 @@ const NoteForm = ( { quoteId } ) => {
     return (
     <form className="note-form" onSubmit={ handleSubmit }  autoComplete="off">
         <label htmlFor="newNote">Add new note:</label>
-        <textarea name="newNote" rows="5" onBlur={handleChange}>
+        <textarea name="newNote" rows="5" onBlur={ handleChange }>
 
         </textarea>
         <button type="submit">Add note</button>

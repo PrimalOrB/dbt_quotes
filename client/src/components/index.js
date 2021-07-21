@@ -1,4 +1,3 @@
-import HomeContent from "./home-content";
 import Loading from "./loading";
 import NavBar from "./nav-bar";
 import QuoteList from "./quote-list";
@@ -8,4 +7,4 @@ import SingleQuote from './single-quote'
 import NoteForm  from './note-form'
 import Note from './note'
 
-export { HomeContent, Loading, NavBar, QuoteList, Filter, SingleQuote, CardLink, NoteForm, Note };
+export { Loading, NavBar, QuoteList, Filter, SingleQuote, CardLink, NoteForm, Note };

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { HomeContent, QuoteList, Filter } from "../components";
+import { QuoteList, Filter } from "../components";
 import { useStoreContext } from "../utils/GlobalState";
 
 const Archived = () => {
@@ -12,7 +12,7 @@ const Archived = () => {
 
   return (
     <>
-      <HomeContent />
+      <h1>Dashboard Content</h1>
       <Filter/>
       <QuoteList quotes={ currentFilter.filter(archived) }/>
     </>
