@@ -10,17 +10,17 @@ const Stats = () => {
   const [state] = useStoreContext();
   const { dataStore, currentFilter } = state
 
-  const archived = dataStore.filter( x => x.status === 'archived')
-  const dataTest = {}
+  const dataSorting = {}
 
+  dataStore.sort( ( a, b ) => a.createdAt - b.createdAt)
 
   for( var i = 0; i < dataStore.length; i++){
-    dataTest[format_date( dataStore[i].createdAt )] = dataTest[format_date( dataStore[i].createdAt )] !== undefined ? dataTest[format_date( dataStore[i].createdAt )] + 1 : 1
+    dataSorting[format_date( dataStore[i].createdAt )] = dataSorting[format_date( dataStore[i].createdAt )] !== undefined ? dataSorting[format_date( dataStore[i].createdAt )] + 1 : 1
   }
   const chartData2 = []
   const labels = []
 
-  for (const [key, value] of Object.entries(dataTest)) {
+  for (const [key, value] of Object.entries(dataSorting)) {
     chartData2.push( { x: new Date( key ) ,y: value })
     labels.push( key )
     console.log(`${key}: ${value}`);
