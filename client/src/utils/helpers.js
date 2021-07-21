@@ -15,6 +15,9 @@ module.exports = {
             return label.split('-').map( capitalize ).join(' ');
         }
     },
+    format_date: ( date ) => {
+        return new Date( Number( date ) ).toLocaleDateString()
+    },
     calc_days_between: ( dateA, dateB ) => {
         var delta = Math.abs( dateA - dateB) / 1000;
         var days = Math.floor( delta / 86400 );

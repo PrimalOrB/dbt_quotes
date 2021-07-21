@@ -1,9 +1,9 @@
 import React from "react";
-import { calc_color_scale } from '../utils/helpers'
+import { calc_color_scale, format_date } from '../utils/helpers'
 
 const RotatedEl = ( { text, icon, colorRange, hover, data } ) => {
 
-    const hoverLabel =  data > 100000 ? new Date( Number( data ) ).toLocaleDateString() : data
+    const hoverLabel =  data > 100000 ? format_date( data ) : data
 
     return (
         <span className='rotation-wrapper-outer' style={ { backgroundColor: `hsl( ${ calc_color_scale( text, colorRange ) },  100%, 50%)` } }>

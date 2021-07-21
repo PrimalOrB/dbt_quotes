@@ -3,6 +3,7 @@ import React from "react";
 import { useStoreContext } from "../utils/GlobalState";
 import { FiPlusSquare, FiHome, FiCheck } from 'react-icons/fi'
 import { HiOutlineArchive } from 'react-icons/hi'
+import { VscGraph } from 'react-icons/vsc'
 
 const MainNav = () => {
 
@@ -44,6 +45,15 @@ const MainNav = () => {
       activeClassName="nav-button-active"
     >
     <FiPlusSquare /> Add New
+    </NavLink>
+
+    <NavLink
+      to="/stats"
+      exact
+      className="nav-button nomargin"
+      activeClassName="nav-button-active"
+    >
+    <VscGraph />
     </NavLink>
     
     {/* <NavLink

@@ -6,13 +6,14 @@
   /* border: 1px solid black */
 }
 
+
 #app {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(240, 240, 240, 1);
 }
 
 nav {
@@ -66,6 +67,12 @@ a:hover {
 
 .nav-button svg {
   display: none;
+}
+
+.nomargin svg{
+  margin: 0;
+  fill: white;
+  display: block
 }
 
 .nav-button:hover {
@@ -141,6 +148,7 @@ main {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  background-color: rgba(240, 240, 240, 1);
 }
 
 main h1 {
@@ -611,15 +619,7 @@ main h2 {
     flex-direction: row;
   }
 
-  .nav-button svg {
-    display: block;
-    stroke: white;
-    color: white;
-    width: 1.25rem;
-    height: 1.25rem;
-    transition: 0.25s ease all;
-    margin-right: 0.4rem;
-  }
+ 
   .nav-menu {
     width: auto
   }
@@ -659,6 +659,21 @@ main h2 {
 }
 
 @media screen and (min-width: 900px) {
+  .nav-button svg {
+    display: block;
+    stroke: white;
+    color: white;
+    width: 1.25rem;
+    height: 1.25rem;
+    transition: 0.25s ease all;
+    margin-right: 0.4rem;
+  }
+
+  .nomargin svg{
+    margin: 0;
+    fill: white
+  }
+  
   #logo {
     display: block
   }  
