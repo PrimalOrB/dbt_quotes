@@ -54,15 +54,6 @@ const MainNav = () => {
     >
       Profile
     </NavLink> */}
-     
-    {/* <NavLink
-      to="/external-api"
-      exact
-      className="nav-button"
-      activeClassName="nav-button-active"
-    >
-      External API
-    </NavLink> */}
   </div>
   )
 };

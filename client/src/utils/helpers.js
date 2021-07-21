@@ -27,5 +27,11 @@ module.exports = {
         const timeDiff = b.getTime() - date.getTime();
         const diff = Math.round( timeDiff / day );
         return { diff };
+    },
+    calc_color_scale: ( value, scaleSet ) => {
+        value = Math.min(value, scaleSet)
+        var scale = value / scaleSet;
+        var hslPos = 120 - (120 * scale);
+        return hslPos
     }
 }
