@@ -30,6 +30,10 @@ module.exports = {
         emailRecipient = 'specials@deboertool.com'
         break
         // emailRecipient = 'aogilvie@deboertool.com'
+      case 'Unarchived':
+        emailRecipient = 'engineering@deboertool.com'
+        break
+        // emailRecipient = 'aogilvie@deboertool.com'
       default:
         emailRecipient = 'specials@deboertool.com'
         break

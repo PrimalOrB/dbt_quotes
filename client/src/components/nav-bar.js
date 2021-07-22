@@ -4,7 +4,7 @@ import MainNav from "./main-nav";
 import AuthNav from "./auth-nav";
 import { useStoreContext } from "../utils/GlobalState";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useQuery, useLazyQuery, useMutation } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_QUOTES } from '../utils/queries';
 import { LOGIN_USER } from '../utils/mutations'
 import Loading from "./loading";

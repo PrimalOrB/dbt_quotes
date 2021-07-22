@@ -53,7 +53,7 @@ const resolvers = {
         if( context.headers.authorization !== undefined ){
           const data = {...input}
           const quote = await Quote.create(data);
-          sendEmail(input,'New',quote)
+          // sendEmail(input,'New',quote)
           return quote;
         }
         throw new AuthenticationError('Incorrect credentials');
@@ -77,6 +77,11 @@ const resolvers = {
             // on task set to ready, send finished email and set complete date
           if( origQuote.status !== 'production-ready' && data.status === 'production-ready'){
             sendEmail(input,'Finished',data)
+            data.completedDate = new Date()
+          } 
+           // on task set to ready, send finished email and set complete date
+          if( origQuote.status === 'archived' && data.status !== 'archived'){
+            sendEmail(input,'Unarchived',data)
             data.completedDate = new Date()
           } 
           let quote = await Quote.findOneAndUpdate( 
