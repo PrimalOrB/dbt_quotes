@@ -26,7 +26,7 @@ const Production = () => {
 
   return (
     <>
-      <h1>Dashboard Content</h1>
+      <h1>Ready For Production</h1>
       <Filter/>
       <QuoteList quotes={ currentFilter.filter(stringFiltered) }/>
     </>

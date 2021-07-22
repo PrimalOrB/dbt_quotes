@@ -34,7 +34,7 @@ const Archived = () => {
 
   return (
     <>
-      <h1>Dashboard Content</h1>
+      <h1>Task To Do</h1>
       <Filter/>
       <QuoteList quotes={ currentFilter.filter(stringFiltered) }/>
     </>

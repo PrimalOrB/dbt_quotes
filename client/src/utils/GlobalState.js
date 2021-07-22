@@ -8,7 +8,7 @@ const StoreProvider = ({ value = [], ...props }) => {
     const [state, dispatch] = useStateReducer({
       currentUser: {},
       dataStore: [],
-      currentFilter: { name: 'quote-asc', filter: ( arr )=>{ return arr.sort( ( a, b ) => a.createdAt - b.createdAt ) } },
+      currentFilter: { name: 'quote-desc', filter: ( arr )=>{ return arr.sort( ( a, b ) => b.createdAt - a.createdAt ) } },
       currentStatusFilter: { name: 'all', filter: ( arr )=>{ return arr } },
       stringFilter: ''
     });

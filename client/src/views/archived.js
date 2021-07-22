@@ -26,7 +26,7 @@ const Archived = () => {
 
   return (
     <>
-      <h1>Dashboard Content</h1>
+      <h1>Archived</h1>
       <Filter/>
       <QuoteList quotes={ currentFilter.filter(stringFiltered) }/>
     </>
