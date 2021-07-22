@@ -36,5 +36,19 @@ module.exports = {
         var scale = value / scaleSet;
         var hslPos = 120 - (120 * scale);
         return hslPos
+    },
+    calc_parse_average: ( input ) => {
+        const currentDate = new Date().getTime()
+        let count = 0
+        let diff = 0
+        for( let i = 0; i < input.length; i++ ){
+            if( input[i].y > 0){
+                count = count + input[i].y
+                diff = diff + ( ( currentDate - new Date( input[i].x ).getTime() ) * input[i].y )
+            } 
+        }
+        const avg = diff / count
+        const day = 1000 * 60 * 60 * 24;
+        return ( avg / day ).toFixed()
     }
 }

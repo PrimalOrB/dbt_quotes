@@ -53,7 +53,7 @@ const resolvers = {
         if( context.headers.authorization !== undefined ){
           const data = {...input}
           const quote = await Quote.create(data);
-          // sendEmail(input,'New',quote)
+          sendEmail(input,'New',quote)
           return quote;
         }
         throw new AuthenticationError('Incorrect credentials');

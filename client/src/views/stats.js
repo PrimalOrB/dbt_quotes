@@ -1,6 +1,7 @@
 import React from "react";
 import { Line } from 'react-chartjs-2';
 import { useStoreContext } from "../utils/GlobalState";
+import { calc_color_scale, calc_parse_average } from '../utils/helpers'
 import moment from 'moment'
 
 const Stats = () => {
@@ -10,7 +11,7 @@ const Stats = () => {
   
   if( dataStore.length ){
 
-    const activeQuotes = dataStore.filter( quote => quote.status !== 'archived').sort( ( a, b ) => a.createdAt - b.createdAt)
+    const activeQuotes = dataStore.filter( quote => ( quote.status !== 'archived' && quote.status !== 'hold' ) ).sort( ( a, b ) => a.createdAt - b.createdAt)
     const oldestDate = moment( new Date( Number( activeQuotes[0].createdAt ) ) )
     const today = moment( new Date() )
     const dayRange =( today.diff( oldestDate, "days" ) )
@@ -84,7 +85,7 @@ const Stats = () => {
           borderColor: 'rgba(255, 0, 0, 0.5)',
         },
         {
-          label: 'No priority',
+          label: 'No Priority',
           data: priorityNull,
           fill: false,
           backgroundColor: 'rgb(180, 180, 180)',
@@ -143,12 +144,45 @@ const Stats = () => {
         ],
       },
     };
+    console.log( data.datasets)
   
     return (
       <>
         <h1>Stats</h1>
   
         <Line data={ data } options={ options } />
+        <div className={ 'statsCont' }>
+          <h3>Average Duration ( days ), By Priority</h3>
+          <span className={ 'priorityRate' }>
+            <p className={ 'statsTitle' }>Priorty 1:</p>
+            <p>{ `${ calc_parse_average( data.datasets[0].data )}` }</p>
+          </span>
+          <span className={ 'priorityRate' }>
+            <p className={ 'statsTitle' }>Priorty 2:</p>
+            <p>{ `${ calc_parse_average( data.datasets[1].data )}` }</p>
+          </span>
+          <span className={ 'priorityRate' }>
+            <p className={ 'statsTitle' }>Priorty 3:</p>
+            <p>{ `${ calc_parse_average( data.datasets[2].data )}` }</p>
+          </span>
+          <span className={ 'priorityRate' }>
+            <p className={ 'statsTitle' }>Priorty 4:</p>
+            <p>{ `${ calc_parse_average( data.datasets[3].data )}` }</p>
+          </span>
+          <span className={ 'priorityRate' }>
+            <p className={ 'statsTitle' }>Priorty 5:</p>
+            <p>{ `${ calc_parse_average( data.datasets[4].data )}` }</p>
+          </span>
+          <span className={ 'priorityRate' }>
+            <p className={ 'statsTitle' }>No Priority:</p>
+            <p>{ `${ calc_parse_average( data.datasets[5].data )}` }</p>
+          </span>
+          <span className={ 'priorityRate' }>
+            <p className={ 'statsTitle' }>Total Tasks:</p>
+            <p>{ `${ calc_parse_average( data.datasets[6].data )}` }</p>
+          </span>
+        </div>
+
   
         {/* <ul>
           { dataStore.map((x) => {
