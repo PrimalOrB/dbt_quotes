@@ -153,34 +153,48 @@ const Stats = () => {
         <Line data={ data } options={ options } />
         <div className={ 'statsCont' }>
           <h3>Average Duration ( days ), By Priority</h3>
-          <span className={ 'priorityRate' }>
-            <p className={ 'statsTitle' }>Priorty 1:</p>
-            <p>{ `${ calc_parse_average( data.datasets[0].data )}` }</p>
-          </span>
-          <span className={ 'priorityRate' }>
-            <p className={ 'statsTitle' }>Priorty 2:</p>
-            <p>{ `${ calc_parse_average( data.datasets[1].data )}` }</p>
-          </span>
-          <span className={ 'priorityRate' }>
-            <p className={ 'statsTitle' }>Priorty 3:</p>
-            <p>{ `${ calc_parse_average( data.datasets[2].data )}` }</p>
-          </span>
-          <span className={ 'priorityRate' }>
-            <p className={ 'statsTitle' }>Priorty 4:</p>
-            <p>{ `${ calc_parse_average( data.datasets[3].data )}` }</p>
-          </span>
-          <span className={ 'priorityRate' }>
-            <p className={ 'statsTitle' }>Priorty 5:</p>
-            <p>{ `${ calc_parse_average( data.datasets[4].data )}` }</p>
-          </span>
-          <span className={ 'priorityRate' }>
-            <p className={ 'statsTitle' }>No Priority:</p>
-            <p>{ `${ calc_parse_average( data.datasets[5].data )}` }</p>
-          </span>
-          <span className={ 'priorityRate' }>
-            <p className={ 'statsTitle' }>Total Tasks:</p>
-            <p>{ `${ calc_parse_average( data.datasets[6].data )}` }</p>
-          </span>
+          { calc_parse_average( data.datasets[0].data ) > 0 && 
+            <span className={ 'priorityRate' }>
+              <p className={ 'statsTitle' }>Priorty 1:</p>
+              <p>{ `${ calc_parse_average( data.datasets[0].data ) }` }</p>
+            </span>
+          }
+          { calc_parse_average( data.datasets[1].data ) > 0 && 
+            <span className={ 'priorityRate' }>
+              <p className={ 'statsTitle' }>Priorty 2:</p>
+              <p>{ `${ calc_parse_average( data.datasets[1].data ) }` }</p>
+            </span>
+          }
+          { calc_parse_average( data.datasets[2].data ) > 0 && 
+            <span className={ 'priorityRate' }>
+              <p className={ 'statsTitle' }>Priorty 3:</p>
+              <p>{ `${ calc_parse_average( data.datasets[2].data ) }` }</p>
+            </span>
+          }
+          { calc_parse_average( data.datasets[3].data ) > 0 && 
+            <span className={ 'priorityRate' }>
+              <p className={ 'statsTitle' }>Priorty 4:</p>
+              <p>{ `${ calc_parse_average( data.datasets[3].data ) }` }</p>
+            </span>
+          }
+          { calc_parse_average( data.datasets[4].data ) > 0 && 
+            <span className={ 'priorityRate' }>
+              <p className={ 'statsTitle' }>Priorty 5:</p>
+              <p>{ `${ calc_parse_average( data.datasets[4].data ) }` }</p>
+            </span>
+          }
+          { calc_parse_average( data.datasets[5].data ) > 0 && 
+            <span className={ 'priorityRate' }>
+              <p className={ 'statsTitle' }>No Priority:</p>
+              <p>{ `${ calc_parse_average( data.datasets[5].data ) }` }</p>
+            </span>
+          }
+          { calc_parse_average( data.datasets[6].data ) > 0 && 
+            <span className={ 'priorityRate' }>
+              <p className={ 'statsTitle' }>Total Tasks:</p>
+              <p>{ `${ calc_parse_average( data.datasets[6].data ) }` }</p>
+            </span>
+          }
         </div>
 
   
