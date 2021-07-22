@@ -95,8 +95,9 @@ const Stats = () => {
           label: 'Total Tasks',
           data: totalTasks,
           fill: true,
-          backgroundColor: 'rgba(245, 124, 0,0.1)',
-          borderColor: 'rgba(245, 124, 0, 0.5)',
+          backgroundColor: 'rgba(245, 124, 0,0.05)',
+          borderColor: 'rgba(245, 124, 0, 0.2)',
+          borderDash: [10,10]
         },
       ],
     };
@@ -110,6 +111,11 @@ const Stats = () => {
       },
       legend: {
           display: false
+      },
+      elements: {
+          line: {
+              tension: 0.25
+          }
       },
       responsive: true,
       scales: {
