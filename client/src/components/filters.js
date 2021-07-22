@@ -1,12 +1,19 @@
 import React from "react";
 import { useStoreContext } from "../utils/GlobalState";
-import { UPDATE_FILTER, UPDATE_STATUS_FILTER } from '../utils/actions';
+import { UPDATE_FILTER, UPDATE_STATUS_FILTER, UPDATE_SEARCH } from '../utils/actions';
 import { dropDownStatus, dropDownSort } from '../utils/dropdowns';
 
 const Filter = () => {
 
   const [state, dispatch] = useStoreContext();
 
+  const newSearchFilter = (e) => {
+    dispatch({ 
+      type: UPDATE_SEARCH,
+      stringFilter: e.target.value
+    });
+  }
+  
   const newFilter = (e) => {
     const filter = dropDownSort.find( x => x.value === e.target.value ).filter
 
@@ -51,6 +58,10 @@ const Filter = () => {
                     return <option key={ x.value } value={ x.value } >{ x.label }</option>
                 })}
               </select>
+          </div>
+          <div className="filter-el">
+            <label htmlFor="status-filter">Search</label>
+            <input name="status-filter" onChange={ newSearchFilter }></input>
           </div>
       </div>
     )

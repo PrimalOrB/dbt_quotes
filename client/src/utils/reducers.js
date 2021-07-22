@@ -3,7 +3,8 @@ import {
     UPDATE_USER,
     UPDATE_DATASTORE,
     UPDATE_FILTER,
-    UPDATE_STATUS_FILTER
+    UPDATE_STATUS_FILTER,
+    UPDATE_SEARCH
 } from "./actions";
   
 export const reducer = ( state, action ) => {
@@ -27,6 +28,11 @@ export const reducer = ( state, action ) => {
             return {
                 ...state,
                 currentStatusFilter: action.currentStatusFilter,
+            } 
+        case UPDATE_SEARCH:
+            return {
+                ...state,
+                stringFilter: action.stringFilter,
             }    
         default:
         return state;
