@@ -158,7 +158,7 @@ const StatsArchived = ( ) => {
             pointBorderColor : ['rgb(255, 0, 0)','rgb(245, 226, 27)','rgb(0, 255, 0)'],
             fill: false,
             backgroundColor: 'rgba(245, 124, 0,0.05)',
-            borderColor: 'rgba(155, 155, 155, 0.4)',
+            borderColor: 'rgba(245, 124, 0, 0.2)',
             borderCapStyle: 'butt',
             borderWidth: 50,
             pointStyle: "line",
@@ -205,9 +205,9 @@ const StatsArchived = ( ) => {
                 <span className={ 'priorityRate' }>
                 <p className={ 'statsTitle underline' }>Priorty 1:</p>
                 <div className="priorityLabelHolder">
-                    <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[0].data[2].x.toFixed(0) }` }</p>
-                    <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[0].data[1].x.toFixed(0) }` }</p>
-                    <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[0].data[0].x.toFixed(0) }` }</p>
+                    <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[0].data[2].x.toFixed(1) }` }</p>
+                    <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[0].data[1].x.toFixed(1) }` }</p>
+                    <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[0].data[0].x.toFixed(1) }` }</p>
                 </div>
                 </span>
             }
@@ -215,9 +215,9 @@ const StatsArchived = ( ) => {
                 <span className={ 'priorityRate' }>
                 <p className={ 'statsTitle underline' }>Priorty 2:</p>
                 <div className="priorityLabelHolder">
-                    <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[1].data[2].x.toFixed(0) }` }</p>
-                    <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[1].data[1].x.toFixed(0) }` }</p>
-                    <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[1].data[0].x.toFixed(0) }` }</p>
+                    <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[1].data[2].x.toFixed(1) }` }</p>
+                    <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[1].data[1].x.toFixed(1) }` }</p>
+                    <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[1].data[0].x.toFixed(1) }` }</p>
                 </div>
                 </span>
             }
@@ -225,9 +225,9 @@ const StatsArchived = ( ) => {
                 <span className={ 'priorityRate' }>
                 <p className={ 'statsTitle underline' }>Priorty 3:</p>
                 <div className="priorityLabelHolder">
-                    <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[2].data[2].x.toFixed(0) }` }</p>
-                    <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[2].data[1].x.toFixed(0) }` }</p>
-                    <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[2].data[0].x.toFixed(0) }` }</p>
+                    <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[2].data[2].x.toFixed(1) }` }</p>
+                    <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[2].data[1].x.toFixed(1) }` }</p>
+                    <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[2].data[0].x.toFixed(1) }` }</p>
                 </div>
                 </span>
             }
@@ -235,9 +235,9 @@ const StatsArchived = ( ) => {
                 <span className={ 'priorityRate' }>
                 <p className={ 'statsTitle underline' }>Priorty 4:</p>
                 <div className="priorityLabelHolder">
-                    <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[3].data[2].x.toFixed(0) }` }</p>
-                    <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[3].data[1].x.toFixed(0) }` }</p>
-                    <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[3].data[0].x.toFixed(0) }` }</p>
+                    <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[3].data[2].x.toFixed(1) }` }</p>
+                    <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[3].data[1].x.toFixed(1) }` }</p>
+                    <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[3].data[0].x.toFixed(1) }` }</p>
                 </div>
                 </span>
             }
@@ -245,9 +245,9 @@ const StatsArchived = ( ) => {
                 <span className={ 'priorityRate' }>
                 <p className={ 'statsTitle underline' }>Priorty 5:</p>
                 <div className="priorityLabelHolder">
-                    <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[4].data[2].x.toFixed(0) }` }</p>
-                    <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[4].data[1].x.toFixed(0) }` }</p>
-                    <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[4].data[0].x.toFixed(0) }` }</p>
+                    <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[4].data[2].x.toFixed(1) }` }</p>
+                    <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[4].data[1].x.toFixed(1) }` }</p>
+                    <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[4].data[0].x.toFixed(1) }` }</p>
                 </div>
                 </span>
             }
@@ -255,9 +255,9 @@ const StatsArchived = ( ) => {
                 <span className={ 'priorityRate' }>
                 <p className={ 'statsTitle underline' }>No Priority:</p>
                 <div className="priorityLabelHolder">
-                    <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[5].data[2].x.toFixed(0) }` }</p>
-                    <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[5].data[1].x.toFixed(0) }` }</p>
-                    <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[5].data[0].x.toFixed(0) }` }</p>
+                    <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[5].data[2].x.toFixed(1) }` }</p>
+                    <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[5].data[1].x.toFixed(1) }` }</p>
+                    <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[5].data[0].x.toFixed(1) }` }</p>
                 </div>
                 </span>
             }
@@ -265,9 +265,9 @@ const StatsArchived = ( ) => {
                 <span className={ 'priorityRate' }>
                 <p className={ 'statsTitle underline' }>Total Tasks:</p>
                <div className="priorityLabelHolder">
-                    <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[6].data[2].x.toFixed(0) }` }</p>
-                    <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[6].data[1].x.toFixed(0) }` }</p>
-                    <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[6].data[0].x.toFixed(0) }` }</p>
+                    <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[6].data[2].x.toFixed(1) }` }</p>
+                    <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[6].data[1].x.toFixed(1) }` }</p>
+                    <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[6].data[0].x.toFixed(1) }` }</p>
                 </div>
                 </span>
             }
