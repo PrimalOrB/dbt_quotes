@@ -690,6 +690,11 @@ hr{
     align-items: center;
   }
 
+  .nav-button-active {
+    background-color: rgba(255, 255, 255, 0.25);
+    border-bottom: 3px solid rgba(245, 124, 0, 1);
+  }
+
   .details {
     justify-content: space-between;
   }
@@ -719,6 +724,11 @@ hr{
     height: 1.25rem;
     transition: 0.25s ease all;
     margin-right: 0.4rem;
+  }
+
+  .nav-button-active {
+    background-color: rgba(255, 255, 255, 0.25);
+    border-bottom: 3px solid rgba(245, 124, 0, 1);
   }
 
   .nomargin svg{
