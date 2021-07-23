@@ -72,13 +72,7 @@ const StatsArchived = ( ) => {
             priorityTotal.push( { x: newPriorityTotal.sort((a, b) => a - b)[0], y: 7 } )
         }  
 
-        const labels = []
-        for( let k = 0; k < maxDuration + 2; k++){
-            labels.push( k )
-        }
-
         const data = {
-        labels: labels,
         datasets: [
             {
             label: 'Priority 1',
@@ -178,9 +172,9 @@ const StatsArchived = ( ) => {
             },
             scales: {
                 xAxes: [{
+                    type:'linear',
                     ticks: {
                         beginAtZero: true,
-                        // stepSize: 1,
                         reverse: true,
                     }
                 }],
