@@ -10,7 +10,7 @@ const StatsArchived = ( ) => {
     const { dataStore } = state
   
     if( dataStore.length ){
-
+        let maxDuration = 0
         const archivedQuotes = dataStore.filter( quote => quote.completedDate > 0 )
         let newPriority1 = []
         let newPriority2 = []
@@ -18,6 +18,7 @@ const StatsArchived = ( ) => {
         let newPriority4 = []
         let newPriority5 = []
         let newPriorityNull = []
+        let newPriorityTotal = []
         for( var h = 0; h < archivedQuotes.length; h++ ){
             archivedQuotes[h].priority === '1' && newPriority1.push( calc_days_between( archivedQuotes[h].createdAt, archivedQuotes[h].completedDate ) )
             archivedQuotes[h].priority === '2' && newPriority2.push( calc_days_between( archivedQuotes[h].createdAt, archivedQuotes[h].completedDate ) )
@@ -25,6 +26,8 @@ const StatsArchived = ( ) => {
             archivedQuotes[h].priority === '4' && newPriority4.push( calc_days_between( archivedQuotes[h].createdAt, archivedQuotes[h].completedDate ) )
             archivedQuotes[h].priority === '5' && newPriority5.push( calc_days_between( archivedQuotes[h].createdAt, archivedQuotes[h].completedDate ) )
             archivedQuotes[h].priority === null && newPriorityNull.push( calc_days_between( archivedQuotes[h].createdAt, archivedQuotes[h].completedDate ) )
+            newPriorityTotal.push( calc_days_between( archivedQuotes[h].createdAt, archivedQuotes[h].completedDate ) )
+            maxDuration = calc_days_between( archivedQuotes[h].createdAt, archivedQuotes[h].completedDate ) > maxDuration ? calc_days_between( archivedQuotes[h].createdAt, archivedQuotes[h].completedDate ) : maxDuration
         }
         let priority1 =[]
         let priority2 =[]
@@ -32,6 +35,7 @@ const StatsArchived = ( ) => {
         let priority4 =[]
         let priority5 =[]
         let priorityNull =[]
+        let priorityTotal = []
         if( newPriority1.length > 0 ) { 
             priority1.push( { x: newPriority1.sort((a, b) => b - a)[0], y: 1 } )
             priority1.push( { x: newPriority1.reduce((a, b) => a + b, 0) / newPriority1.length, y: 1 } )
@@ -61,11 +65,18 @@ const StatsArchived = ( ) => {
             priorityNull.push( { x: newPriorityNull.sort((a, b) => b - a)[0], y: 6 } )
             priorityNull.push( { x: newPriorityNull.reduce((a, b) => a + b, 0) / newPriorityNull.length, y: 6 } )
             priorityNull.push( { x: newPriorityNull.sort((a, b) => a - b)[0], y: 6 } )
+        } 
+        if( newPriorityTotal.length > 0 ) {
+            priorityTotal.push( { x: newPriorityTotal.sort((a, b) => b - a)[0], y: 7 } )
+            priorityTotal.push( { x: newPriorityTotal.reduce((a, b) => a + b, 0) / newPriorityTotal.length, y: 7 } )
+            priorityTotal.push( { x: newPriorityTotal.sort((a, b) => a - b)[0], y: 7 } )
         }  
 
-        console.log( priority1, priority2, priority3, priority4, priority5, priorityNull )
-        const labels = [6,7,8,9]
-            
+        const labels = []
+        for( let k = 0; k < maxDuration + 2; k++){
+            labels.push( k )
+        }
+
         const data = {
         labels: labels,
         datasets: [
@@ -75,6 +86,11 @@ const StatsArchived = ( ) => {
             fill: false,
             backgroundColor: 'rgb(102, 255, 0)',
             borderColor: 'rgba(102, 255, 0, 0.5)',
+            pointBorderColor : ['rgb(255, 0, 0)','rgb(245, 226, 27)','rgb(0, 255, 0)'],
+            borderCapStyle: 'butt',
+            borderWidth: 50,
+            pointStyle: "line",
+            hoverBorderWidth: 50,
             },
             {
             label: 'Priority 2',
@@ -82,6 +98,11 @@ const StatsArchived = ( ) => {
             fill: false,
             backgroundColor: 'rgb(204, 255, 0)',
             borderColor: 'rgba(204, 255, 0, 0.5)',
+            pointBorderColor : ['rgb(255, 0, 0)','rgb(245, 226, 27)','rgb(0, 255, 0)'],
+            borderCapStyle: 'butt',
+            borderWidth: 50,
+            pointStyle: "line",
+            hoverBorderWidth: 50,
             },
             {
             label: 'Priority 3',
@@ -89,6 +110,11 @@ const StatsArchived = ( ) => {
             fill: false,
             backgroundColor: 'rgb(255, 204, 0)',
             borderColor: 'rgba(255, 204, 0, 0.5)',
+            pointBorderColor : ['rgb(255, 0, 0)','rgb(245, 226, 27)','rgb(0, 255, 0)'],
+            borderCapStyle: 'butt',
+            borderWidth: 50,
+            pointStyle: "line",
+            hoverBorderWidth: 50,
             },
             {
             label: 'Priority 4',
@@ -96,6 +122,11 @@ const StatsArchived = ( ) => {
             fill: false,
             backgroundColor: 'rgb(255, 102, 0)',
             borderColor: 'rgba(255, 102, 0, 0.5)',
+            pointBorderColor : ['rgb(255, 0, 0)','rgb(245, 226, 27)','rgb(0, 255, 0)'],
+            borderCapStyle: 'butt',
+            borderWidth: 50,
+            pointStyle: "line",
+            hoverBorderWidth: 50,
             },
             {
             label: 'Priority 5',
@@ -103,6 +134,11 @@ const StatsArchived = ( ) => {
             fill: false,
             backgroundColor: 'rgb(255, 0, 0)',
             borderColor: 'rgba(255, 0, 0, 0.5)',
+            pointBorderColor : ['rgb(255, 0, 0)','rgb(245, 226, 27)','rgb(0, 255, 0)'],
+            borderCapStyle: 'butt',
+            borderWidth: 50,
+            pointStyle: "line",
+            hoverBorderWidth: 50,
             },
             {
             label: 'No Priority',
@@ -110,84 +146,132 @@ const StatsArchived = ( ) => {
             fill: false,
             backgroundColor: 'rgb(180, 180, 180)',
             borderColor: 'rgba(180, 180, 180, 0.5)',
+            pointBorderColor : ['rgb(255, 0, 0)','rgb(245, 226, 27)','rgb(0, 255, 0)'],
+            borderCapStyle: 'butt',
+            borderWidth: 50,
+            pointStyle: "line",
+            hoverBorderWidth: 50,
             },
-            // {
-            // label: 'Total Tasks',
-            // data: totalTasks,
-            // fill: true,
-            // backgroundColor: 'rgba(245, 124, 0,0.05)',
-            // borderColor: 'rgba(245, 124, 0, 0.2)',
-            // borderDash: [10,10]
-            // },
+            {
+            label: 'Total Tasks',
+            data: priorityTotal,
+            pointBorderColor : ['rgb(255, 0, 0)','rgb(245, 226, 27)','rgb(0, 255, 0)'],
+            fill: false,
+            backgroundColor: 'rgba(245, 124, 0,0.05)',
+            borderColor: 'rgba(155, 155, 155, 0.4)',
+            borderCapStyle: 'butt',
+            borderWidth: 50,
+            pointStyle: "line",
+            hoverBorderWidth: 50,
+            },
         ],
         };
         
-        
-        // const options = {
-        //     plugins: {
-        //         title: {
-        //             display: true,
-        //             text: 'Completed Task Duration ( days ), By Priority'
-        //         }
-        //     },
-        //     legend: {
-        //         display: false
-        //     },
-        //     responsive: true,
-        //     scales: {
-        //         xAxes: [{
-        //         }],
-        //         yAxes: [{
-        //             id: 'A',
-        //             type: 'linear',
-        //             position: 'left',
-        //           }, {
-        //             id: 'B',
-        //             type: 'linear',
-        //             position: 'right',
-        //             ticks: {
-        //               max: 1,
-        //               min: 0
-        //             }
-        //           }]
-        //     },
-        // };
-    
         const options2= {  
-            plugins: {
-                    title: {
-                        display: true,
-                        text: 'Completed Task Duration ( days ), By Priority'
-                    }
-                },
+            title: {
+                display: true,
+                text: 'Completed Task Duration ( days ), By Priority',
+                fontSize: 24
+            },
+            legend: {
+                display: false,
+            },
             scales: {
                 xAxes: [{
-                    display: false,
-                    type: 'linear',
                     ticks: {
-                      reverse: false,
-                
-                      // forces step size to be 5 units
-                      stepSize: 5 // <----- This prop sets the stepSize
-                    }
-                  }],
-                yAxes: [{
-                    display: false,
-                    ticks: {
-                        min: 0,
-                        max: 6,
+                        beginAtZero: true,
                         stepSize: 1,
-                        precision: 0
+                        reverse: true,
                     }
-                  }]
-            }
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 1,
+                        max: 8,
+                        display: false,
+                        reverse: true,
+                    }
+                }]
+            },
         }
 
         return (
         <>
-            <h1>Stats</h1>
-    
             <Line data={ data } options={ options2 } />
+            <div className={ 'statsCont' }>
+            <h3>Distribution of completed task (days), By Priority</h3>
+            { calc_parse_average( data.datasets[0].data ) > 0 && 
+                <span className={ 'priorityRate' }>
+                <p className={ 'statsTitle underline' }>Priorty 1:</p>
+                <div className="priorityLabelHolder">
+                    <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[0].data[2].x.toFixed(0) }` }</p>
+                    <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[0].data[1].x.toFixed(0) }` }</p>
+                    <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[0].data[0].x.toFixed(0) }` }</p>
+                </div>
+                </span>
+            }
+            { calc_parse_average( data.datasets[1].data ) > 0 && 
+                <span className={ 'priorityRate' }>
+                <p className={ 'statsTitle underline' }>Priorty 2:</p>
+                <div className="priorityLabelHolder">
+                    <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[1].data[2].x.toFixed(0) }` }</p>
+                    <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[1].data[1].x.toFixed(0) }` }</p>
+                    <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[1].data[0].x.toFixed(0) }` }</p>
+                </div>
+                </span>
+            }
+            { calc_parse_average( data.datasets[2].data ) > 0 && 
+                <span className={ 'priorityRate' }>
+                <p className={ 'statsTitle underline' }>Priorty 3:</p>
+                <div className="priorityLabelHolder">
+                    <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[2].data[2].x.toFixed(0) }` }</p>
+                    <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[2].data[1].x.toFixed(0) }` }</p>
+                    <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[2].data[0].x.toFixed(0) }` }</p>
+                </div>
+                </span>
+            }
+            { calc_parse_average( data.datasets[3].data ) > 0 && 
+                <span className={ 'priorityRate' }>
+                <p className={ 'statsTitle underline' }>Priorty 4:</p>
+                <div className="priorityLabelHolder">
+                    <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[3].data[2].x.toFixed(0) }` }</p>
+                    <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[3].data[1].x.toFixed(0) }` }</p>
+                    <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[3].data[0].x.toFixed(0) }` }</p>
+                </div>
+                </span>
+            }
+            { calc_parse_average( data.datasets[4].data ) > 0 && 
+                <span className={ 'priorityRate' }>
+                <p className={ 'statsTitle underline' }>Priorty 5:</p>
+                <div className="priorityLabelHolder">
+                    <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[4].data[2].x.toFixed(0) }` }</p>
+                    <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[4].data[1].x.toFixed(0) }` }</p>
+                    <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[4].data[0].x.toFixed(0) }` }</p>
+                </div>
+                </span>
+            }
+            { calc_parse_average( data.datasets[5].data ) > 0 && 
+                <span className={ 'priorityRate' }>
+                <p className={ 'statsTitle underline' }>No Priority:</p>
+                <div className="priorityLabelHolder">
+                    <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[5].data[2].x.toFixed(0) }` }</p>
+                    <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[5].data[1].x.toFixed(0) }` }</p>
+                    <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[5].data[0].x.toFixed(0) }` }</p>
+                </div>
+                </span>
+            }
+            { calc_parse_average( data.datasets[6].data ) > 0 && 
+                <span className={ 'priorityRate' }>
+                <p className={ 'statsTitle underline' }>Total Tasks:</p>
+               <div className="priorityLabelHolder">
+                    <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[6].data[2].x.toFixed(0) }` }</p>
+                    <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[6].data[1].x.toFixed(0) }` }</p>
+                    <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[6].data[0].x.toFixed(0) }` }</p>
+                </div>
+                </span>
+            }
+            </div>
         </>
         )
     }

@@ -103,14 +103,13 @@ const StatsActive = ( ) => {
         };
         
         const options = {
-        plugins: {
-            title: {
-                display: true,
-                text: 'Active Tasks ( Not Archived & Not On Hold ), By Date'
-            }
+        title: {
+            display: true,
+            text: 'Active Tasks ( Not Archived & Not On Hold ), By Date',
+            fontSize: 24
         },
         legend: {
-            display: false
+            display: true
         },
         elements: {
             line: {
