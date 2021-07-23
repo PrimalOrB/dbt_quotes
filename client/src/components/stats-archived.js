@@ -180,7 +180,7 @@ const StatsArchived = ( ) => {
                 xAxes: [{
                     ticks: {
                         beginAtZero: true,
-                        stepSize: 1,
+                        // stepSize: 1,
                         reverse: true,
                     }
                 }],
