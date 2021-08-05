@@ -79,7 +79,7 @@ const StatsActive = ( ) => {
             },
             {
             label: 'Priority 5',
-            data: priority4,
+            data: priority5,
             fill: false,
             backgroundColor: 'rgb(255, 0, 0)',
             borderColor: 'rgba(255, 0, 0, 0.5)',
