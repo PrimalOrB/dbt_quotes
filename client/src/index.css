@@ -6,16 +6,13 @@
   /* border: 1px solid black */
 }
 
-
 #app {
   width: 100%;
-  height: 100%;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: rgba(240, 240, 240, 1);
-  overflow:scroll
+  overflow: scroll;
 }
 
 nav {
@@ -44,7 +41,7 @@ a:hover {
 }
 
 #logo {
-  display: none
+  display: none;
 }
 
 .nav-menu {
@@ -54,7 +51,7 @@ a:hover {
 }
 
 .nav-button {
-  padding: 0.25rem .75rem;
+  padding: 0.25rem 0.75rem;
   text-transform: uppercase;
   color: white;
   font-weight: bold;
@@ -71,10 +68,10 @@ a:hover {
   display: none;
 }
 
-.nomargin svg{
+.nomargin svg {
   margin: 0;
   fill: white;
-  display: block
+  display: block;
 }
 
 .nav-button:hover {
@@ -316,7 +313,7 @@ main h2 {
 }
 
 .rotate span {
-  color: black
+  color: black;
 }
 
 .rotation-wrapper-inner {
@@ -339,7 +336,7 @@ main h2 {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
-  justify-content:flex-end;
+  justify-content: flex-end;
 }
 
 .sub-details {
@@ -363,7 +360,7 @@ main h2 {
   border-radius: 0 0 0 0.75rem;
   flex-shrink: 0;
   flex-grow: 0;
-  order: 1
+  order: 1;
 }
 
 .quoteCard svg {
@@ -396,7 +393,7 @@ main h2 {
   height: 4rem;
   background-color: rgba(255, 255, 255, 0.5);
   white-space: pre;
-  overflow-y: auto;;
+  overflow-y: auto;
   white-space: pre-wrap;
   order: 3;
 }
@@ -590,7 +587,6 @@ main h2 {
 .priorityRate {
   display: flex;
   align-items: flex-start;
-  
 }
 
 .priorityRate p {
@@ -603,21 +599,21 @@ main h2 {
 }
 
 .underline {
- border-bottom: 1px solid gray;
- padding-left: 0.5rem
+  border-bottom: 1px solid gray;
+  padding-left: 0.5rem;
 }
 
-.priorityLabelHolder > .priorityLabel{
+.priorityLabelHolder > .priorityLabel {
   border-left: 1px solid gray;
   padding-left: 4px;
 }
 
-.priorityLabelHolder >.priorityLabel:first-child{
+.priorityLabelHolder > .priorityLabel:first-child {
   border: none;
   padding-left: 5px;
 }
 
-hr{
+hr {
   border-bottom: 3px solid #4d4d4d;
   width: 100%;
   margin: 3rem 0;
@@ -671,9 +667,8 @@ hr{
     flex-direction: row;
   }
 
- 
   .nav-menu {
-    width: auto
+    width: auto;
   }
 
   .nav-button {
@@ -706,13 +701,12 @@ hr{
   }
 
   .status {
-    order: 2
+    order: 2;
   }
 
   .note-form textarea {
     width: 80%;
   }
-  
 }
 
 @media screen and (min-width: 900px) {
@@ -731,12 +725,12 @@ hr{
     border-bottom: 3px solid rgba(245, 124, 0, 1);
   }
 
-  .nomargin svg{
+  .nomargin svg {
     margin: 0;
-    fill: white
+    fill: white;
   }
-  
+
   #logo {
-    display: block
-  }  
+    display: block;
+  }
 }

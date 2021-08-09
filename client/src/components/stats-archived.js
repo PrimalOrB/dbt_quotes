@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Line } from 'react-chartjs-2';
-import { calc_color_scale, calc_parse_average, calc_days_between } from '../utils/helpers'
+import { calc_parse_average, calc_days_between } from '../utils/helpers'
 import { useStoreContext } from "../utils/GlobalState";
 import moment from 'moment'
 
 const StatsArchived = ( ) => {
 
+
     const [state] = useStoreContext();
     const { dataStore } = state
-  
-    if( dataStore.length ){
+
+    // const [ processingData, setProcessingData ] = useState( false )
+
         let maxDuration = 0
         const archivedQuotes = dataStore.filter( quote => quote.completedDate > 0 )
+
         let newPriority1 = []
         let newPriority2 = []
         let newPriority3 = []
@@ -72,93 +75,98 @@ const StatsArchived = ( ) => {
             priorityTotal.push( { x: newPriorityTotal.sort((a, b) => a - b)[0], y: 7 } )
         }  
 
+        // useEffect(()=>{
+        //     setProcessingData( true )  
+        // },[ newPriorityTotal ] )
+
+
         const data = {
-        datasets: [
-            {
-            label: 'Priority 1',
-            data: priority1,
-            fill: false,
-            backgroundColor: 'rgb(102, 255, 0)',
-            borderColor: 'rgba(102, 255, 0, 0.5)',
-            pointBorderColor : ['rgb(255, 0, 0)','rgb(245, 124, 0)','rgb(0, 255, 0)'],
-            borderCapStyle: 'butt',
-            borderWidth: 50,
-            pointStyle: "line",
-            hoverBorderWidth: 50,
-            },
-            {
-            label: 'Priority 2',
-            data: priority2,
-            fill: false,
-            backgroundColor: 'rgb(204, 255, 0)',
-            borderColor: 'rgba(204, 255, 0, 0.5)',
-            pointBorderColor : ['rgb(255, 0, 0)','rgb(245, 124, 0)','rgb(0, 255, 0)'],
-            borderCapStyle: 'butt',
-            borderWidth: 50,
-            pointStyle: "line",
-            hoverBorderWidth: 50,
-            },
-            {
-            label: 'Priority 3',
-            data: priority3,
-            fill: false,
-            backgroundColor: 'rgb(255, 204, 0)',
-            borderColor: 'rgba(255, 204, 0, 0.5)',
-            pointBorderColor : ['rgb(255, 0, 0)','rgb(245, 124, 0)','rgb(0, 255, 0)'],
-            borderCapStyle: 'butt',
-            borderWidth: 50,
-            pointStyle: "line",
-            hoverBorderWidth: 50,
-            },
-            {
-            label: 'Priority 4',
-            data: priority4,
-            fill: false,
-            backgroundColor: 'rgb(255, 102, 0)',
-            borderColor: 'rgba(255, 102, 0, 0.5)',
-            pointBorderColor : ['rgb(255, 0, 0)','rgb(245, 124, 0)','rgb(0, 255, 0)'],
-            borderCapStyle: 'butt',
-            borderWidth: 50,
-            pointStyle: "line",
-            hoverBorderWidth: 50,
-            },
-            {
-            label: 'Priority 5',
-            data: priority4,
-            fill: false,
-            backgroundColor: 'rgb(255, 0, 0)',
-            borderColor: 'rgba(255, 0, 0, 0.5)',
-            pointBorderColor : ['rgb(255, 0, 0)','rgb(245, 124, 0)','rgb(0, 255, 0)'],
-            borderCapStyle: 'butt',
-            borderWidth: 50,
-            pointStyle: "line",
-            hoverBorderWidth: 50,
-            },
-            {
-            label: 'No Priority',
-            data: priorityNull,
-            fill: false,
-            backgroundColor: 'rgb(180, 180, 180)',
-            borderColor: 'rgba(180, 180, 180, 0.5)',
-            pointBorderColor : ['rgb(255, 0, 0)','rgb(245, 124, 0)','rgb(0, 255, 0)'],
-            borderCapStyle: 'butt',
-            borderWidth: 50,
-            pointStyle: "line",
-            hoverBorderWidth: 50,
-            },
-            {
-            label: 'Total Tasks',
-            data: priorityTotal,
-            pointBorderColor : ['rgb(255, 0, 0)','rgb(245, 124, 0)','rgb(0, 255, 0)'],
-            fill: false,
-            backgroundColor: 'rgba(245, 124, 0,0.05)',
-            borderColor: 'rgba(245, 124, 0, 0.2)',
-            borderCapStyle: 'butt',
-            borderWidth: 50,
-            pointStyle: "line",
-            hoverBorderWidth: 50,
-            },
-        ],
+            datasets: [
+                {
+                label: 'Priority 1',
+                data: priority1,
+                fill: false,
+                backgroundColor: 'rgb(102, 255, 0)',
+                borderColor: 'rgba(102, 255, 0, 0.5)',
+                pointBorderColor : ['rgb(255, 0, 0)','rgb(245, 124, 0)','rgb(0, 255, 0)'],
+                borderCapStyle: 'butt',
+                borderWidth: 50,
+                pointStyle: "line",
+                hoverBorderWidth: 50,
+                },
+                {
+                label: 'Priority 2',
+                data: priority2,
+                fill: false,
+                backgroundColor: 'rgb(204, 255, 0)',
+                borderColor: 'rgba(204, 255, 0, 0.5)',
+                pointBorderColor : ['rgb(255, 0, 0)','rgb(245, 124, 0)','rgb(0, 255, 0)'],
+                borderCapStyle: 'butt',
+                borderWidth: 50,
+                pointStyle: "line",
+                hoverBorderWidth: 50,
+                },
+                {
+                label: 'Priority 3',
+                data: priority3,
+                fill: false,
+                backgroundColor: 'rgb(255, 204, 0)',
+                borderColor: 'rgba(255, 204, 0, 0.5)',
+                pointBorderColor : ['rgb(255, 0, 0)','rgb(245, 124, 0)','rgb(0, 255, 0)'],
+                borderCapStyle: 'butt',
+                borderWidth: 50,
+                pointStyle: "line",
+                hoverBorderWidth: 50,
+                },
+                {
+                label: 'Priority 4',
+                data: priority4,
+                fill: false,
+                backgroundColor: 'rgb(255, 102, 0)',
+                borderColor: 'rgba(255, 102, 0, 0.5)',
+                pointBorderColor : ['rgb(255, 0, 0)','rgb(245, 124, 0)','rgb(0, 255, 0)'],
+                borderCapStyle: 'butt',
+                borderWidth: 50,
+                pointStyle: "line",
+                hoverBorderWidth: 50,
+                },
+                {
+                label: 'Priority 5',
+                data: priority5,
+                fill: false,
+                backgroundColor: 'rgb(255, 0, 0)',
+                borderColor: 'rgba(255, 0, 0, 0.5)',
+                pointBorderColor : ['rgb(255, 0, 0)','rgb(245, 124, 0)','rgb(0, 255, 0)'],
+                borderCapStyle: 'butt',
+                borderWidth: 50,
+                pointStyle: "line",
+                hoverBorderWidth: 50,
+                },
+                {
+                label: 'No Priority',
+                data: priorityNull,
+                fill: false,
+                backgroundColor: 'rgb(180, 180, 180)',
+                borderColor: 'rgba(180, 180, 180, 0.5)',
+                pointBorderColor : ['rgb(255, 0, 0)','rgb(245, 124, 0)','rgb(0, 255, 0)'],
+                borderCapStyle: 'butt',
+                borderWidth: 50,
+                pointStyle: "line",
+                hoverBorderWidth: 50,
+                },
+                {
+                label: 'Total Tasks',
+                data: priorityTotal,
+                pointBorderColor : ['rgb(255, 0, 0)','rgb(245, 124, 0)','rgb(0, 255, 0)'],
+                fill: false,
+                backgroundColor: 'rgba(245, 124, 0,0.05)',
+                borderColor: 'rgba(245, 124, 0, 0.2)',
+                borderCapStyle: 'butt',
+                borderWidth: 50,
+                pointStyle: "line",
+                hoverBorderWidth: 50,
+                },
+            ],
         };
         
         const options2= {  
@@ -190,6 +198,12 @@ const StatsArchived = ( ) => {
             },
         }
 
+        // if( !processingData ){
+        //     return (
+        //         <h2>Loading</h2>
+        //     )
+        // }
+
         return (
         <>
             <Line data={ data } options={ options2 } />
@@ -202,6 +216,7 @@ const StatsArchived = ( ) => {
                     <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[0].data[2].x.toFixed(1) }` }</p>
                     <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[0].data[1].x.toFixed(1) }` }</p>
                     <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[0].data[0].x.toFixed(1) }` }</p>
+                    <p className="priorityLabel"><b>num: </b>{ `${ newPriority1.length }` }</p>
                 </div>
                 </span>
             }
@@ -212,6 +227,7 @@ const StatsArchived = ( ) => {
                     <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[1].data[2].x.toFixed(1) }` }</p>
                     <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[1].data[1].x.toFixed(1) }` }</p>
                     <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[1].data[0].x.toFixed(1) }` }</p>
+                    <p className="priorityLabel"><b>num: </b>{ `${ newPriority2.length }` }</p>
                 </div>
                 </span>
             }
@@ -222,6 +238,7 @@ const StatsArchived = ( ) => {
                     <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[2].data[2].x.toFixed(1) }` }</p>
                     <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[2].data[1].x.toFixed(1) }` }</p>
                     <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[2].data[0].x.toFixed(1) }` }</p>
+                    <p className="priorityLabel"><b>num: </b>{ `${ newPriority3.length }` }</p>
                 </div>
                 </span>
             }
@@ -232,6 +249,7 @@ const StatsArchived = ( ) => {
                     <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[3].data[2].x.toFixed(1) }` }</p>
                     <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[3].data[1].x.toFixed(1) }` }</p>
                     <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[3].data[0].x.toFixed(1) }` }</p>
+                    <p className="priorityLabel"><b>num: </b>{ `${ newPriority4.length }` }</p>
                 </div>
                 </span>
             }
@@ -242,6 +260,7 @@ const StatsArchived = ( ) => {
                     <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[4].data[2].x.toFixed(1) }` }</p>
                     <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[4].data[1].x.toFixed(1) }` }</p>
                     <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[4].data[0].x.toFixed(1) }` }</p>
+                    <p className="priorityLabel"><b>num: </b>{ `${ newPriority5.length }` }</p>
                 </div>
                 </span>
             }
@@ -252,23 +271,24 @@ const StatsArchived = ( ) => {
                     <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[5].data[2].x.toFixed(1) }` }</p>
                     <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[5].data[1].x.toFixed(1) }` }</p>
                     <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[5].data[0].x.toFixed(1) }` }</p>
+                    <p className="priorityLabel"><b>num: </b>{ `${ newPriorityNull.length }` }</p>
                 </div>
                 </span>
             }
             { calc_parse_average( data.datasets[6].data ) > 0 && 
                 <span className={ 'priorityRate' }>
                 <p className={ 'statsTitle underline' }>Total Tasks:</p>
-               <div className="priorityLabelHolder">
+                <div className="priorityLabelHolder">
                     <p className="priorityLabel"><b>min: </b>{ `${ data.datasets[6].data[2].x.toFixed(1) }` }</p>
                     <p className="priorityLabel"><b>avg: </b>{ `${ data.datasets[6].data[1].x.toFixed(1) }` }</p>
                     <p className="priorityLabel"><b>max: </b>{ `${ data.datasets[6].data[0].x.toFixed(1) }` }</p>
+                    <p className="priorityLabel"><b>num: </b>{ `${ newPriorityTotal.length }` }</p>
                 </div>
                 </span>
             }
             </div>
         </>
         )
-    }
 };
 
 export default StatsArchived;

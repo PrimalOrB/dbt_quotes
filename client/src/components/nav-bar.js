@@ -54,7 +54,7 @@ const NavBar = () => {
 
   return (
     <>
-    {loading ? (
+    {loading || error ? (
       <Loading />
     ) : (
       <nav>

@@ -82,7 +82,7 @@ const resolvers = {
            // on task set to ready, send finished email and set complete date
           if( origQuote.status === 'archived' && data.status !== 'archived'){
             sendEmail(input,'Unarchived',data)
-            data.completedDate = new Date()
+            data.completedDate = null
           } 
           let quote = await Quote.findOneAndUpdate( 
             {_id: input._id},
