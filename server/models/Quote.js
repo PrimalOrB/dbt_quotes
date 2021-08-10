@@ -43,7 +43,7 @@ const quoteSchema = new Schema(
         type: Number,
     },
     completedDate: {
-        type: Number,
+        type: Date,
     },
     notes: [noteSchema]
   },

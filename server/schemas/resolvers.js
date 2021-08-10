@@ -79,7 +79,7 @@ const resolvers = {
             sendEmail(input,'Finished',data)
             data.completedDate = new Date()
           } 
-           // on task set to ready, send finished email and set complete date
+           // on task unarchive, set completed date to null
           if( origQuote.status === 'archived' && data.status !== 'archived'){
             sendEmail(input,'Unarchived',data)
             data.completedDate = null
