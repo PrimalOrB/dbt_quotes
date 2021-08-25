@@ -54,13 +54,25 @@ const resolvers = {
           const data = {...input}
           const quote = await Quote.create(data);
           sendEmail(input,'New',quote)
-          return quote;
+
+          // note text
+          const noteBy = data.user
+          const noteText = 'Record created' 
+          
+          // add note to quote
+          let updatedQuote = await Quote.findOneAndUpdate(
+            { _id: quote._id },
+            { $push: { notes: { noteText, noteBy } } },
+            { new: true, runValidators: true }
+          );
+          return updatedQuote;
         }
         throw new AuthenticationError('Incorrect credentials');
       },
-      editQuote: async( parent, {input}, context ) => {
+      editQuote: async( parent, { input }, context ) => {
         if( context.headers.authorization !== undefined ){
         const data = {...input}
+        
         let origQuote = await Quote.findOne({_id: input._id})
             // reset task date on unarchived jobs
           if( origQuote.status === 'archived' && data.status !== 'archived'){
@@ -84,12 +96,30 @@ const resolvers = {
             sendEmail(input,'Unarchived',data)
             data.completedDate = null
           } 
+
+          // note text
+          const noteBy = data.user
+          let noteText = 'An edit was made' 
+          if( origQuote.status !== data.status ) {
+            noteText = `${ noteText }, status changed to ${ data.status }`
+          }
+          if( origQuote.statusMtl !== data.statusMtl ) {
+            noteText = `${ noteText }, material status changed to ${ data.statusMtl }`
+          }
+
           let quote = await Quote.findOneAndUpdate( 
             {_id: input._id},
             {"$set": data},
             {"new": true}
-            );       
-          return quote;
+          );       
+            
+          // add note to quote
+          let updatedQuote = await Quote.findOneAndUpdate(
+            { _id: input._id },
+            { $push: { notes: { noteText, noteBy } } },
+            { new: true, runValidators: true }
+          );
+          return updatedQuote;
         }
         throw new AuthenticationError('Incorrect credentials');
       },

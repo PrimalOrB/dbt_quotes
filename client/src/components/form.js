@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useMutation } from '@apollo/client';
 import { ADD_QUOTE, EDIT_QUOTE } from '../utils/mutations';
 import { QUERY_QUOTES, QUERY_QUOTE } from '../utils/queries';
-import { dropDownStatus } from '../utils/dropdowns';
+import { dropDownStatus, dropDownMaterial } from '../utils/dropdowns';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { Loading } from './'
@@ -23,6 +23,8 @@ const AddForm = () => {
         status:'tbd',
         PODate:'',
         POQty:'',
+        statusMtl: '',
+        mtlURL: '',
     }
 
     const initialErrorMessage = {
@@ -30,6 +32,7 @@ const AddForm = () => {
         'description':'input-error',
         'pcsURL':'',
         'crmURL':'',
+        'mtlURL': '',
     }
 
     const [ formState, setFormState ] = useState( initialState );
@@ -37,7 +40,6 @@ const AddForm = () => {
     const [ errorMessage, setErrorMessage ] = useState( initialErrorMessage )
 
     function handleChange( e ) {
-        console.log( formState )
         switch ( e.target.name ){
             case 'customerName': case 'description':
                 if( e.target.value.length === 0 ){
@@ -48,7 +50,7 @@ const AddForm = () => {
                     addState()
                 }
                 break
-            case 'pcsURL': case 'crmURL':
+            case 'pcsURL': case 'crmURL': case 'mtlURL':
                 if( e.target.value.length > 0 ){
                     const value = e.target.value
                     const regex = /https?:\/\/(www\.)?(pcs\.)?(deboertool.com)/
@@ -112,27 +114,26 @@ const AddForm = () => {
       });
 
     const [ editQuote, { error2 }] = useMutation(EDIT_QUOTE, {
-    update(cache, { data: { editQuote } }) {
-        try {
-            console.log( editQuote )
-            // const { quotes } = cache.readQuery({ query: QUERY_QUOTES });
-            cache.writeQuery({
-                query: QUERY_QUOTES,
+        update(cache, { data: { editQuote } }) {
+            try {
+                // console.log( editQuote )
+                // const { quotes } = cache.readQuery({ query: QUERY_QUOTES });
+                cache.writeQuery({
+                    query: QUERY_QUOTES,
 
-                data: { quotes: [editQuote] }
-            });
-            window.location.replace("/");
-        } catch (e) {
-            console.error(e);
+                    data: { quotes: [editQuote] }
+                });
+                window.location.replace("/");
+            } catch (e) {
+                console.error(e);
+            }
         }
-    }
     });
 
     const handleSubmit = async event =>{
         console.log( 'submit' )
         event.preventDefault()
         try {
-            console.log( formState )
             await addQuote({
                 variables: { 
                     input:{
@@ -146,7 +147,10 @@ const AddForm = () => {
                         status: formState.status,
                         PODate: formState.PODate,
                         POQty: formState.POQty,
-                    }
+                        statusMtl: formState.statusMtl,
+                        mtlURL: formState.mtlURL,
+                        user: state.currentUser.nickname,
+                    },
                  }
             });      
             } catch (event) {
@@ -157,7 +161,6 @@ const AddForm = () => {
     const handleEdit = async event =>{
         event.preventDefault()
         try {
-            console.log( formState )
             await editQuote({
                 variables: { 
                     input:{
@@ -172,10 +175,13 @@ const AddForm = () => {
                         status: formState.status,
                         PODate: formState.PODate,
                         POQty: formState.POQty,
-                     }
+                        statusMtl: formState.statusMtl,
+                        mtlURL: formState.mtlURL,
+                        user: state.currentUser.nickname,
+                    }, 
                 }
             });
-        
+       
             } catch (event) {
         }
     }
@@ -242,7 +248,6 @@ const AddForm = () => {
                                 return <option key={ x.value } value={ x.value } >{ x.label }</option>
                             })}
                     </select>
-                    {/* <Select id='status' value={ dropDown.value } defaultValue={ formState.status === null ? '' : formState.status }/> */}
                 </div>
                 <div>
                     <label htmlFor="PODate">PO Received Date:</label>
@@ -251,6 +256,18 @@ const AddForm = () => {
                 <div>
                     <label htmlFor="POQty">PO Quantity:</label>
                     <input type="text" name="POQty" placeholder='Quantity of item on Purchase Order' defaultValue={ formState.POQty === null ? '' : formState.POQty } onBlur={handleChange}/>
+                </div>
+                <div>
+                    <label htmlFor="statusMtl">Raw Material:</label>
+                    <select name="statusMtl" id="statusMtl" value={ formState.statusMtl } onChange={handleChange}>
+                        { dropDownMaterial.map((x) => {
+                                return <option key={ x.value } value={ x.value } >{ x.label }</option>
+                            })}
+                    </select>
+                </div>
+                <div>
+                    <label htmlFor="mtlURL">Material PO URL:</label>
+                    <input type="text" name="mtlURL"  placeholder='http://pcs.deboertool.com/purchasing/purchase_order_view.php?...' defaultValue={ formState.mtlURL === null ? '' : formState.mtlURL } onBlur={handleChange} className={ errorMessage.pcsURL }/>
                 </div>
                 { !errors ? <button type="submit">Edit</button> : <p className="form-error">{errors} Input Error{errors > 1 && 's'}</p>}
             </form>
@@ -304,6 +321,18 @@ const AddForm = () => {
                 <div>
                     <label htmlFor="POQty">PO Quantity:</label>
                     <input type="text" name="POQty" placeholder='Quantity of item on Purchase Order' onBlur={handleChange}/>
+                </div>
+                <div>
+                    <label htmlFor="statusMtl">Raw Material:</label>
+                    <select name="statusMtl" id="statusMtl" value={ formState.statusMtl } onChange={handleChange}>
+                        { dropDownMaterial.map((x) => {
+                                return <option key={ x.value } value={ x.value } >{ x.label }</option>
+                            })}
+                    </select>
+                </div>
+                <div>
+                    <label htmlFor="mtlURL">Material PO URL:</label>
+                    <input type="text" name="mtlURL"  placeholder='http://pcs.deboertool.com/purchasing/purchase_order_view.php?...' defaultValue={ formState.mtlURL === null ? '' : formState.mtlURL } onBlur={handleChange} className={ errorMessage.mtlURL }/>
                 </div>
                 { !errors ? <button type="submit">Add New</button> : <p className="form-error">{errors} Input Error{errors > 1 && 's'}</p>}
             </form>

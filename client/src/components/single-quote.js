@@ -9,8 +9,7 @@ import { MdForum } from 'react-icons/md'
 import { CardLink } from './'
 import { format_plural, format_label_case, calc_days_between, calc_days_to_current } from "../utils/helpers";
 
-const SingleQuote = ( { quoteData } ) => {
-      
+const SingleQuote = ( { quoteData } ) => {     
     return (
         <>
             <article className="quoteCard" key={ quoteData._id }>
@@ -38,6 +37,7 @@ const SingleQuote = ( { quoteData } ) => {
                     <Link className="cardLink" to={`/quote/${quoteData._id}`} ><p><MdForum/>Conversation { quoteData.noteCount > 0 && <span className='note-count' >( { quoteData.noteCount } { format_plural( 'note', quoteData.noteCount ) } )</span>}</p></Link>
                     { quoteData.completedDate > 0 && ( <span>Task Duration: { calc_days_between( quoteData.completedDate, quoteData.createdAt ) } { format_plural( 'day', calc_days_between( quoteData.completedDate, quoteData.createdAt ) )  }</span>) }
                     <div className="quoteLinks">
+                        { ( quoteData.statusMtl !== '' && quoteData.statusMtl !== null)  && <CardLink icon={ FiExternalLink() } text={ "material" } rel="noopener noreferrer" url={ quoteData.mtlURL } target={ `_mtl${quoteData._id}` } status={ quoteData.statusMtl }/>}
                         { ( quoteData.crmURL !== '' && quoteData.crmURL !== null)  && <CardLink icon={ FiExternalLink() } text={ "crm" } rel="noopener noreferrer" url={ quoteData.crmURL } target={ `_blank${quoteData._id}` } />}
                         { ( quoteData.pcsURL !== '' && quoteData.pcsURL !== null)  && <CardLink icon={ FiExternalLink() } text={ "pcs" } rel="noopener noreferrer" url={ quoteData.pcsURL } target={ `crm${quoteData._id}` }/>}
                         <Link className="cardLink" to={`/edit/${quoteData._id}`} ><p><FiEdit/>edit</p></Link>

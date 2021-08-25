@@ -16,6 +16,8 @@ export const QUERY_QUOTES = gql`
             status
             PODate
             POQty
+            statusMtl
+            mtlURL
             completedDate
             noteCount
             }
@@ -37,6 +39,8 @@ export const QUERY_QUOTE = gql`
             status
             PODate
             POQty
+            statusMtl
+            mtlURL
             completedDate
             notes{
                 _id
