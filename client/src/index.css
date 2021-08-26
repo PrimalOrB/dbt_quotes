@@ -652,6 +652,18 @@ hr {
   background: #4d4d4d;
 }
 
+.success {
+  fill: green
+}
+
+.fail {
+  fill: red
+}
+
+.ordered {
+  fill: yellow
+}
+
 @media screen and (min-width: 768px) {
   main {
     padding: 1rem 1rem 2rem 1rem;

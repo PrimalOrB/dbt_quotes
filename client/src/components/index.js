@@ -8,5 +8,6 @@ import NoteForm  from './note-form'
 import Note from './note'
 import StatsActive from './stats-active'
 import StatsArchived from './stats-archived'
+import MtlStatus from './mtlstatus'
 
-export { Loading, NavBar, QuoteList, Filter, SingleQuote, CardLink, NoteForm, Note, StatsActive, StatsArchived };
+export { Loading, NavBar, QuoteList, Filter, SingleQuote, CardLink, NoteForm, Note, StatsActive, StatsArchived, MtlStatus };
