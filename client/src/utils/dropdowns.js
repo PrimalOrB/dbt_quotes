@@ -20,7 +20,7 @@ export const dropDownSort = [
   ]
 
 export const dropDownMaterial = [
-    {value: 'tbd', label: 'Material Status', filter: (arr)=>{ return arr.filter( x => x.statusMtl === 'tbd') } },
+    {value: 'tbd', label: 'Assign Material Status', filter: (arr)=>{ return arr.filter( x => x.statusMtl === 'tbd') } },
     {value: 'stock', label: 'Stock Item', filter: (arr)=>{ return arr.filter( x => x.statusMtl === 'stock') } },
     {value: 'need-order', label: 'Need To Order', filter: (arr)=>{ return arr.filter( x => x.statusMtl === 'need-order') } },
     {value: 'ordered', label: 'Ordered', filter: (arr)=>{ return arr.filter( x => x.statusMtl === 'ordered') } },

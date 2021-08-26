@@ -257,6 +257,7 @@ const AddForm = () => {
                     <label htmlFor="POQty">PO Quantity:</label>
                     <input type="text" name="POQty" placeholder='Quantity of item on Purchase Order' defaultValue={ formState.POQty === null ? '' : formState.POQty } onBlur={handleChange}/>
                 </div>
+                <h1>Raw Material</h1>
                 <div>
                     <label htmlFor="statusMtl">Raw Material:</label>
                     <select name="statusMtl" id="statusMtl" value={ formState.statusMtl } onChange={handleChange}>
@@ -322,6 +323,7 @@ const AddForm = () => {
                     <label htmlFor="POQty">PO Quantity:</label>
                     <input type="text" name="POQty" placeholder='Quantity of item on Purchase Order' onBlur={handleChange}/>
                 </div>
+                <h1>Raw Material</h1>
                 <div>
                     <label htmlFor="statusMtl">Raw Material:</label>
                     <select name="statusMtl" id="statusMtl" value={ formState.statusMtl } onChange={handleChange}>
