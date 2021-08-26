@@ -97,7 +97,7 @@ const resolvers = {
             data.completedDate = null
           } 
           // on task unarchive, set completed date to null
-          if( origQuote.statusMtl !== data.statusMtl ){
+          if( origQuote.statusMtl !== data.statusMtl && data.statusMtl !== null ){
             sendEmail( input,'Material', data )
           } 
           
@@ -134,7 +134,7 @@ const resolvers = {
           if( origQuote.status !== data.status ) {
             noteText = `${ noteText }, status changed to ${ data.status }`
           }
-          if( origQuote.statusMtl !== data.statusMtl && origQuote.statusMtl !== undefined ) {
+          if( origQuote.statusMtl !== data.statusMtl && origQuote.statusMtl !== undefined && data.statusMtl ) {
             noteText = `${ noteText }, material status changed to ${ data.statusMtl }`
           }
           if( origQuote.mtlURL !== data.mtlURL && origQuote.mtlURL !== undefined  ) {
