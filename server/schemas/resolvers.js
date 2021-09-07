@@ -58,6 +58,11 @@ const resolvers = {
           // note text
           const noteBy = data.user
           const noteText = 'Record created' 
+
+          // on create if material needed
+          if( data.statusMtl === 'need-order' ){
+            sendEmail( input,'Material', data )
+          } 
           
           // add note to quote
           let updatedQuote = await Quote.findOneAndUpdate(
