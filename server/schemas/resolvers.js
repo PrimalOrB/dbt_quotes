@@ -101,8 +101,8 @@ const resolvers = {
             sendEmail( input,'Unarchived', data )
             data.completedDate = null
           } 
-          // on task unarchive, set completed date to null
-          if( origQuote.statusMtl !== data.statusMtl && data.statusMtl !== null ){
+          // if material has changed, and is not 'confirmed or received'
+          if( origQuote.statusMtl !== data.statusMtl && data.statusMtl !== null && data.statusMtl !== 'ordered-confirmed' && data.statusMtl !== 'ordered-received' ){
             sendEmail( input,'Material', data )
           } 
           
