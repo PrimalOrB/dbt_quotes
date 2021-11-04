@@ -20,11 +20,7 @@ const NavBar = () => {
   const { user } = useAuth0()
   useEffect(() => {
     if (user) {
-      dispatch({
-        type: UPDATE_USER,
-        currentUser: user
-      });
-      tryLogin()
+      tryLogin( user )
     }
   }, [user, dispatch]);
 
@@ -34,7 +30,24 @@ const NavBar = () => {
       const { data } = await login({
         variables: {email: user.email }
       });
-      Auth.login(data.login.token);
+      Auth.login( data.login.token );
+
+      let permissionsAuth = {
+        data: {
+          userPermissions: []
+        }
+      }
+
+      permissionsAuth = Auth.getProfile( data.login.token )
+
+      let userData = { user: user, permissions: permissionsAuth.data.userPermissions }
+
+      console.log( userData )
+
+      dispatch({
+        type: UPDATE_USER,
+        currentUser: userData
+      });
     } catch (e) {
       console.error(e);
     }

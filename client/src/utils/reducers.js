@@ -1,4 +1,5 @@
 import { useReducer } from 'react';
+import Auth from './auth';
 import {
     UPDATE_USER,
     UPDATE_DATASTORE,
@@ -10,10 +11,22 @@ import {
 export const reducer = ( state, action ) => {
     switch (action.type) {
         case UPDATE_USER:
-            return {
-                ...state,
-                currentUser: action.currentUser,
-            };
+            console.log( action.currentUser )
+            if( action.currentUser.permissions.includes('all') ){
+                action.currentUser.permissions = true
+                return {
+                    ...state,
+                    currentUser: action.currentUser,
+                } 
+            } else {
+                console.log( 'logout' )
+                action.currentUser.permissions = false
+                Auth.logout()
+                return  {
+                    ...state,
+                    currentUser: action.currentUser,
+                } 
+            }
         case UPDATE_DATASTORE:
             return {
                 ...state,

@@ -1,11 +1,12 @@
 const jwt = require('jsonwebtoken');
+require('dotenv').config()
 
-const secret = 'mysecretsshhhhh';
+const secret = process.env.SERVER_SECRET;
 const expiration = '2h';
 
 module.exports = {
-  signToken: function({ email}) {
-    const payload = { email };
+  signToken: function( args ) {
+    const { payload } = args
 
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },
@@ -24,13 +25,15 @@ module.exports = {
   
     // if no token, return request object as is
     if (!token) {
+      req.auth = false
       return req;
     }
-  
+    
     try {
       // decode and attach user data to request object
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
       req.user = data;
+      req.auth = true
     } catch {
       console.log('Invalid token');
     }

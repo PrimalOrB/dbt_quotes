@@ -2,6 +2,7 @@ const { Quote } = require( '../models' )
 const { AuthenticationError } = require( 'apollo-server-express' )
 const { signToken } = require( '../utils/auth' )
 const { sendEmail } = require( '../utils/email' )
+const permissions = require('../data/permissions')
 
 const resolvers = {
     Query: {
@@ -106,8 +107,15 @@ const resolvers = {
         throw new AuthenticationError('Incorrect credentials');
       },
       login: async( parent, { email }, context ) => {
+        let userPermissions = permissions.filter( user => user.email === email )
+        if( userPermissions.length > 0 ){
+          userPermissions = userPermissions[0].permissions
+        }
+
         if( context.headers.authorization !== undefined ){
-          const token = signToken( email )
+          const payload = { email, userPermissions }
+          console.log( payload )
+          const token = signToken( { payload } )
           return { token }
         }
         throw new AuthenticationError('Incorrect credentials');

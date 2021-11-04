@@ -7,8 +7,8 @@ const AuthNav = () => {
     const [state] = useStoreContext();
     const { currentUser } = state;
 
-    if( currentUser ){
-        const { given_name, picture } = currentUser;
+    if( currentUser?.user ){
+        const { given_name, picture } = currentUser.user;
         return (
         
             <div className="access-block">
