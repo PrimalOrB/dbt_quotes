@@ -55,19 +55,36 @@ const resolvers = {
           const data = {...input}
           const quote = await Quote.create(data);
           sendEmail(input,'New',quote)
-          return quote;
+
+          // note text
+          const noteBy = data.user
+          const noteText = 'Record created' 
+
+          // on create if material needed
+          if( data.statusMtl === 'need-order' ){
+            sendEmail( input,'Material', data )
+          } 
+          
+          // add note to quote
+          let updatedQuote = await Quote.findOneAndUpdate(
+            { _id: quote._id },
+            { $push: { notes: { noteText, noteBy } } },
+            { new: true, runValidators: true }
+          );
+          return updatedQuote;
         }
         throw new AuthenticationError('Incorrect credentials');
       },
-      editQuote: async( parent, {input}, context ) => {
+      editQuote: async( parent, { input }, context ) => {
         if( context.headers.authorization !== undefined ){
         const data = {...input}
+        
         let origQuote = await Quote.findOne({_id: input._id})
-            // reset task date on unarchived jobs
+          // reset task date on unarchived jobs
           if( origQuote.status === 'archived' && data.status !== 'archived'){
             data.createdAt = new Date()
           }  
-            // reset completed date on jobs put back to dashboard from ready
+          // reset completed date on jobs put back to dashboard from ready
           if( origQuote.status === 'production-ready' && ( data.status !== 'production-ready' || data.status !== 'archived' )){
             data.completedDate = null
           }
@@ -75,22 +92,75 @@ const resolvers = {
           if( ( origQuote.status !== 'production-ready' || origQuote.status !== 'archived' ) && data.status === 'archived'){
             data.completedDate = new Date()
           } 
-            // on task set to ready, send finished email and set complete date
+          // on task set to ready, send finished email and set complete date
           if( origQuote.status !== 'production-ready' && data.status === 'production-ready'){
-            sendEmail(input,'Finished',data)
+            sendEmail( input,'Finished', data )
             data.completedDate = new Date()
           } 
-           // on task unarchive, set completed date to null
+          // on task unarchive, set completed date to null
           if( origQuote.status === 'archived' && data.status !== 'archived'){
-            sendEmail(input,'Unarchived',data)
+            sendEmail( input,'Unarchived', data )
             data.completedDate = null
           } 
+          // if material has changed, and is not 'confirmed or received'
+          if( origQuote.statusMtl !== data.statusMtl && data.statusMtl !== null && data.statusMtl !== 'ordered-confirmed' && data.statusMtl !== 'ordered-received' ){
+            sendEmail( input,'Material', data )
+          } 
+          
+          // note text
+          const noteBy = data.user
+          let noteText = 'Edited' 
+          if( origQuote.customerName !== data.customerName ) {
+            noteText = `${ noteText }, customer name changed`
+          }
+          if( Number( origQuote.jNum ) !== Number( data.jNum ) ) {
+            noteText = `${ noteText }, j# changed`
+          }
+          if( origQuote.description !== data.description ) {
+            noteText = `${ noteText }, description changed`
+          }
+          if( Number( origQuote.priority ) !== Number( data.priority ) ) {
+            noteText = `${ noteText }, priority changed`
+          }
+          if( origQuote.additionalNotes !== data.additionalNotes ) {
+            noteText = `${ noteText }, additional notes changed`
+          }
+          if( origQuote.pcsURL !== data.pcsURL ) {
+            noteText = `${ noteText }, PCS URL changed`
+          }
+          if( origQuote.crmURL !== data.crmURL ) {
+            noteText = `${ noteText }, PCS URL changed`
+          }
+          if( Number( origQuote.PODate ) !== Number( data.PODate ) ) {
+            noteText = `${ noteText }, PO date changed`
+          }
+          if( Number( origQuote.POQty ) !== Number( data.POQty ) ) {
+            noteText = `${ noteText }, PO Qty changed`
+          }
+          if( origQuote.status !== data.status ) {
+            noteText = `${ noteText }, status changed to ${ data.status }`
+          }
+          if( origQuote.statusMtl !== data.statusMtl && origQuote.statusMtl !== undefined && data.statusMtl ) {
+            noteText = `${ noteText }, material status changed to ${ data.statusMtl }`
+          }
+          if( origQuote.mtlURL !== data.mtlURL && origQuote.mtlURL !== undefined  ) {
+            noteText = `${ noteText }, material URL changed`
+          }
+          
+
           let quote = await Quote.findOneAndUpdate( 
             {_id: input._id},
             {"$set": data},
             {"new": true}
-            );       
-          return quote;
+          );       
+            
+          // add note to quote
+          let updatedQuote = await Quote.findOneAndUpdate(
+            { _id: input._id },
+            { $push: { notes: { noteText, noteBy } } },
+            { new: true, runValidators: true }
+          );
+          return updatedQuote;
         }
         throw new AuthenticationError('Incorrect credentials');
       },

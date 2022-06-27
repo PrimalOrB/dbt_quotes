@@ -42,6 +42,12 @@ const quoteSchema = new Schema(
     POQty: {
         type: Number,
     },
+    statusMtl: {
+        type: String,
+    },
+    mtlURL: {
+        type: String,
+    },
     completedDate: {
         type: Date,
     },

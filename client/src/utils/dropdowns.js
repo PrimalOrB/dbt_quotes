@@ -18,3 +18,12 @@ export const dropDownSort = [
     {value: 'priority-desc', label: 'Priority Descending', filter: function(arr){ return arr.filter( x => x.priority > 0 ).sort( ( a, b ) => Number(b.priority) - Number(a.priority) ) } },
     {value: 'no-priority', label: 'No Priority Assigned', filter: function(arr){ return arr.filter( x => x.priority < 1 ).sort( ( a, b ) => a.createdAt - b.createdAt ) } },
   ]
+
+export const dropDownMaterial = [
+    {value: 'tbd', label: 'Assign Material Status', filter: (arr)=>{ return arr.filter( x => x.statusMtl === 'tbd') } },
+    {value: 'stock', label: 'Stock Item', filter: (arr)=>{ return arr.filter( x => x.statusMtl === 'stock') } },
+    {value: 'need-order', label: 'Need To Order', filter: (arr)=>{ return arr.filter( x => x.statusMtl === 'need-order') } },
+    {value: 'ordered', label: 'Ordered', filter: (arr)=>{ return arr.filter( x => x.statusMtl === 'ordered') } },
+    {value: 'ordered-confirmed', label: 'Confirmed Order', filter: (arr)=>{ return arr.filter( x => x.statusMtl === 'ordered-confirmed') } },
+    {value: 'ordered-received', label: 'Received', filter: (arr)=>{ return arr.filter( x => x.statusMtl === 'ordered-received') } },
+]

@@ -15,6 +15,9 @@ export const ADD_QUOTE = gql`
                 status
                 PODate
                 POQty
+                statusMtl
+                mtlURL
+                user
             }
         }
 `;
@@ -33,6 +36,9 @@ export const EDIT_QUOTE = gql`
                 status
                 PODate
                 POQty
+                statusMtl
+                mtlURL
+                user
             }
         }
 `;

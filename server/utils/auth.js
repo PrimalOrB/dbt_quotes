@@ -5,8 +5,13 @@ const secret = process.env.SERVER_SECRET;
 const expiration = '2h';
 
 module.exports = {
+<<<<<<< HEAD
   signToken: function( args ) {
     const { payload } = args
+=======
+  signToken: function({ email }) {
+    const payload = { email };
+>>>>>>> 14518ff3c00634a4cb802a59bcbd619746c7c22b
 
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },

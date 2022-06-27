@@ -6,5 +6,6 @@ import SingleView from './single-view'
 import Archive from './archived'
 import Production from './production'
 import Stats from './stats'
+import Material from './material'
 
-export { Home, Profile, AddNew, SingleView, Archive, Production, Stats, NoAuth };
+export { Home, Profile, AddNew, SingleView, Archive, Production, Stats, NoAuth, Material };

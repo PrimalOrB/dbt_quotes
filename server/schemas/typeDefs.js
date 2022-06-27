@@ -13,6 +13,9 @@ const typeDefs = gql`
         status: String
         PODate: String
         POQty: String
+        statusMtl: String
+        mtlURL: String
+        user: String
     }
 
     input NoteInput {
@@ -21,7 +24,6 @@ const typeDefs = gql`
         noteBy: String!
     }
     
-
     type Quote {
         _id: ID
         createdAt: String
@@ -35,8 +37,11 @@ const typeDefs = gql`
         status: String
         PODate: String
         POQty: String
+        statusMtl: String
+        mtlURL: String
         completedDate: String
         noteCount: Int
+        user: String
         notes: [Note]
     }
 
