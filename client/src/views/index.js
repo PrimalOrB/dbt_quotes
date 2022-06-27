@@ -7,5 +7,6 @@ import Archive from './archived'
 import Production from './production'
 import Stats from './stats'
 import Material from './material'
+import QuoteReady from './quote-ready'
 
-export { Home, Profile, AddNew, SingleView, Archive, Production, Stats, NoAuth, Material };
+export { Home, Profile, AddNew, SingleView, Archive, Production, Stats, NoAuth, Material, QuoteReady };

@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { useMutation } from '@apollo/client';
 import { ADD_QUOTE, EDIT_QUOTE } from '../utils/mutations';
-import { QUERY_QUOTES, QUERY_QUOTE } from '../utils/queries';
+import { QUERY_QUOTE } from '../utils/queries';
 import { dropDownStatus, dropDownMaterial } from '../utils/dropdowns';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { Loading } from './'
 import { useStoreContext } from "../utils/GlobalState";
+import { UPDATE_EDITED_ENTRY, ADD_NEW_ENTRY } from '../utils/actions'
 
 const AddForm = () => {
 
-    const [state] = useStoreContext();
+    const [state, dispatch] = useStoreContext();
 
     const initialState = {
         customerName:'',
@@ -26,6 +28,8 @@ const AddForm = () => {
         statusMtl: '',
         mtlURL: '',
     }
+
+    const history = useHistory();
 
     const initialErrorMessage = {
         'customerName':'input-error',
@@ -70,7 +74,8 @@ const AddForm = () => {
                 if( match.length ){
                     console.log( match[0]._id)
                     alert( `${e.target.value} already exists, loading content...` )
-                    window.location.replace(`/edit/${match[0]._id}`);
+                    history.push(`/edit/${match[0]._id}`)
+                    // window.location.replace(`/edit/${match[0]._id}`);
                 }
                 addState()
                 break
@@ -98,35 +103,29 @@ const AddForm = () => {
     }
 
     const [ addQuote, { error }] = useMutation(ADD_QUOTE, {
-        update(cache, { data: { addQuote } }) {
-            try {
-                // console.log( cache )
-                // const { quotes } = cache.readQuery({ query: QUERY_QUOTES });
-                cache.writeQuery({
-                    query: QUERY_QUOTES,
-                    data: { quotes: [addQuote] }
-                });
-                window.location.replace("/");
-            } catch (e) {
-                console.error(e);
-            }
+        onCompleted: data=> {
+            console.log( data )
+            dispatch({
+                type: ADD_NEW_ENTRY,
+                added: data.addQuote
+              });
+              history.push('/')
+        },
+        onError: err => {
+            console.log( err )
         }
       });
 
     const [ editQuote, { error2 }] = useMutation(EDIT_QUOTE, {
-        update(cache, { data: { editQuote } }) {
-            try {
-                // console.log( editQuote )
-                // const { quotes } = cache.readQuery({ query: QUERY_QUOTES });
-                cache.writeQuery({
-                    query: QUERY_QUOTES,
-
-                    data: { quotes: [editQuote] }
-                });
-                window.location.replace("/");
-            } catch (e) {
-                console.error(e);
-            }
+        onCompleted: data=> {
+            dispatch({
+                type: UPDATE_EDITED_ENTRY,
+                update: data.editQuote
+              });
+              history.push('/')
+        },
+        onError: err => {
+            console.log( err )
         }
     });
 
@@ -149,7 +148,7 @@ const AddForm = () => {
                         POQty: formState.POQty,
                         statusMtl: formState.statusMtl,
                         mtlURL: formState.mtlURL,
-                        user: state.currentUser.nickname,
+                        user: state.currentUser.user.nickname,
                     },
                  }
             });      
@@ -177,7 +176,7 @@ const AddForm = () => {
                         POQty: formState.POQty,
                         statusMtl: formState.statusMtl,
                         mtlURL: formState.mtlURL,
-                        user: state.currentUser.nickname,
+                        user: state.currentUser.user.nickname,
                     }, 
                 }
             });
@@ -199,6 +198,7 @@ const AddForm = () => {
             ...quote
         } )
         data?.quote && setErrorMessage('')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[data?.quote])
 
     if (loading) {

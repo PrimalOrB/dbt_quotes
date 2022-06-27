@@ -22,6 +22,7 @@ const NavBar = () => {
     if (user) {
       tryLogin( user )
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, dispatch]);
 
 
@@ -42,8 +43,6 @@ const NavBar = () => {
 
       let userData = { user: user, permissions: permissionsAuth.data.userPermissions }
 
-      console.log( userData )
-
       dispatch({
         type: UPDATE_USER,
         currentUser: userData
@@ -54,8 +53,8 @@ const NavBar = () => {
   };
 
 
-  // refresh query every minute
-  const { loading, data } = useQuery(QUERY_QUOTES,{pollInterval: 60000});
+  // refresh query every 5 minutes
+  const { loading, data } = useQuery(QUERY_QUOTES,{pollInterval: 300000});
   useEffect(() => {
     if (data) {
       dispatch({

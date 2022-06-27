@@ -5,13 +5,14 @@ import {
     UPDATE_DATASTORE,
     UPDATE_FILTER,
     UPDATE_STATUS_FILTER,
-    UPDATE_SEARCH
+    UPDATE_SEARCH,
+    UPDATE_EDITED_ENTRY,
+    ADD_NEW_ENTRY
 } from "./actions";
   
 export const reducer = ( state, action ) => {
     switch (action.type) {
         case UPDATE_USER:
-            console.log( action.currentUser )
             if( action.currentUser.permissions.includes('all') ){
                 action.currentUser.permissions = true
                 return {
@@ -46,7 +47,17 @@ export const reducer = ( state, action ) => {
             return {
                 ...state,
                 stringFilter: action.stringFilter,
-            }    
+            }  
+        case ADD_NEW_ENTRY:
+            return {
+                ...state,
+                dataStore: [ ...state.dataStore, action.added ]
+            }
+        case UPDATE_EDITED_ENTRY:
+            return {
+                ...state,
+                dataStore: [ ...state.dataStore.filter( x => x._id !== action.update._id ), action.update ]
+            }
         default:
         return state;
     }

@@ -2,6 +2,7 @@ export const dropDownStatus = [
     {value: 'tbd', label: 'Assign Status', filter: (arr)=>{ return arr.filter( x => x.status === 'tbd') } },
     {value: 'rfq', label: 'RFQ', filter: (arr)=>{ return arr.filter( x => x.status === 'rfq')}},
     {value: 'quote-review', label: 'Quote Review', filter: (arr)=>{ return arr.filter( x => x.status === 'quote-review')}},
+    {value: 'quote-ready', label: 'Quote Ready', filter: (arr)=>{ return arr.filter( x => x.status === 'quote-ready')}},
     {value: 'production', label: 'Production', filter: (arr)=>{ return arr.filter( x => x.status === 'production')}},
     {value: 'production-review', label: 'Production Review', filter: (arr)=>{ return arr.filter( x => x.status === 'production-review')}},
     {value: 'production-ready', label: 'Production Ready', filter: (arr)=>{ return arr.filter( x => x.status === 'production-ready')}},

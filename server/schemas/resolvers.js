@@ -105,7 +105,7 @@ const resolvers = {
           // if material has changed, and is not 'confirmed or received'
           if( origQuote.statusMtl !== data.statusMtl && data.statusMtl !== null && data.statusMtl !== 'ordered-confirmed' && data.statusMtl !== 'ordered-received' ){
             sendEmail( input,'Material', data )
-          } 
+          }           
           
           // note text
           const noteBy = data.user
@@ -146,20 +146,15 @@ const resolvers = {
           if( origQuote.mtlURL !== data.mtlURL && origQuote.mtlURL !== undefined  ) {
             noteText = `${ noteText }, material URL changed`
           }
-          
-
-          let quote = await Quote.findOneAndUpdate( 
-            {_id: input._id},
-            {"$set": data},
-            {"new": true}
-          );       
+              
             
           // add note to quote
           let updatedQuote = await Quote.findOneAndUpdate(
             { _id: input._id },
-            { $push: { notes: { noteText, noteBy } } },
+            { $set: data, $push: { notes: { noteText, noteBy } } },
             { new: true, runValidators: true }
           );
+
           return updatedQuote;
         }
         throw new AuthenticationError('Incorrect credentials');
@@ -184,7 +179,6 @@ const resolvers = {
 
         if( context.headers.authorization !== undefined ){
           const payload = { email, userPermissions }
-          console.log( payload )
           const token = signToken( { payload } )
           return { token }
         }

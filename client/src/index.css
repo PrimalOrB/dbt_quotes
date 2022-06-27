@@ -493,7 +493,8 @@ main h2 {
   color: white;
 }
 
-.production-ready {
+.production-ready,
+.quote-ready {
   background-color: rgb(182, 218, 182);
 }
 

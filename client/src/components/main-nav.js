@@ -13,11 +13,11 @@ const MainNav = () => {
 
   const productionReady = state.dataStore.filter( x => x.status === 'production-ready').length
 
+  const quoteReady = state.dataStore.filter( x => x.status === 'quote-ready').length
+
   const materials = state.dataStore.filter( x => { 
     return x.statusMtl === 'need-order' || x.statusMtl === 'ordered'
   } ).length  
-
-  console.log( materials )
 
   const clearSearchFilter = (e) => {
     dispatch({ 
@@ -39,13 +39,23 @@ const MainNav = () => {
     </NavLink>
 
     <NavLink
+        to="/qready"
+        exact
+        className={`nav-button ${ quoteReady > 0 && 'pulse'}`}
+        activeClassName="nav-button-active"
+        onClick={ clearSearchFilter }
+      >
+        <FiCheck />Q Ready
+    </NavLink>
+
+    <NavLink
         to="/production"
         exact
         className={`nav-button ${ productionReady > 0 && 'pulse'}`}
         activeClassName="nav-button-active"
         onClick={ clearSearchFilter }
       >
-        <FiCheck />Ready
+        <FiCheck />Prod Ready
     </NavLink>
 
     <NavLink
@@ -87,15 +97,7 @@ const MainNav = () => {
       >
       <VscGraph />
     </NavLink>
-    
-    {/* <NavLink
-      to="/profile"
-      exact
-      className="nav-button"
-      activeClassName="nav-button-active"
-    >
-      Profile
-    </NavLink> */}
+  
   </div>
   )
 };

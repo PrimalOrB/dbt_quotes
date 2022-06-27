@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Line } from 'react-chartjs-2';
 import { calc_parse_average, calc_days_between } from '../utils/helpers'
 import { useStoreContext } from "../utils/GlobalState";
-import moment from 'moment'
 
 const StatsArchived = ( ) => {
 

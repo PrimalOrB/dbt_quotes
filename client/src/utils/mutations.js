@@ -5,19 +5,27 @@ export const ADD_QUOTE = gql`
     mutation addQuote($input: QuoteInput!) {
             addQuote(input: $input) {
                 _id
-                customerName
-                jNum
-                description
-                priority
-                additionalNotes
-                pcsURL
-                crmURL
-                status
-                PODate
-                POQty
-                statusMtl
-                mtlURL
-                user
+            createdAt
+            customerName
+            jNum
+            description
+            priority
+            additionalNotes
+            pcsURL
+            crmURL
+            status
+            PODate
+            POQty
+            statusMtl
+            mtlURL
+            completedDate
+            noteCount
+            notes{
+                _id
+                noteText
+                noteBy
+                createdAt
+              }
             }
         }
 `;
@@ -26,6 +34,7 @@ export const EDIT_QUOTE = gql`
     mutation editQuote($input: QuoteInput!) {
             editQuote(input: $input) {
                 _id
+                createdAt
                 customerName
                 jNum
                 description
@@ -38,7 +47,14 @@ export const EDIT_QUOTE = gql`
                 POQty
                 statusMtl
                 mtlURL
-                user
+                completedDate
+                noteCount
+                notes{
+                    _id
+                    noteText
+                    noteBy
+                    createdAt
+                }
             }
         }
 `;

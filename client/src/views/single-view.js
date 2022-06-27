@@ -16,8 +16,6 @@ const SingleView = (  ) => {
 
   const quote = data?.quote || []
 
-  console.log( data )
-
   return (
     <>
     {loading ? (

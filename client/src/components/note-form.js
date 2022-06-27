@@ -24,7 +24,7 @@ const NoteForm = ( { quoteId } ) => {
         }
     }
 
-    const [ addNote, { error }] = useMutation(ADD_NOTE, {
+    const [ addNote ] = useMutation(ADD_NOTE, {
         update(cache, { data: { addNote } }) {
             try {
                 // console.log( cache )
