@@ -35,8 +35,9 @@ const Archived = () => {
   return (
     <>
       <h1>Task To Do</h1>
-      <Filter/>
-      <QuoteList quotes={ currentFilter.filter(stringFiltered) }/>
+      <a href="https://dbt-engineering.herokuapp.com/quotes"><p>Quote Tracker has been moved to DBT Engineering Tools. Click To Forward</p></a>
+      {/* <Filter/> */}
+      {/* <QuoteList quotes={ currentFilter.filter(stringFiltered) }/> */}
     </>
   )
 

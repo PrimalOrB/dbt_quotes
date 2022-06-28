@@ -40,8 +40,10 @@ const App = () => {
     <ApolloProvider client={client}>
       <StoreProvider>
         <div id="app">
-          <NavBar/>
+          <Home/>
+          {/* <NavBar/>
           <main>
+          <Route path="/" component={ Home } />
             <Switch>
               <ProtectedRoute exact path="/" component={ Home } />
               <ProtectedRoute exact path="/archive" component={ Archive } />
@@ -54,7 +56,7 @@ const App = () => {
               <ProtectedRoute path="/edit/:id" component={ AddNew } />
               <ProtectedRoute path="/quote/:id" component={ SingleView } />
             </Switch>
-          </main>
+          </main> */}
         </div>
       </StoreProvider>
     </ApolloProvider>
